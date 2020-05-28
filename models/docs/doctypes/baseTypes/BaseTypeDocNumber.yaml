@@ -1,4 +1,5 @@
 title: BaseTypeDocNumber
+type: object
 description: >
   Серия документа
 properties:
