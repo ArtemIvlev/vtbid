@@ -16,5 +16,5 @@ oneOf:
 #  - $ref: ./doctypes/FatherHoodCertDoc.yaml
 # - $ref: ./doctypes/NameChangeCertDoc.yaml
 #  - $ref: ./doctypes/DeathCertDoc.yaml
-  - $ref: ./doctypes/VehicleDoc.yaml
+  - $ref: ./doctypes/VehicleDoc.v1.yaml
 x-examples: {}
