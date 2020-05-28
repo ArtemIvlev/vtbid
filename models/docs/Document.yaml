@@ -1,5 +1,6 @@
 title: Document
 type: object
+description: Модель Документов
 properties:
   type:
     type: string
@@ -11,9 +12,8 @@ properties:
     type: string
     format: date-time
   details:
-    $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/docs/1.0.0#/components/schemas/DocResponse'
+    $ref: ./DocResponse.yaml
   RelatedPartyRef:
-    $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/schemas/RelatedPartyRef'
+    $ref: ../common/RelatedPartyRef.yaml
   metadata:
     $ref: ../common/metadata.yaml
-description: ''

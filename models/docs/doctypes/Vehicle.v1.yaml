@@ -1,0 +1,63 @@
+title: Vehicle
+description: Данные транспортных средств
+allOf:
+  - $ref: ./baseTypes/BaseProofBlock.yaml
+  - $ref: ./baseTypes/BaseDepartmentDoc.yaml
+  - $ref: ./baseTypes/BaseGetDateDoc.yaml
+  - $ref: ./baseTypes/BaseValidateDateDoc.yaml
+  - type: object
+    properties:
+      car_name:
+        type: string
+        example: Моя Ласточка
+        description: Имя транспортного средства
+      registration_plate:
+        type: string
+        example: У111АА72
+        description: Государственный регистрационный знак
+      vin:
+        type: string
+        example: ХТС541000S2074681
+        description: Идентификационный номер (VIN)
+      brand:
+        type: string
+        example: Хендай
+        description: Марка
+      model:
+        type: string
+        example: Солярис
+        description: Модель (модификация)
+      vehicle_category:
+        type: string
+        example: B
+        description: Категория ТС
+      production_year:
+        type: integer
+        example: '2001'
+        description: Год выпуска
+      engine_number:
+        type: string
+        example: '029400'
+        description: Номер двигателя
+      body_number:
+        type: string
+        example: ХТС541000S2074000
+        description: Номер кузова (прицепа)
+      chassis_number:
+        type: string
+        example: '2074681'
+        description: Номер шасси (рамы)
+      registration_doc:
+        type: object
+        description: Серия и номер регистрационного документа (СТС)
+        properties:
+          registration_doc_series:
+            type: string
+            example: 72АА
+            description: Серия регистрационного документа
+          registration_doc_number:
+            type: integer
+            example: '160000'
+            description: Номер регистрационного документа
+    required:
+      - registration_plate

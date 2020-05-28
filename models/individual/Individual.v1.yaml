@@ -1,6 +1,6 @@
 title: Individual
 type: object
-description: Все о ФЛ
+description: Модель про физ лицо
 x-examples: {}
 properties:
   id:
@@ -15,8 +15,7 @@ properties:
     type: string
     description: ссылка на профиль (апи)
   gender:
-    type: string
-    description: Пол
+    $ref: '../docs/doctypes/baseTypes/BaseTypeGender.yaml#/properties/gender'
   placeOfBirth:
     type: string
     description: В модели это ссылка на место рождения (не уверен что нам оно надо)

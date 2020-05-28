@@ -1,0 +1,10 @@
+title: VehicleDoc
+description: |
+  Сведения о транспортных средствах
+    `type` будет равен `VEHICLE_CERT`
+type: object
+properties:
+  vehicles:
+    type: array
+    items:
+      $ref: ./Vehicle.v1.yaml

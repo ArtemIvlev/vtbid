@@ -14,7 +14,7 @@ properties:
   formattedName:
     type: string
   validFor:
-    $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/schemas/ValidFor'
+    $ref: ../common/validFor.yaml
   nameType:
     type: string
   tradingName:
