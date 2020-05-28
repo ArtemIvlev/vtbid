@@ -1,0 +1,8 @@
+title: ExternalReference
+type: object
+description: Ссылка на внешний источник (например профиль в VK)
+properties:
+  href:
+    type: string
+  type:
+    type: string
