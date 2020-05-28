@@ -1,0 +1,11 @@
+title: BaseTypeGender
+type: object
+properties:
+  gender:
+    type: string
+    enum:
+      - F
+      - M
+      - U
+    description: Половая принадлежность ('F'- female, 'M' - male, 'U' - Не определен )
+    example: 'F'

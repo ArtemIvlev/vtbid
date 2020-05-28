@@ -1,0 +1,7 @@
+title: BaseTypeSnils
+type: object
+properties:
+  snils:
+    type: string
+    description: СНИЛС гражданина
+    example: '125-505-98 00'

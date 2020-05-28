@@ -1,0 +1,1334 @@
+
+title: Document
+type: object
+properties:
+  type:
+    type: string
+  identificationId:
+    type: string
+  issuingAuthority:
+    type: string
+  issuingDate:
+    type: string
+    format: date-time
+  details:
+    $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/docs/1.0.0#/components/schemas/DocResponse'
+  RelatedPartyRef:
+    $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/schemas/RelatedPartyRef'
+  metadata:
+    $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/schemas/metadata'
+title: DocItems
+description: >
+  Коллекция идентификаторов документов пользователя с типом.
+type: array
+items:
+  allOf:
+    - type: object
+      required: 
+        - id
+        - type
+    - $ref: '#/components/schemas/BaseTypeId'
+    - $ref: '#/components/schemas/BaseTypeProofRelevance'
+    - $ref: '#/components/schemas/BaseDocType'
+title: BaseTypeId
+type: object
+properties:
+  id:
+    type: string
+    description: Уникальный идентификатор сущности(документа)
+    format: uuid
+    example: '91899952b06c4cc89746d38b2c8c72f3'
+title: BaseTypeProofRelevance
+type: object
+properties:
+  relevance:
+    type: string
+    enum: 
+      - actual
+      - expired
+      - invalid
+    example: 'actual'
+    description: >
+      Релевантность сведений(документа).
+      
+      * `actual` — актуальные сведения(документ)
+      
+      * `expired` — не актуальные сведения(документ), был заменён или срок действия завершён
+      
+      * `invalid` — не валидные сведения(документ). Причины не валидности могут быть различными. 
+title: BaseDocType
+type: object
+description: >
+  Базовый атомарный тип всех документов. Описывает типы документов. Абстрактный.
+properties:
+  type:
+    type: string
+    enum: 
+      - RF_PASSPORT
+      - SNILS
+      - FID_DOC
+      - RF_DRIVING_LICENSE
+      - MLTR_ID
+      - FRGN_PASS
+      - MDCL_PLCY
+      - FID_BRTH_CERT
+      - OLD_BRTH_CERT
+      - REGISTRATION
+      - RF_BRTH_CERT
+      - MARRIED_CERT
+      - DIVORCE_CERT
+      - NAME_CHANGE_CERT
+      - FATHERHOOD_CERT
+      - DEATH_CERT
+      - VEHICLE_CERT
+      - MLTR_CONTRACT_CERT
+      - MLTR_ID
+      - LGL_CPCT_CERT
+      - PRISON_CERT
+      - ILS_PFR_CERT
+      - EGRN_CERT
+    description: >
+      * `SNILS` – СНИЛС
+      
+      * `RF_PASSPORT` – паспорт гражданина РФ
+      
+      * `FID_DOC` – документ иностранного гражданина
+      
+      * `RF_DRIVING_LICENSE` – водительское удостоверение
+      
+      * `MLTR_ID` – военный билет
+      
+      * `FRGN_PASS` – заграничный паспорт
+      
+      * `MDCL_PLCY` – полис ОМС
+      
+      * `FID_BRTH_CERT` – свидетельство о рождении – другая страна
+      
+      * `OLD_BRTH_CERT` – свидетельство о рождении – СССР
+      
+      * `REGISTRATION` – сведения об адресе регистрации по месту жительства или месту пребывания
+      
+      * `RF_BRTH_CERT` – свидетельство о рождении – Россия
+      
+      * `MARRIED_CERT` - свидетельство о заключении брака
+      
+      * `DIVORCE_CERT` - свидетельство о расторжении брака
+        
+      * `NAME_CHANGE_CERT` - свидетельство о перемене имени
+      
+      * `FATHERHOOD_CERT` - свидетельство об установлении отцовства
+      
+      * `DEATH_CERT` - свидетельство о смерти
+      
+      * `VEHICLE_CERT` - Сведения о транспортном средстве
+      
+      * `MLTR_CONTRACT_CERT` - Сведения о гражданах, призванных (поступивших по контракту) на военную службу (уволенных с военной службы)
+      
+      * `MLTR_ID` - Военный билет
+      
+      * `LGL_CPCT_CERT` - Сведения о дееспособности
+      
+      * `PRISON_CERT` - Сведения о нахождении гражданина в местах лишения свободы
+      
+      * `ILS_PFR_CERT` - Сведения о состоянии индивидуального страхового счета застрахованного лица
+      
+      * `EGRN_CERT` - Сведения, содержащиеся в кадастре недвижимости и реестре прав на недвижимость в составе Единого государственного реестра недвижимости, относящиеся к гражданам Российской Федерации - физическим лицам
+      
+discriminator:
+  propertyName: type
+title:  BaseDoc
+description: >
+  Базовый тип для всех документов. Абстрактный, должен только наследоваться.
+allOf:
+  - $ref: '#/components/schemas/BaseDocType'
+  - $ref: '#/components/schemas/BaseTypeDocSeries'
+  - $ref: '#/components/schemas/BaseTypeDocNumber'
+  - $ref: '#/components/schemas/BaseTypeDocIssued'
+  - type: object
+    required: 
+      - type
+      - series
+      - number
+      - issued
+title: DocResponse
+type: object
+oneOf:
+  - $ref: '#/components/schemas/SNILSDoc'
+  - $ref: '#/components/schemas/RfPassportDoc'
+  - $ref: '#/components/schemas/FrgnPassportDoc'
+  - $ref: '#/components/schemas/RfDrivingLicenseDoc'
+  - $ref: '#/components/schemas/FidDoc'
+  - $ref: '#/components/schemas/FidBrthCertDoc'
+  - $ref: '#/components/schemas/OldBrthCertDoc'
+  - $ref: '#/components/schemas/MdclPlcyDoc'
+  - $ref: '#/components/schemas/RegistrationDoc'
+  - $ref: '#/components/schemas/MarriedCertDoc'
+  - $ref: '#/components/schemas/DivorceCertDoc'
+  - $ref: '#/components/schemas/RfBrthCertDoc'
+  - $ref: '#/components/schemas/FatherHoodCertDoc'
+  - $ref: '#/components/schemas/NameChangeCertDoc'
+  - $ref: '#/components/schemas/DeathCertDoc'
+  - $ref: '#/components/schemas/VehicleDoc'
+
+  
+
+title: SNILSDoc
+description: > 
+  СНИЛС
+  `type` будет равен `SNILS`
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  - $ref: '#/components/schemas/BaseValidateDateDoc'
+  - $ref: '#/components/schemas/BaseTypeSnils'
+  - $ref: '#/components/schemas/BaseTypeName'
+  - $ref: '#/components/schemas/BaseTypePatronymic'
+  - $ref: '#/components/schemas/BaseTypeSurname'
+  - $ref: '#/components/schemas/BaseTypeGender'
+  - $ref: '#/components/schemas/BaseTypeBirthDate'
+  - type: object
+    required:
+      - snils
+      - name
+      - surname
+      - gender
+      - birthdate
+title: RfPassportDoc
+description: > 
+  Паспорт гражданина России
+  `type` будет равен `RF_PASSPORT`
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDoc'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  - $ref: '#/components/schemas/BaseValidateDateDoc'
+  - $ref: '#/components/schemas/BaseTypeName'
+  - $ref: '#/components/schemas/BaseTypePatronymic'
+  - $ref: '#/components/schemas/BaseTypeSurname'
+  - $ref: '#/components/schemas/BaseTypeGender'
+  - $ref: '#/components/schemas/BaseTypeBirthDate'
+  - $ref: '#/components/schemas/BaseTypeBirthPlace'
+  - type: object
+    required:
+      - name
+      - surname
+      - issued_by
+      - gender
+      - birthdate
+      - birthplace
+      - division
+      - passport_status
+    properties:
+      issued_by:
+        type: string
+        example: 'Гагаринским отделением милиции №5 по г.Москве МВД России'
+        description: Кем выдан паспорт
+      division:
+        type: string
+        description: Код подразделения
+        example: '503-078'
+      passport_status:
+        type: string
+        enum:
+          - valid # 300 - Действителен
+          - invalid # 301 - Не действителен
+          - no_information # 302 - Сведениями по заданным реквизитам не располагаем
+        description: Статус паспорта
+        example: invalid
+      invalidity_reason:
+        type: string
+        enum:
+          - expired # 601 - истек срок действия
+          - replaced # 602 - заменен на новый
+          - with_violation # 603 - выдан с нарушением
+          - in_search # 604 - в розыске
+          - destroyes # 605 - изъят, уничтожен
+          - owner_death # 606 - в связи со смертью владельца
+          - technical_defect # 607 - технический брак
+          - lost # 609 - утрачен
+        description: Причина недействительности
+        example: replaced
+title: FrgnPassportDoc
+description: > 
+  Заграничный паспорт гражданина России
+  `type` будет равен `FRGN_PASS`
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDoc'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  - $ref: '#/components/schemas/BaseValidateDateDoc'
+  - $ref: '#/components/schemas/BaseTypeName'
+  - $ref: '#/components/schemas/BaseTypePatronymic'
+  - $ref: '#/components/schemas/BaseTypeSurname'
+  - $ref: '#/components/schemas/BaseTypeGender'
+  - $ref: '#/components/schemas/BaseTypeBirthDate'
+  - $ref: '#/components/schemas/BaseTypeBirthPlace'
+  - type: object
+    required:
+      - expired
+      - latin_name
+      - latin_surname
+      - issued_by
+      - gender
+      - birthdate
+      - birthplace
+      - division
+    properties:
+      latin_name:
+        type: string
+        example: 'IVAN'
+        description: Транслитерированное имя
+      latin_surname:
+        type: string
+        example: 'IVANOV'
+        description: Транслитерированная фамилия
+      issued_by:
+        type: string
+        example: 'ФМС 404'
+        description: Кем выдан паспорт
+      expired:
+        type: string
+        format: date
+        example: '2026-08-29'
+        description: Действителен до
+      country_name:
+        type: string
+        example: 'RUSSIA'
+        description: указывается название страны буквами латинского алфавита
+      passport_type:
+        description: тип заграничного паспорта
+        type: string
+        enum:
+          - P # для паспорта гражданина Российской Федерации
+          - D # для дипломатического паспорта
+          - S # для служебного паспорта
+        example: 'P'
+      passport_status:
+        type: string
+        enum:
+          - valid # 300 - Действителен
+          - invalid # 301 - Не действителен
+          - no_information # 302 - Сведениями по заданным реквизитам не располагаем
+        description: Статус паспорта
+        example: invalid
+      invalidity_reason:
+        type: string
+        enum:
+          - expired # 601 - истек срок действия
+          - replaced # 602 - заменен на новый
+          - with_violation # 603 - выдан с нарушением
+          - in_search # 604 - в розыске
+          - destroyes # 605 - изъят, уничтожен
+          - owner_death # 606 - в связи со смертью владельца
+          - technical_defect # 607 - технический брак
+          - lost # 609 - утрачен
+        description: Причина недействительности
+        example: replaced
+title: RfDrivingLicenseDoc
+# VS01043v001-MVDR05  Предоставление сведений о выданных водительских удостоверениях (для российских ВУ) 
+# https://smev3.gosuslugi.ru/portal/inquirytype_one.jsp?zone=fed&id=77439
+description: > 
+  Водительское удостоверение гражданина РФ
+  `type` будет равен `RF_DRIVING_LICENSE` 
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDoc'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  - $ref: '#/components/schemas/BaseValidateDateDoc'
+  - $ref: '#/components/schemas/BaseTypeName'
+  - $ref: '#/components/schemas/BaseTypePatronymic'
+  - $ref: '#/components/schemas/BaseTypeSurname'
+  - $ref: '#/components/schemas/BaseTypeBirthDate'
+  - $ref: '#/components/schemas/BaseTypeBirthPlace'
+  #- $ref: '#/components/schemas/BaseTypeBirthRegion' #указывается, если родился в России
+  #- $ref: '#/components/schemas/BaseTypeBirthCountry' #указывается, если родился не в России
+  - type: object
+    required:
+      - issued_by
+    properties:
+      country_name:
+        type: string
+        example: 'RUS'
+        description: Страна выдачи ВУ (Общероссийский классификатор стран мира)
+      #address:
+        #type: string
+        #description: Адрес 
+        #example: 'г. Москва'
+      issued_by:
+        type: string
+        example: 'ФМС 404'
+        description: Орган выдачи
+      expired:
+        type: string
+        format: date
+        example: '2026-08-29'
+        description: Действителен до
+      categories:
+        description: Категории B, C, D
+        type: array
+        items:
+          type: string
+          enum:
+            - А # Мотоциклы
+            - А1 # Легкие мотоциклы
+            - В # Легковые автомобили, небольшие грузовики (до 3,5 тонн)
+            - ВE # Легковые автомобили с прицепом
+            - В1 # Трициклы
+            - С # Грузовые автомобили (от 3,5 тонн)
+            - СE # Грузовые автомобили с прицепом
+            - С1 # Средние грузовики (от 3,5 до 7,5 тонн)
+            - С1E # Средние грузовики с прицепом
+            - D # Автобусы
+            - DE # Автобусы с прицепом
+            - D1 # Небольшие автобусы
+            - D1E # Небольшие автобусы с прицепом
+            - М # Мопеды
+            - Tm # Трамваи
+            - Tb # Троллейбусы
+          description: Категория ВУ
+          example: 'B'
+      experience:
+        type: string
+        format: date
+        example: '2009'
+        description: Водительский стаж (указывается год)
+title: FidDoc
+description: > 
+  Документ иностранного гражданина
+  `type` будет равен `FID_DOC`
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  - $ref: '#/components/schemas/BaseValidateDateDoc'
+  - type: object
+    required:
+      - number
+      - issued
+    properties:
+      series:
+        type: string
+                      
+        description:   Серия документа. 
+        example: '65 02'
+      number:
+        type: string
+        example: '650230'
+                      
+        description:   Номер документа. 
+      issued:
+        type: string
+        format: date-time
+        example: '2016-08-29T09:12:33.001Z'
+        description:   Дата выдачи документа
+                                                        
+title: FidBrthCertDoc
+description: > 
+  Cвидетельство о рождении – другая страна
+  `type` будет равен `FID_BRTH_CERT`
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  - $ref: '#/components/schemas/BaseValidateDateDoc'
+  - type: object
+    required:
+      - number
+      - issued
+      - issued_by
+    properties:
+      series:
+        type: string
+        description: >
+          Серия документа. 
+        example: '65 02'
+      number:
+        type: string
+        example: '650230'
+        description: >
+          Номер документа. 
+      issued:
+        type: string
+        format: date
+        example: '2016-08-29'
+        description: >
+          Дата выдачи документа
+      issued_by:
+        type: string
+        example: ''
+        description: >
+          Кем выдан документ 
+title: OldBrthCertDoc
+description: > 
+  Cвидетельство о рождении – СССР
+  `type` будет равен `OLD_BRTH_CERT`
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  - $ref: '#/components/schemas/BaseValidateDateDoc'
+  - type: object
+    required:
+      - number
+      - issued
+      - issued_by
+    properties:
+      series:
+        type: string
+        description: >
+          Серия документа. 
+        example: '65 02'
+      number:
+        type: string
+        example: '650230'
+        description: >
+          Номер документа. 
+      issued:
+        type: string
+        format: date-time
+        example: '2016-08-29T09:12:33.001Z'
+        description: >
+          Дата выдачи документа
+      issued_by:
+        type: string
+        example: 'Отдел ЗАГС Новгородского горисполкома'
+        description: >
+          Кем выдан документ
+      act_number:
+        type: string
+        example: '344'
+        description: >
+          Номер актовой записи
+title: MdclPlcyDoc
+description: > 
+  Полис ОМС
+  `type` будет равен `MDCL_PLCY`
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  - $ref: '#/components/schemas/BaseValidateDateDoc'
+  - type: object
+    required:
+      - number
+    properties:
+      number:
+        type: string
+        example: '650230'
+        description: >
+          Номер документа. 
+      expiry_date:
+        type: string
+        format: date
+        example: '2036-08-29'
+        description: >
+          Действителен до (указывается если не бессрочный)
+title: RegistrationDoc
+description: > 
+  Сведения о регистрации гражданина Российской Федерации по месту жительства или месту пребывания (снятии с регистрационного учета)
+  `type` будет равен `REGISTRATION`
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  - $ref: '#/components/schemas/BaseValidateDateDoc'
+
+  - type: object
+    required:
+      - reg_type
+    properties:
+      date_from:
+        format: date
+        example: '2016-04-14'
+        description: Дата регистрации с
+      date_to:
+        format: date
+        example: '2019-08-29'
+        description: Дата регистрации по
+      reg_type:
+        type: integer
+        enum:
+          - 1 # Регистрация по месту жительства
+          - 2 # Регистрация по месту прибывания
+title: MarriedCertDoc
+description: >
+  Свидетельство о заключении брака. `type` будет равен `MARRIED_CERT`
+  В хранилище также будут храниться данные о супругах: ФИО, СНИЛСы или номер паспорта. Если потребуется можно добавить эти сведения в api.
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDoc'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  #- $ref: '#/components/schemas/BaseValidateDateDoc'
+
+  #- $ref: '#/components/schemas/BaseWifeInfo'
+  #- $ref: '#/components/schemas/BaseMWBirthplaceInfo'
+  #- $ref: '#/components/schemas/BaseHusbandInfo'
+  #- $ref: '#/components/schemas/BaseFHBirthplaceInfo'
+  - type: object
+    #required:
+      #- marriage_date
+    #properties:
+      #marriage_date:
+        #type: string
+        #format: date-time
+        #description: Дата заключения брака (https://tools.ietf.org/html/rfc3339#section-5.6)
+        #example: '2017-07-21T00:00:00Z'
+title: DivorceCertDoc
+description: >
+  Свидетельство о расторжении брака. `type` будет равен `DIVORCE_CERT` 
+  В хранилище также будут храниться данные о супругах: ФИО, СНИЛСы или номер паспорта. Если потребуется можно добавить эти сведения в api.
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDoc'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  #- $ref: '#/components/schemas/BaseValidateDateDoc'
+
+  #- $ref: '#/components/schemas/BaseWifeInfo'
+  #- $ref: '#/components/schemas/BaseMWBirthplaceInfo'
+  #- $ref: '#/components/schemas/BaseHusbandInfo'
+  #- $ref: '#/components/schemas/BaseFHBirthplaceInfo'
+  - type: object
+    #required:
+      #- divorce_date  
+    #properties:
+      #divorce_date:
+        #type: string
+        #format: date-time
+        #description: Дата расторжения брака (https://tools.ietf.org/html/rfc3339#section-5.6)
+        #example: '2017-07-21T00:00:00Z'    
+title: RfBrthCertDoc
+description: > 
+  Свидетельство  о государственной регистрации рождения
+  `type` будет равен `RF_BRTH_CERT`
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDoc'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  #- $ref: '#/components/schemas/BaseValidateDateDoc'
+
+  #- $ref: '#/components/schemas/BaseMotherInfo'
+  #- $ref: '#/components/schemas/BaseFatherInfo'
+  - type: object
+    #required:
+      #- child_gender
+      #- child_name
+      #- child_surname
+      #- child_patronymic
+      #- child_birthdate
+      #- child_birthplace
+    #properties:
+      # Сведения о родившемся ребенке
+      #child_gender:
+        #type: string
+        #enum:
+        #  - F
+        #  - M
+        #description: Половая принадлежность ребенка ('F'- female, 'M' - male )
+        #example: 'F'
+      #child_name:
+        #type: string
+        #example: 'Алиса'
+        #description: имя ребенка
+      #child_surname:
+        #type: string
+        #example: 'Петрова'
+        #description: фамилия ребенка
+      #child_patronymic:
+        #type: string
+        #example: 'Сергеевна'
+        #description: отчество ребенка
+      #child_birthdate:
+        #type: string
+        #format: date-time
+        #description: Дата рождения (https://tools.ietf.org/html/rfc3339#section-5.6)
+        #example: '2017-07-21T00:00:00Z'
+      # Данные о месте рождения ребенка
+      #child_birthplace:
+        #type: string
+        #example: 'РОССИЯ, город Москва'
+        #description: Место рождения (текстом) ребенка
+      #child_birthplace_oksm:
+        #type: integer
+        #example: '643'
+        #description: Код страны места рождения ребенка
+      #child_birthplace_country_name:
+        #type: string
+        #example: 'РОССИЯ'
+        #description: Полное наименование страны места рождения ребенка
+      #child_birthplace_region_code:
+        #type: string
+        #example: '76'
+        #description:  Код субъекта РФ места рождения ребенка (из справочника «Коды субъектов Российской Федерации» (ССРФ). Элемент обязателен при <КодСтраны>=643 (Россия))
+      #child_birthplace_region_name:
+        #type: string
+        #example: 'Ярославская область'
+        #description:  Наименование субъекта РФ места рождения ребенка
+      #child_birthplace_district:
+        #type: string
+        #example: 'Фрунзенский'
+        #description:  Наименование района места рождения ребенка
+      #child_birthplace_city:
+        #type: string
+        #example: 'Ярославль'
+        #description:  Наименование города места рождения ребенка
+      #child_birthplace_locality:
+        #type: string
+        #example: 'пос. Дорожный'
+        #description:  Наименование населенного пункта места рождения ребенка
+title: FatherHoodCertDoc
+description: > 
+  Свидетельство о государственной регистрации установления отцовства
+  `type` будет равен `FATHERHOOD_CERT`
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDoc'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  #- $ref: '#/components/schemas/BaseValidateDateDoc'
+
+  #- $ref: '#/components/schemas/BaseMotherInfo'
+  #- $ref: '#/components/schemas/BaseMWBirthplaceInfo'
+  #- $ref: '#/components/schemas/BaseFatherInfo'
+  #- $ref: '#/components/schemas/BaseFHBirthplaceInfo'
+  - type: object
+    #required:
+      #- child_gender
+      #- child_name_before
+      #- child_surname_before
+      #- child_patronymic_before
+      #- child_name_after
+      #- child_surname_after
+      #- child_patronymic_after
+      #- child_birthdate
+      #- child_birthplace
+      #- birth_record_number
+      #- birth_record_date
+      #- birth_registry_office_name
+      #- birth_registry_office_code
+    #properties:
+      #child_gender:
+        #type: string
+        #enum:
+        #  - F
+        #  - M
+        #description: Половая принадлежность ребенка ('F'- female, 'M' - male )
+        #example: 'F'
+      #child_name_before:
+        #type: string
+        #example: 'Алиса'
+        #description: имя ребенка до установления отцовства
+      #child_surname_before:
+        #type: string
+        #example: 'Петрова'
+        #description: фамилия ребенка до установления отцовства
+      #child_patronymic_before:
+        #type: string
+        #example: 'Сергеевна'
+        #description: отчество ребенка до установления отцовства
+      #child_name_after:
+        #type: string
+        #example: 'Алиса'
+        #description: имя ребенка после установления отцовства
+      #child_surname_after:
+        #type: string
+        #example: 'Смирнова'
+        #description: фамилия ребенка после установления отцовства
+      #child_patronymic_after:
+        #type: string
+        #example: 'Алексеевна'
+        #description: отчество ребенка после установления отцовства
+      #child_birthdate:
+        #type: string
+        #format: date-time
+        #description: Дата рождения (https://tools.ietf.org/html/rfc3339#section-5.6)
+        #example: '2017-07-21T00:00:00Z'
+      # Данные о месте рождения ребенка
+      #child_birthplace:
+        #type: string
+        #example: 'РОССИЯ, город Москва'
+        #description: Место рождения (текстом) ребенка
+      #child_birthplace_oksm:
+        #type: integer
+        #example: '643'
+        #description: Код страны места рождения ребенка
+      #child_birthplace_country_name:
+        #type: string
+        #example: 'РОССИЯ'
+        #description: Полное наименование страны места рождения ребенка
+      #child_birthplace_region_code:
+        #type: string
+        #example: '76'
+        #description:  Код субъекта РФ места рождения ребенка (из справочника «Коды субъектов Российской Федерации» (ССРФ). Элемент обязателен при <КодСтраны>=643 (Россия))
+      #child_birthplace_region_name:
+        #type: string
+        #example: 'Ярославская область'
+        #description:  Наименование субъекта РФ места рождения ребенка
+      #child_birthplace_district:
+        #type: string
+        #example: 'Фрунзенский'
+        #description:  Наименование района места рождения ребенка
+      #child_birthplace_city:
+        #type: string
+        #example: 'Ярославль'
+        #description:  Наименование города места рождения ребенка
+      #child_birthplace_locality:
+        #type: string
+        #example: 'пос. Дорожный'
+        #description:  Наименование населенного пункта места рождения ребенка
+title: NameChangeCertDoc
+description: > 
+  Свидетельство о государственной регистрации перемены имени
+  `type` будет равен `NAME_CHANGE_CERT`
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDoc'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  #- $ref: '#/components/schemas/BaseValidateDateDoc'
+
+  - type: object
+    #required:
+      #- name_before
+      #- surname_before
+      #- patronymic_before
+      #- name_after
+      #- surname_after
+      #- patronymic_after
+      #- birthdate
+    #properties:
+      #oksm:
+        #type: integer
+        #example: '643'
+        #description: Код страны гражданства 
+      #country_name:
+        #type: string
+        #example: 'РОССИЯ'
+        #description: Полное наименование страны гражданства 
+      #name_before:
+        #type: string
+        #example: 'Инна'
+        #description: Имя до перемены имени
+      #surname_before:
+        #type: string
+        #example: 'Иванова'
+        #description: Фамилия до перемены имени
+      #patronymic_before:
+        #type: string
+        #example: 'Александровна'
+        #description: Отчество до перемены имени
+      #name_after:
+        #type: string
+        #example: 'Алла'
+        #description: Имя после перемены имени
+      #surname_after:
+        #type: string
+        #example: 'Борисовна'
+        #description: Фамилия спосле перемены имени
+      #patronymic_after:
+        #type: string
+        #example: 'Пугачева'
+        #description: Отчество после перемены имени
+      # Данные о месте рождения
+      #birthplace:
+        #type: string
+        #example: 'РОССИЯ, город Москва'
+        #description: Место рождения (текстом) 
+      #birthplace_oksm:
+        #type: integer
+        #example: '643'
+        #description: Код страны места рождения 
+      #birthplace_country_name:
+        #type: string
+        #example: 'РОССИЯ'
+        #description: Полное наименование страны места рождения 
+      #birthplace_region_code:
+        #type: string
+        #example: '76'
+        #description:  Код субъекта РФ места рождения  (из справочника «Коды субъектов Российской Федерации» (ССРФ). Элемент обязателен при <КодСтраны>=643 (Россия))
+      #birthplace_region_name:
+        #type: string
+        #example: 'Ярославская область'
+        #description:  Наименование субъекта РФ места рождения 
+      #birthplace_district:
+        #type: string
+        #example: 'Фрунзенский'
+        #description:  Наименование района места рождения 
+      #birthplace_city:
+        #type: string
+        #example: 'Ярославль'
+        #description:  Наименование города места рождения
+      #birthplace_locality:
+        #type: string
+        #example: 'пос. Дорожный'
+        #description:  Наименование населенного пункта места рождения 
+      #birthdate:
+        #type: string
+        #format: date
+        #example: '1987-08-29'
+        #description: День рождения 
+title: DeathCertDoc
+description: > 
+  Свидетельство о смерти
+    `type` будет равен `DEATH_CERT`
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDoc'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  #- $ref: '#/components/schemas/BaseValidateDateDoc'
+
+  - type: object
+    #required:
+      #- gender
+      #- name
+      #- surname
+      #- patronymic
+      #- deathdate
+      #- deathplace
+    #properties:
+      #gender:
+        #type: string
+        #enum:
+          #- F
+          #- M
+        #description: Пол ('F'- female, 'M' - male)
+      #oksm:
+        #type: integer
+        #example: '643'
+        #description: Код страны гражданства 
+      #country_name:
+        #type: string
+        #example: 'РОССИЯ'
+        #description: Полное наименование страны гражданства 
+      #name:
+        #type: string
+        #example: 'Инна'
+        #description: Имя умершего
+      #surname:
+        #type: string
+        #example: 'Иванова'
+        #description: Фамилия умершего
+      #patronymic:
+        #type: string
+        #example: 'Александровна'
+        #description: Отчество умершего
+      #birthdate:
+        #type: string
+        #format: date
+        #example: '1987-08-29'
+        #description: Дата рождения 
+      #deathdate:
+        #type: string
+        #format: date
+        #example: '1987-08-29'
+        #description: Дата смерти
+      # Данные о месте рождения
+      #birthplace:
+        #type: string
+        #example: 'РОССИЯ, город Москва'
+        #description: Место рождения (текстом) 
+      #birthplace_oksm:
+        #type: integer
+        #example: '643'
+        #description: Код страны места рождения 
+      #birthplace_country_name:
+        #type: string
+        #example: 'РОССИЯ'
+        #description: Полное наименование страны места рождения 
+      #birthplace_region_code:
+        #type: string
+        #example: '76'
+        #description:  Код субъекта РФ места рождения  (из справочника «Коды субъектов Российской Федерации» (ССРФ). Элемент обязателен при <КодСтраны>=643 (Россия))
+      #birthplace_region_name:
+        #type: string
+        #example: 'Ярославская область'
+        #description:  Наименование субъекта РФ места рождения 
+      #birthplace_district:
+        #type: string
+        #example: 'Фрунзенский'
+        #description:  Наименование района места рождения 
+      #birthplace_city:
+        #type: string
+        #example: 'Ярославль'
+        #description:  Наименование города места рождения
+      #birthplace_locality:
+        #type: string
+        #example: 'пос. Дорожный'
+        #description:  Наименование населенного пункта места рождения 
+      #Адрес места смерти
+      #deathplace:
+        #type: string
+        #example: 'РОССИЯ, город Москва'
+        #description: Место смерти (текстом) 
+      #deathplace_oksm:
+        #type: integer
+        #example: '643'
+        #description: Код страны места смерти 
+      #deathplace_country_name:
+        #type: string
+        #example: 'РОССИЯ'
+        #description: Полное наименование страны места смерти 
+      #deathplace_region_code:
+        #type: string
+        #example: '76'
+        #description:  Код субъекта РФ места смерти  (из справочника «Коды субъектов Российской Федерации» (ССРФ). Элемент обязателен при <КодСтраны>=643 (Россия))
+      #deathplace_region_name:
+        #type: string
+        #example: 'Ярославская область'
+        #description:  Наименование субъекта РФ места смерти 
+      #deathplace_district:
+        #type: string
+        #example: 'Фрунзенский'
+        #description:  Наименование района места смерти 
+      #deathplace_city:
+        #type: string
+        #example: 'Ярославль'
+        #description:  Наименование города места смерти
+      #deathplace_locality:
+        #type: string
+        #example: 'пос. Дорожный'
+        #description:  Наименование населенного пункта места смерти 
+title: VehicleDoc
+# ВС «Предоставление сведений о регистрационных действиях транспортных средств и их владельцах» VS00743v001-MVDR05
+# (https://smev3.gosuslugi.ru/portal/inquirytype_one.jsp?id=64528&zone=fed&page=1&dTest=false)
+description: > 
+  Сведения о транспортных средствах
+    `type` будет равен `VEHICLE_CERT`
+type: object
+properties:
+  vehicles:
+    type: array
+    items:
+      $ref: '#/components/schemas/Vehicle'
+title: Vehicle
+description: Данные транспортных средств
+allOf:
+  - $ref: '#/components/schemas/BaseProofBlock'
+  - $ref: '#/components/schemas/BaseDepartmentDoc'
+  - $ref: '#/components/schemas/BaseGetDateDoc'
+  - $ref: '#/components/schemas/BaseValidateDateDoc'
+  - type: object
+    required:
+      - registration_plate
+      - registration_doc_number
+      - registration_doc_series
+    properties:
+      car_name:
+        type: string
+        example: 'Моя Ласточка'
+        description: Имя транспортного средства
+      #primary_pts:
+        #type: string
+        #example: '72КЕ000001'
+        #description: Паспорт транспортного средства (ПТС)
+      #department_code:
+        #type: string
+        #example: '1171093'
+        #description: Код подразделения ГИБДД
+      #department_name:
+        #type: string
+        #example: 'МО ГИБДД РЭР и ТН АМТС УМВД России по Тюменской области'
+        #description: Наименование подразделения ГИБДД
+      registration_plate:
+        type: string
+        example: 'У111АА72'
+        description: Государственный регистрационный знак
+      vin:
+        type: string
+        example: 'ХТС541000S2074681'
+        description: Идентификационный номер (VIN)
+      brand:
+        type: string
+        example: 'Хендай'
+        description: Марка
+      model:
+        type: string
+        example: 'Солярис'
+        description: Модель (модификация)
+      #vehicle_type:
+        #type: string
+        #example: 'Лимузин'
+        #description: Наименование типа ТС
+      vehicle_category:
+        type: string
+        example: 'B'
+        description: Категория ТС
+      #is_in_leasing:
+        #type: boolean
+        #example: false
+        #description: Признак того, что ТС находится в лизинге (false - ТС не в лизинге, true - ТС в лизинге)
+      production_year:
+        type: integer
+        example: '2001'
+        description: Год выпуска
+      engine_number:
+        type: string
+        example: '029400'
+        description: Номер двигателя
+      body_number:
+        type: string
+        example: 'ХТС541000S2074000'
+        description: Номер кузова (прицепа)
+      chassis_number:
+        type: string
+        example: '2074681'
+        description: Номер шасси (рамы) 
+      #power_horse:
+        #type: number
+        #example: '210.0'
+        #description: Мощность двигателя, л.с.
+      #power_kwt:
+        #type: number
+        #example: '154.5'
+        #description: Мощность двигателя, кВт
+      #engine_volume:
+        #type: number
+        #example: '10850.0'
+        #description: Объём двигателя, см куб.
+      #eco_class:
+        #type: integer
+        #example: '4'
+        #description: Экологический класс
+        #enum:
+          #- 1
+          #- 2
+          #- 3
+          #- 4
+          #- 5
+      #registration_doc_cCode:
+        #type: string
+        #example: 'Свидетельство о регистрации  транспортного средства (приказ МВД России № 346-93)'
+        #description: Наименование регистрационного документа
+      registration_doc:
+        type: object
+        description: Серия и номер регистрационного документа (СТС)
+        properties:
+          registration_doc_series:
+            type: string
+            example: '72АА'
+            description: Серия регистрационного документа
+          registration_doc_number:
+            type: integer
+            example: '160000'
+            description: Номер регистрационного документа
+      #registration_doc_date:
+        #type: string
+        #format: date
+        #example: '2016-08-29'
+        #description: Дата выдачи регистрационного документа
+      #operations:
+        #description: перечень операций с ТС
+        #type: array
+        #items:
+          #properties:
+            #operation_name:
+              #type: string
+              #example: 'Первичная регистрация ТС'
+              #description: Наименование технологической операции
+            #operation_date:
+              #type: string
+              #format: date
+              #example: '2016-08-29'
+              #description: Дата операции
+            #operation_code:
+              #type: string
+              #example: '11'
+              #description: Код технологической операции
+title: BaseTypeDocSeries
+description: >
+  Серия документа
+properties:
+  series:
+    type: string
+    description: >
+      Серия документа
+    example: '65 02'
+title: BaseTypeDocNumber
+description: >
+  Серия документа
+properties:
+  number:
+    type: string
+    example: '650230'
+    description: >
+      Номер документа
+title: BaseTypeDocIssued
+description: >
+  Серия документа
+properties:
+  issued:
+    type: string
+    format: date-time
+    example: '2016-08-29T09:12:33.001Z'
+    description: >
+      Дата выдачи документа
+title: BaseDepartmentDoc 
+type: object
+properties:
+  department_doc:
+        type: string
+        description: Ведомство, к которому относится документ
+        example: 'ГУВМ МВД России'   
+title: BaseGetDateDoc
+type: object
+properties:
+  get_date_doc:
+    type: string
+    format: date-time
+    description: >
+      Дата и время получения документа (https://tools.ietf.org/html/rfc3339#section-5.6)
+    example: '2019-08-21T21:20:01Z'
+title: BaseValidateDateDoc
+type: object
+properties:
+  validate_date_doc:
+    type: string
+    format: date-time
+    description: >
+      Дата и время валидации документа (https://tools.ietf.org/html/rfc3339#section-5.6)
+    example: '2019-08-21T21:20:01Z'
+title: BaseTypeProofStatus
+type: object
+properties:
+  status:
+    type: string
+    enum: 
+      - trusted
+      - verified
+      - verifying
+      - unverified
+    description: >
+      Статус доверия к сведениям объекта.
+      
+      * `trusted` — юридически значимые сведения, высшей степени доверия. Подлинность сведений **ВОЗМОЖНО** проверить по цепочке электронных подписей.
+      
+      * `verified` - сведения введённые пользователем и проверенные в БГИР. Подлинность сведений **НЕ ВОЗМОЖНО** проверить по цепочке электронных подписей.
+      
+      * `verifying` - сведения проверяются в ГИС, результат проверки еще не известен. Подлинность сведений **НЕ ВОЗМОЖНО** проверить по цепочке электронных подписей.
+      
+      * `unverified` — сведения не проверенные или не прошедшие проверку в БГИР. Подлинность сведений **НЕ ВОЗМОЖНО** проверить по цепочке электронных подписей.
+title: BaseTypeProofMessage
+type: object
+properties:
+  message:
+    type: string
+    example: 'Паспорт признан недействительным после утери'
+    description: >
+      Дополнительная информация о сведениях. Например тут может быть информация поясняющая причину невалидности документа. 
+title: BaseProofBlock
+allOf:
+  - $ref: '#/components/schemas/BaseTypeProofStatus'
+  - $ref: '#/components/schemas/BaseTypeProofRelevance'
+  - $ref: '#/components/schemas/BaseTypeProofMessage'
+  - type: object
+    required: 
+      - hash
+      - sign
+      - status
+      - relevance
+title: BaseTypeName
+type: object
+properties:
+  name:
+    type: string
+    description: Имя
+    example: Мария
+title: BaseTypePatronymic
+type: object
+properties:
+  patronymic:
+    type: string
+    description: Отчество (если наличиствует)
+    example: Петровна
+title: BaseTypeSurname
+type: object
+properties:
+  surname:
+    type: string
+    description: Фамилия
+    example: Менделеева
+title: BaseTypeSnils
+type: object
+properties:
+  snils:
+    type: string
+    description: СНИЛС гражданина
+    example: '125-505-98 00'
+title: BaseTypeInn
+type: object
+properties:
+  inn:
+    type: string
+    description: ИНН гражданина
+    pattern: '^\d{12}$'
+    example: '770834234563'
+title: BaseTypeGender
+type: object
+properties:
+  gender:
+    type: string
+    enum:
+      - F
+      - M
+      - U
+    description: Половая принадлежность ('F'- female, 'M' - male, 'U' - Не определен )
+    example: 'F'
+title: BaseTypeBirthDate
+type: object
+properties:
+  birthdate:
+    type: string
+    format: date-time
+    description: >
+      Дата рождения (https://tools.ietf.org/html/rfc3339#section-5.6)
+    example: '2017-07-21T00:00:00Z'
+title: BaseTypeBirthCountry
+type: object
+properties:
+  birthcountry:
+    type: string
+    description: Страна рождения (Общероссийский классификатор стран мира)
+    example: RUS
+title: BaseTypeBirthRegion
+type: object
+properties:
+  birthregion:
+    type: string
+    description: Регион рождения (Код ОКТМО)
+    example: 45
+title: BaseTypeBirthPlace:
+type: object
+properties:
+  birthplace:
+    type: string
+    description: Место рождения
+    example: поселок Трудовой горизонт
+BaseTypeCitizenship:
+type: object
+properties:
+  citizenship:
+    type: string
+    description: Гражданство (todo гражданств может быть несколько)
+    example: RUS
+BaseTypeDoubleCitizenship:
+type: object
+properties:
+  DoubleCitizenship:
+    type: boolean
+    description: Признак наличия двойного гражданства
+    example: false
+BaseTypeCitizenshipDate:
+type: object
+properties:
+  citizenship_date:
+    type: string
+    format: date-time
+    description: Дата получения гражданства (https://tools.ietf.org/html/rfc3339#section-5.6)
+    example: '2017-07-21T17:32:28Z'

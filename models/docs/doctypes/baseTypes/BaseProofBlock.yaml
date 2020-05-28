@@ -1,0 +1,11 @@
+title: BaseProofBlock
+allOf:
+  - $ref: ./BaseTypeProofStatus.yaml
+  - $ref: ./BaseTypeProofRelevance.yaml
+  - $ref: ./BaseTypeProofMessage.yaml
+  - type: object
+    required: 
+      - hash
+      - sign
+      - status
+      - relevance

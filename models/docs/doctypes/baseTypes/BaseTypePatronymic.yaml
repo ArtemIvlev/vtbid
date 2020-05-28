@@ -1,0 +1,7 @@
+title: BaseTypePatronymic
+type: object
+properties:
+  patronymic:
+    type: string
+    description: Отчество (если наличиствует)
+    example: Петровна

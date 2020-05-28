@@ -1,0 +1,20 @@
+title: DocResponse
+type: object
+oneOf:
+  - $ref: ./doctypes/SNILSDoc.yaml
+  - $ref: ./doctypes/RfPassportDoc.yaml
+#  - $ref: ./doctypes/FrgnPassportDoc.yaml
+#  - $ref: ./doctypes/RfDrivingLicenseDoc.yaml
+#  - $ref: ./doctypes/FidDoc.yaml
+#  - $ref: ./doctypes/FidBrthCertDoc.yaml
+#  - $ref: ./doctypes/OldBrthCertDoc.yaml
+#  - $ref: ./doctypes/MdclPlcyDoc.yaml
+#  - $ref: ./doctypes/RegistrationDoc.yaml
+#  - $ref: ./doctypes/MarriedCertDoc.yaml
+#  - $ref: ./doctypes/DivorceCertDoc.yaml
+#  - $ref: ./doctypes/RfBrthCertDoc.yaml
+#  - $ref: ./doctypes/FatherHoodCertDoc.yaml
+# - $ref: ./doctypes/NameChangeCertDoc.yaml
+#  - $ref: ./doctypes/DeathCertDoc.yaml
+#  - $ref: ./doctypes/VehicleDoc.yaml
+x-examples: {}

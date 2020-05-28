@@ -1,0 +1,81 @@
+title: BaseDocType
+type: object
+description: >
+  Базовый атомарный тип всех документов. Описывает типы документов. Абстрактный.
+properties:
+  type:
+    type: string
+    enum: 
+      - RF_PASSPORT
+      - SNILS
+      - FID_DOC
+      - RF_DRIVING_LICENSE
+      - MLTR_ID
+      - FRGN_PASS
+      - MDCL_PLCY
+      - FID_BRTH_CERT
+      - OLD_BRTH_CERT
+      - REGISTRATION
+      - RF_BRTH_CERT
+      - MARRIED_CERT
+      - DIVORCE_CERT
+      - NAME_CHANGE_CERT
+      - FATHERHOOD_CERT
+      - DEATH_CERT
+      - VEHICLE_CERT
+      - MLTR_CONTRACT_CERT
+      - MLTR_ID
+      - LGL_CPCT_CERT
+      - PRISON_CERT
+      - ILS_PFR_CERT
+      - EGRN_CERT
+    description: >
+      * `SNILS` – СНИЛС
+      
+      * `RF_PASSPORT` – паспорт гражданина РФ
+      
+      * `FID_DOC` – документ иностранного гражданина
+      
+      * `RF_DRIVING_LICENSE` – водительское удостоверение
+      
+      * `MLTR_ID` – военный билет
+      
+      * `FRGN_PASS` – заграничный паспорт
+      
+      * `MDCL_PLCY` – полис ОМС
+      
+      * `FID_BRTH_CERT` – свидетельство о рождении – другая страна
+      
+      * `OLD_BRTH_CERT` – свидетельство о рождении – СССР
+      
+      * `REGISTRATION` – сведения об адресе регистрации по месту жительства или месту пребывания
+      
+      * `RF_BRTH_CERT` – свидетельство о рождении – Россия
+      
+      * `MARRIED_CERT` - свидетельство о заключении брака
+      
+      * `DIVORCE_CERT` - свидетельство о расторжении брака
+        
+      * `NAME_CHANGE_CERT` - свидетельство о перемене имени
+      
+      * `FATHERHOOD_CERT` - свидетельство об установлении отцовства
+      
+      * `DEATH_CERT` - свидетельство о смерти
+      
+      * `VEHICLE_CERT` - Сведения о транспортном средстве
+      
+      * `MLTR_CONTRACT_CERT` - Сведения о гражданах, призванных (поступивших по контракту) на военную службу (уволенных с военной службы)
+      
+      * `MLTR_ID` - Военный билет
+      
+      * `LGL_CPCT_CERT` - Сведения о дееспособности
+      
+      * `PRISON_CERT` - Сведения о нахождении гражданина в местах лишения свободы
+      
+      * `ILS_PFR_CERT` - Сведения о состоянии индивидуального страхового счета застрахованного лица
+      
+      * `EGRN_CERT` - Сведения, содержащиеся в кадастре недвижимости и реестре прав на недвижимость в составе Единого государственного реестра недвижимости, относящиеся к гражданам Российской Федерации - физическим лицам
+      
+discriminator:
+  propertyName: type
+

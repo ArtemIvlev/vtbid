@@ -1,0 +1,7 @@
+title: BaseTypeBirthPlace
+type: object
+properties:
+  birthplace:
+    type: string
+    description: Место рождения
+    example: поселок Трудовой горизонт

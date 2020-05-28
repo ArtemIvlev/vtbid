@@ -1,0 +1,50 @@
+title: RfPassportDoc
+description: |
+  Паспорт гражданина России `type` будет равен `RF_PASSPORT`
+allOf:
+  - $ref: ./baseTypes/BaseProofBlock.yaml
+  - $ref: ./baseTypes/BaseDoc.yaml
+  - $ref: ./baseTypes/BaseDepartmentDoc.yaml
+  - $ref: ./baseTypes/BaseGetDateDoc.yaml
+  - $ref: ./baseTypes/BaseValidateDateDoc.yaml
+  - $ref: ./baseTypes/BaseTypeName.yaml
+  - $ref: ./baseTypes/BaseTypePatronymic.yaml
+  - $ref: ./baseTypes/BaseTypeSurname.yaml
+  - $ref: ./baseTypes/BaseTypeGender.yaml
+  - $ref: ./baseTypes/BaseTypeBirthDate.yaml
+  - $ref: ./baseTypes/BaseTypeBirthPlace.yaml
+  - type: object
+    properties:
+      issued_by:
+        type: string
+        example: Гагаринским отделением милиции №5 по г.Москве МВД России
+        description: Кем выдан паспорт
+      division:
+        type: string
+        description: Код подразделения
+        example: 503-078
+      passport_status:
+        type: string
+        enum:
+          - valid
+          - invalid
+          - no_information
+        description: Статус паспорта
+        example: invalid
+      invalidity_reason:
+        type: string
+        enum:
+          - expired
+          - replaced
+          - with_violation
+          - in_search
+          - destroyes
+          - owner_death
+          - technical_defect
+          - lost
+        description: Причина недействительности
+        example: replaced
+    required:
+      - issued_by
+      - division
+      - passport_status

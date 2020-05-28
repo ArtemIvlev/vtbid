@@ -1,0 +1,9 @@
+title: BaseTypeDocSeries
+description: >
+  Серия документа
+properties:
+  series:
+    type: string
+    description: >
+      Серия документа
+    example: '65 02'

@@ -1,0 +1,66 @@
+#TODO: Может быть свести с API Dadata?
+title: Adress
+type: object
+properties: 
+  id:
+    type: string
+    format: uuid
+  area:
+    description: '--'
+    type: string
+  block:
+    description: '--'
+    type: string
+  city:
+    description: '--'
+    type: string
+  country:
+    description: '--'
+    type: string
+  district:
+    description: '--'
+    type: string
+  fiasCode:
+    description: '--'
+    type: string
+  fiasId:
+    description: '--'
+    type: string
+  flat:
+    description: '--'
+    type: string
+  house:
+    description: '--'
+    type: string
+  okato:
+    description: '--'
+    type: string
+  oktmo:
+    description: '--'
+    type: string
+  postalCode:
+    description: '--'
+    type: string
+  region:
+    description: '--'
+    type: string
+  settlement:
+    description: '--'
+    type: string
+  street:
+    description: '--'
+    type: string
+  unrestrictedValue:
+    description: '--'
+    type: string
+  value:
+    description: '--'
+    type: string
+  streetType:
+    description: '--'
+    type: string
+  fiasLevel:
+    description: '--'
+    type: string
+description: ''
+

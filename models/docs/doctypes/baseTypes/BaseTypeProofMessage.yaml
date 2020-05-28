@@ -1,0 +1,8 @@
+title: BaseTypeProofMessage
+type: object
+properties:
+  message:
+    type: string
+    example: 'Паспорт признан недействительным после утери'
+    description: >
+      Дополнительная информация о сведениях. Например тут может быть информация поясняющая причину невалидности документа. 

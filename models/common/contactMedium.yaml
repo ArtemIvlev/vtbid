@@ -1,0 +1,17 @@
+title: contactMedium
+type: object
+properties:
+  validFor:
+    $ref: ./validFor.yaml
+  preferred:
+    type: string
+  vaidated: 
+    type: boolean
+  canBeLogin:
+    description: если да, то значение данного поля может быть использовано для входа в личный кабинет. В случае если у одного пользователя данное значение выбрано для входа, то такое же значение для других пользователей для входа выбранно быть не может.
+    type: boolean
+discriminator:
+  propertyName: objectType
+oneOf:
+  - $ref: ./phoneNumber.yaml
+  - $ref: ./email.yaml

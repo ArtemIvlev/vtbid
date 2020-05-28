@@ -1,0 +1,7 @@
+title: BaseTypeName
+type: object
+properties:
+  name:
+    type: string
+    description: Имя
+    example: Мария

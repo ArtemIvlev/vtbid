@@ -1,0 +1,21 @@
+title: metadata
+type: object
+description: стандартные данные объекта
+properties:
+  createadAt: 
+    type: string
+    description: дата создания
+    format: date-time
+  createadBy: 
+    type: string
+    description: имя создавшего пользователя  
+  modifiedAt:
+    type: string
+    description: дата изменения
+    format: date-time
+  modifiedBy: 
+    type: string
+    description: имя изменившего пользователя
+  qaLevel: 
+    type: string
+    description: уровень доверия 1-100 (можно будет потом сделать по десяткам и субстатусы между ними)

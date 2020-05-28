@@ -27,7 +27,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Individual.v1.yaml
+                  $ref: ../models/individual/Individual.v1.yaml
       deprecated: false
     post:
       tags:
@@ -38,7 +38,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/Individual.v1.yaml
+              $ref: ../models/individual/Individual.v1.yaml
         required: true
       responses:
         '201':
@@ -46,7 +46,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Individual.v1.yaml
+                $ref: ../models/individual/Individual.v1.yaml
       deprecated: false
       x-codegen-request-body-name: individual
   '/individual/{individualId}':
@@ -71,7 +71,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Individual.v1.yaml
+                $ref: ../models/individual/Individual.v1.yaml
       deprecated: false
     put:
       tags:
@@ -88,7 +88,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/Individual.v1.yaml
+              $ref: ../models/individual/Individual.v1.yaml
         required: true
       responses:
         '201':
@@ -96,7 +96,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Individual.v1.yaml
+                $ref: ../models/individual/Individual.v1.yaml
       deprecated: false
       x-codegen-request-body-name: individual
     delete:
@@ -130,7 +130,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/Individual.v1.yaml
+              $ref: ../models/individual/Individual.v1.yaml
         required: true
       responses:
         '200':
@@ -138,6 +138,6 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Individual.v1.yaml
+                $ref: ../models/individual/Individual.v1.yaml
       deprecated: false
       x-codegen-request-body-name: individual

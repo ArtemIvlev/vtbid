@@ -1,0 +1,9 @@
+title: ValidFor
+type: object
+properties:
+  startDateTime:
+    type: string
+    format: date-time
+  endDateTime:
+    type: string
+    format: date-time

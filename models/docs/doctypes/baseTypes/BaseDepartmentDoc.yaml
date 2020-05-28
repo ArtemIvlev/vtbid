@@ -1,0 +1,7 @@
+title: BaseDepartmentDoc 
+type: object
+properties:
+  department_doc:
+        type: string
+        description: Ведомство, к которому относится документ
+        example: 'ГУВМ МВД России'   

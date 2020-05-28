@@ -1,0 +1,9 @@
+title: BaseTypeDocNumber
+description: >
+  Серия документа
+properties:
+  number:
+    type: string
+    example: '650230'
+    description: >
+      Номер документа

@@ -1,5 +1,7 @@
 title: Individual
 type: object
+description: Все о ФЛ
+x-examples: {}
 properties:
   id:
     type: string
@@ -55,7 +57,7 @@ properties:
   characteristic:
     type: array
     items:
-      $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/schemas/Characteristic'
+      $ref: ../common/characteristic.yaml
   otherName:
     type: array
     items:
@@ -64,7 +66,7 @@ properties:
     description: документы идентифицирующие ФЛ
     type: array
     items:
-      $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/docs/1.0.0#/components/schemas/Document'
+      $ref: ../docs/Document.yaml
   externalReference:
     type: array
     items:
@@ -72,13 +74,11 @@ properties:
   relatedParty:
     type: array
     items:
-      $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/schemas/PartyRef'
+      $ref: ../common/partyRef.yaml
   contactMedium:
     type: array
     description: Контактные данные
     items:
-      $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/schemas/ContactMedium'
+      $ref: ../common/contactMedium.yaml
   metadata:
-    $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/schemas/metadata'
-description: Все о ФЛ
-x-examples: {}
+    $ref: ../common/metadata.yaml

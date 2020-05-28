@@ -1,0 +1,19 @@
+title: Document
+type: object
+properties:
+  type:
+    type: string
+  identificationId:
+    type: string
+  issuingAuthority:
+    type: string
+  issuingDate:
+    type: string
+    format: date-time
+  details:
+    $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/docs/1.0.0#/components/schemas/DocResponse'
+  RelatedPartyRef:
+    $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/schemas/RelatedPartyRef'
+  metadata:
+    $ref: ../common/metadata.yaml
+description: ''

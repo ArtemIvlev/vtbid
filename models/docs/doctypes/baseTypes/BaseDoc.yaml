@@ -1,0 +1,14 @@
+title:  BaseDoc
+description: >
+  Базовый тип для всех документов. Абстрактный, должен только наследоваться.
+allOf:
+  - $ref: ./BaseDocType.yaml
+  - $ref: ./BaseTypeDocSeries.yaml
+  - $ref: ./BaseTypeDocNumber.yaml
+  - $ref: ./BaseTypeDocIssued.yaml
+  - type: object
+    required: 
+      - type
+      - series
+      - number
+      - issued

@@ -1,0 +1,7 @@
+title: BaseTypeSurname
+type: object
+properties:
+  surname:
+    type: string
+    description: Фамилия
+    example: Менделеева
