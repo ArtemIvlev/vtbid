@@ -1,0 +1,143 @@
+openapi: 3.0.1
+info:
+  title: API PartyManagement
+  description: ''
+  version: 1.0-191114
+  contact:
+    name: Artem Ivlev
+paths:
+  /individual:
+    get:
+      tags:
+        - individual
+      summary: individualFind
+      operationId: individualFind
+      parameters:
+        - $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/parameters/filterParam'
+        - $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/parameters/offsetParam'
+        - $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/parameters/limitParam'
+        - $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/parameters/fieldsParam'
+        - $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/parameters/depthParam'
+        - $ref: 'https://api.swaggerhub.com/domains/ArtemIvlev/common/1.0.0#/components/parameters/expandParam'
+      responses:
+        '200':
+          description: List of Individual
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Individual.v1.yaml
+      deprecated: false
+    post:
+      tags:
+        - individual
+      summary: individualCreate
+      operationId: individualCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/Individual.v1.yaml
+        required: true
+      responses:
+        '201':
+          description: Individual
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Individual.v1.yaml
+      deprecated: false
+      x-codegen-request-body-name: individual
+  '/individual/{individualId}':
+    get:
+      tags:
+        - individual
+      summary: individualGet
+      operationId: individualGet
+      parameters:
+        - name: individualId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Individual
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Individual.v1.yaml
+      deprecated: false
+    put:
+      tags:
+        - individual
+      summary: individualUpdate
+      operationId: individualUpdate
+      parameters:
+        - name: individualId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/Individual.v1.yaml
+        required: true
+      responses:
+        '201':
+          description: Success Individual
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Individual.v1.yaml
+      deprecated: false
+      x-codegen-request-body-name: individual
+    delete:
+      tags:
+        - individual
+      summary: individualDelete
+      operationId: individualDelete
+      parameters:
+        - name: individualId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Success
+          content: {}
+      deprecated: false
+    patch:
+      tags:
+        - individual
+      summary: individualPatch
+      operationId: individualPatch
+      parameters:
+        - name: individualId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/Individual.v1.yaml
+        required: true
+      responses:
+        '200':
+          description: Success Individual
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Individual.v1.yaml
+      deprecated: false
+      x-codegen-request-body-name: individual
