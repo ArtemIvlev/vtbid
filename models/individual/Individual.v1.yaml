@@ -81,3 +81,5 @@ properties:
       $ref: ../common/contactMedium.yaml
   metadata:
     $ref: ../common/metadata.yaml
+  avatar:
+    $ref: ./avatar.yaml

@@ -1,0 +1,18 @@
+title: avatar
+type: object
+description: |-
+  Модель хранения аватара
+  без версионирования
+properties:
+  id:
+    format: uuid
+    type: string
+  isPublic:
+    type: boolean
+    description: |-
+      Не факт что нам нужно
+      Давать ли этот аватар при переводах и т.д.
+  file:
+    type: string
+    format: byte
+    description: 240х240 в base64
