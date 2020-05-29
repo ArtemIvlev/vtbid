@@ -73,7 +73,7 @@ properties:
   relatedParty:
     type: array
     items:
-      $ref: ../common/partyRef.yaml
+      $ref: ../common/RelatedPartyRef.yaml
   contactMedium:
     type: array
     description: Контактные данные

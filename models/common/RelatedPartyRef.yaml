@@ -1,20 +1,13 @@
 title: RelatedPartyRef
 type: object
-description: >-
-  Ссылка на сторону (Party) или на связь (PartyRole)
-  RelatedParty reference. A related party defines party or party role linked
-  to a specific entity.
+description: Ссылка на сторону (Party) или на связь (PartyRole) RelatedParty reference. A related party defines party or party role linked to a specific entity.
 properties:
   '@referredType':
     type: string
-    description: >-
-      Generic attribute indicating the name of the class type of the
-      referred resource entity.
+    description: Generic attribute indicating the name of the class type of the referred resource entity.
   href:
     type: string
-    description: >-
-      Reference of the related party, could be a party reference or a party
-      role reference
+    description: 'Reference of the related party, could be a party reference or a party role reference'
   id:
     type: string
     description: Unique identifier of a related party
@@ -24,3 +17,19 @@ properties:
   role:
     type: string
     description: Role of the related party.
+  metadata:
+    $ref: ./metadata.yaml
+x-examples:
+  PersonalManager: { "@referredType": "Individual",
+        "href": "https://host:port/partyManagement/v4/individual/2777",
+        "id": "2777",
+        "name": "Иванова Татьяна Васильевна",
+        "role": "PersonalManager"
+       }
+  relative: { "@referredType": "Individual",
+        "href": "https://host:port/partyManagement/v4/individual/2777",
+        "id": "2777",
+        "name": "Иванова Татьяна Васильевна",
+        "role": "relative"
+       }
+

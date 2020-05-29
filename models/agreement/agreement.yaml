@@ -35,10 +35,6 @@ properties:
     description: A string identifying the version of the agreement
   agreementPeriod:
     $ref: ../common/validFor.yaml
-#  associatedAgreement:
-#    type: array
-#    items:
-#      $ref: '#/components/schemas/AgreementRef'
   characteristic:
     type: array
     items:
@@ -60,6 +56,8 @@ properties:
   '@type':
     type: string
     description: 'When sub-classing, this defines the sub-class entity name'
+  metadata:
+    $ref: ../common/metadata.yaml
 required:
   - agreementType
   - name

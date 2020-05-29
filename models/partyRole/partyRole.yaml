@@ -1,0 +1,99 @@
+title: PartyRole
+type: object
+description: The part played by a party in a given context.
+properties:
+  id:
+    type: string
+    description: Unique identifier for PartyRoles
+  href:
+    type: string
+    description: Url used to reference the party role.
+  name:
+    type: string
+    description: 'A word, term, or phrase by which the PartyRole is known and distinguished from other PartyRoles.'
+  agreement:
+    type: array
+    items:
+      $ref: ../agreement/AgreementRef.yaml
+  characteristic:
+    type: array
+    description: Describes the characteristic of a party role.
+    items:
+      $ref: ../common/characteristic.yaml
+  contactMedium:
+    type: array
+    items:
+      $ref: ../common/contactMedium.yaml
+  engagedParty:
+    $ref: ../common/RelatedPartyRef.yaml
+  relatedParty:
+    type: array
+    items:
+      $ref: ../common/RelatedPartyRef.yaml
+  validFor:
+    $ref: ../common/validFor.yaml
+  '@baseType':
+    type: string
+    description: 'When sub-classing, this defines the super-class'
+  '@schemaLocation':
+    type: string
+    format: uri
+    description: A URI to a JSON-Schema file that defines additional attributes and relationships
+  '@type':
+    type: string
+    description: 'When sub-classing, this defines the sub-class entity name'
+x-examples:
+  example-1: {
+ "@type": "PartyRole",
+ "href": "https:/host:port/tmf-api/partyRoleManagement/v4/partyRole/4079",
+ "id": "4079",
+ "name": "Global Pirates",
+ "status": "Approved",
+ "statusReason": "NDA has been signed",
+ "validFor": {
+ "startDateTime": "2018-06-16T00:00Z",
+ "endDateTime": "2019-01-13T00:00Z"
+ },
+  "engagedParty": {
+  "@referredType": "Organization",
+  "href": "https:/host:port/tmf-api/partyManagement/v2/organization/99",
+  "id": "99",
+  "name": "Global Pirates",
+  "role": "Provider"
+ }, 
+ "characteristic": [
+ {
+  "name": "mainSkill",
+  "value": "analytics",
+  "valueType": "string"
+ }
+ ],
+ "creditProfile": [
+ {
+  "creditProfileDate": "2018-06-17T00:00Z",
+  "creditRiskRating": 4,
+  "creditScore": 1,
+  "validFor": {
+  "startDateTime": "2018-06-14T00:00Z",
+  "endDateTime": "2019-01-13T00:00Z"
+ }
+ }
+ ],
+ "agreement": [
+    {
+      "@referredType": "Agreement",
+      "href": "https:/host:port/tmf-api/agreementManagement/v4/agreement/5091",
+      "id": "5091",
+      "name": "Winter Contract Agreement"
+    }
+ ],
+ "relatedParty": [
+    {
+      "@referredType": "Organization",
+      "href": "https:/host:port/tmf-api/partyManagement/v4/organization/3658",
+      "id": "3658",
+      "name": "Gustave Flaubert",
+      "role": "customer"
+    }
+ ]
+}
