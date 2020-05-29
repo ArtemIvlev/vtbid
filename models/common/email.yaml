@@ -1,10 +1,6 @@
 title: Email
 type: object
 properties:
-  objectType:
-    type: string
-    enum:
-      - email
   email:
     type: string
     format: email
