@@ -8,5 +8,3 @@ properties:
   email:
     type: string
     format: email
-  metadata:
-    $ref: ./metadata.yaml

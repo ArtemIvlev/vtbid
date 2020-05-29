@@ -7,7 +7,9 @@ properties:
     type: string
   vaidated:
     type: boolean
-  oneof:
-  - $ref: ./phoneNumber.yaml
-  - $ref: ./email.yaml
-
+  value:
+    oneOf:
+      - $ref: './email.yaml'
+      - $ref: ./phoneNumber.yaml
+  metadata:
+    $ref: ./metadata.yaml
