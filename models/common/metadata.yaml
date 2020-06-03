@@ -21,3 +21,11 @@ properties:
     description: уровень доверия 1-100 (можно будет потом сделать по десяткам и субстатусы между ними)
   valid:
     $ref: ./validFor.yaml
+  status:
+    type: string
+    description: статус (есть не везде)
+  comment:
+    type: string
+    description: коментарии к статусу
+  log:
+    $ref: ./log.yaml

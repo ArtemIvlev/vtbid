@@ -16,3 +16,5 @@ properties:
     type: string
     format: byte
     description: 240х240 в base64
+  metadata:
+    $ref: ../common/metadata.yaml

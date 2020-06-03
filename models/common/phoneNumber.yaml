@@ -1,6 +1,9 @@
 title: PhoneNumber
 type: object
 properties:
+  objectType: 
+    type: string
+    enum: ["phone"]
   phoneNumber: 
     type: string
     format: phone

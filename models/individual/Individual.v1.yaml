@@ -50,9 +50,16 @@ properties:
   location:
     type: string
     description: текущее положение пользователя (на имеет смысла?)
-  status:
-    type: string
-    description: 'статус профиля (черновик, проспект, идентифицированный и тд) Возможно придется тут делать не строку а объект.'
+  type:
+    type: array
+    description:  тип профиля
+    items:
+      type: string
+      enum: 
+        - клиент 
+        - представитель юл
+        - проспект
+        - гость
   characteristic:
     type: array
     items:
