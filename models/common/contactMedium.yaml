@@ -1,14 +1,13 @@
 title: contactMedium
 type: object
 properties:
-  validFor:
-    $ref: ./validFor.yaml
-  preferred:
+  type:
     type: string
-  vaidated:
-    type: boolean
-  oneof:
-    - email:
-        $ref: ./email.yaml
+    enum: [email, phone]
+  value:
+    oneOf: 
+      - $ref: ./email.yaml
+      - $ref: ./phoneNumber.yaml
   metadata:
     $ref: ./metadata.yaml
+x-examples: {}
