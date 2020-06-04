@@ -4,6 +4,9 @@ description:
   Объект например тело ответа на запрос в госорганы
   Один лог файл может быть приложен к нескольким документам и артефактам
 properties:
+  uid: 
+    type: string
+    format: uuid
   values:
     type: array
     items:

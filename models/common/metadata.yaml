@@ -27,5 +27,8 @@ properties:
   comment:
     type: string
     description: коментарии к статусу
-  log:
-    $ref: ./log.yaml
+  logRef:
+    description: ссылка на логи на основании которых получена данная версия артефакта
+    type: string
+
+
