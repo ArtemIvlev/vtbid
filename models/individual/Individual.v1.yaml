@@ -64,10 +64,10 @@ properties:
     type: array
     items:
       $ref: ../common/characteristic.yaml
-  otherName:
-    type: array
-    items:
-      $ref: otherName.yaml
+ # otherName: Убрал так как по сути можно сделать запрос истории individual
+ #   type: array
+ #   items:
+ #     $ref: otherName.yaml
   documents:
     description: документы идентифицирующие ФЛ
     type: array
