@@ -48,3 +48,5 @@ allOf:
       - issued_by
       - division
       - passport_status
+x-tags:
+  - ready to implement

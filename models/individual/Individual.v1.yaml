@@ -1,7 +1,6 @@
 title: Individual
 type: object
 description: Модель про физ лицо
-x-examples: {}
 properties:
   id:
     type: string
@@ -52,11 +51,11 @@ properties:
     description: текущее положение пользователя (на имеет смысла?)
   type:
     type: array
-    description:  тип профиля
+    description: тип профиля
     items:
       type: string
-      enum: 
-        - клиент 
+      enum:
+        - клиент
         - представитель юл
         - проспект
         - гость
@@ -64,10 +63,6 @@ properties:
     type: array
     items:
       $ref: ../common/characteristic.yaml
- # otherName: Убрал так как по сути можно сделать запрос истории individual
- #   type: array
- #   items:
- #     $ref: otherName.yaml
   documents:
     description: документы идентифицирующие ФЛ
     type: array

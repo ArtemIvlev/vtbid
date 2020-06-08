@@ -61,3 +61,5 @@ allOf:
             description: Номер регистрационного документа
     required:
       - registration_plate
+x-tags:
+  - to check

@@ -13,3 +13,5 @@ allOf:
   - $ref: ./baseTypes/BaseTypeGender.yaml
   - $ref: ./baseTypes/BaseTypeBirthDate.yaml
   - type: object
+x-tags:
+  - to check

@@ -19,3 +19,5 @@ properties:
     type: string
   tradingName:
     type: string
+x-tags:
+  - deprecated
