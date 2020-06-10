@@ -1,34 +1,31 @@
 title: metadata
-type: object
 description: стандартные данные объекта
-properties:
-  createadAt:
-    type: string
-    description: дата создания
-    format: date-time
-  createadBy:
-    type: string
-    description: имя создавшего пользователя
-  modifiedAt:
-    type: string
-    description: дата изменения
-    format: date-time
-  modifiedBy:
-    type: string
-    description: имя изменившего пользователя
-  qaLevel:
-    type: string
-    description: уровень доверия 1-100 (можно будет потом сделать по десяткам и субстатусы между ними)
-  valid:
-    $ref: ./validFor.yaml
-  status:
-    type: string
-    description: статус (есть не везде)
-  comment:
-    type: string
-    description: коментарии к статусу
-  logRef:
-    description: ссылка на логи на основании которых получена данная версия артефакта
-    type: string
-
-
+allOf:
+  - $ref: ../docs/doctypes/baseTypes/BaseTypeProofStatus.yaml
+  - type: object
+    properties:
+      createadAt:
+        type: string
+        description: дата создания
+        format: date-time
+      createadBy:
+        type: string
+        description: имя создавшего пользователя
+      modifiedAt:
+        type: string
+        description: дата изменения
+        format: date-time
+      modifiedBy:
+        type: string
+        description: имя изменившего пользователя
+      qaLevel:
+        type: string
+        description: уровень доверия 1-100 (можно будет потом сделать по десяткам и субстатусы между ними)
+      valid:
+        $ref: ./validFor.yaml
+      comment:
+        type: string
+        description: коментарии к статусу
+      logRef:
+        description: ссылка на логи на основании которых получена данная версия артефакта
+        type: string

@@ -1,66 +1,67 @@
-#TODO: Может быть свести с API Dadata?
-title: Adress
+title: BaseTypeAddress
+description: Адрес
 type: object
-properties: 
-  id:
+properties:
+  addressStr:
     type: string
-    format: uuid
-  area:
-    description: '--'
+    description: Адрес (одной строкой)
+    example: 'г. Москва, Ленинский пр-т, д.112, кв.22'
+  countryId:
     type: string
-  block:
-    description: '--'
+    description: Страна
+    example: 'RUS'
+  zipCode:
     type: string
-  city:
-    description: '--'
-    type: string
-  country:
-    description: '--'
-    type: string
-  district:
-    description: '--'
-    type: string
-  fiasCode:
-    description: '--'
-    type: string
-  fiasId:
-    description: '--'
-    type: string
-  flat:
-    description: '--'
-    type: string
-  house:
-    description: '--'
-    type: string
-  okato:
-    description: '--'
-    type: string
-  oktmo:
-    description: '--'
-    type: string
-  postalCode:
-    description: '--'
-    type: string
+    description: Индекс
+    example: '394018'
   region:
-    description: '--'
     type: string
+    description: Регион
+    example: 'Воронежская обл.'
+  area:
+    type: string
+    description: Район
+    example: 'Бутурлиновский'
+  additionArea:
+    type: string
+    description: Дополнительная территория
+    example: 'Дополнительная территория'  
+  city:
+    type: string
+    description: Город
+    example: 'Воронеж'
+  district:
+    type: string
+    description: Дополнительная территория
+    example: 'р-н Ленинский'
   settlement:
-    description: '--'
     type: string
+    description: Улица на дополнительной территории
+    example: 'р-н Ленинский'
   street:
-    description: '--'
     type: string
-  unrestrictedValue:
-    description: '--'
+    description: Улица
+    example: 'Станкевича'
+  additionAreaStreet:
     type: string
-  value:
-    description: '--'
+    description: Улица
+    example: 'Улица на дополнительной территории'  
+  house:
     type: string
-  streetType:
-    description: '--'
+    description: Дом
+    example: '4'
+  frame:
     type: string
-  fiasLevel:
-    description: '--'
+    description: Корпус
+    example: '5'
+  building:
     type: string
-description: ''
-
+    description: Строение
+    example: '1'
+  flat:
+    type: string
+    description: Квартира
+    example: '45'
+  fiasCode:
+    type: string
+    description: Идентификатор адресной единицы. Формат строки не определен

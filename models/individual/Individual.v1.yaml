@@ -2,7 +2,7 @@ title: Individual
 type: object
 description: Модель про физ лицо
 properties:
-  id:
+  uuid:
     type: string
     format: uuid
     description: Идентификатор partyId
@@ -51,10 +51,17 @@ properties:
     description: текущее положение пользователя (на имеет смысла?)
   type:
     type: array
-    description: тип профиля
+    description: 
+      тип профиля. массив из ролей про которые мы знаем
+      `vip` -
+      `клиент` - не привилигированный клиент
+      `представитель юл` - признак что ФЛ являющееся представителем ЮЛ 
+      `проспект` - не клиент ФЛ данные которого переданны в МДМ
+      `гость` - не клиент данные которого есть только у нас
     items:
       type: string
       enum:
+        - vip
         - клиент
         - представитель юл
         - проспект
@@ -85,3 +92,16 @@ properties:
     $ref: ../common/metadata.yaml
   avatar:
     $ref: ./avatar.yaml
+  addresses:
+    type: array
+    items:
+      address:
+        type: object
+        properties:
+          type: string
+          enum:
+            - регистрациии
+            - проживания
+            - свой вариант??
+          value:
+            $ref: ../common/address.yaml

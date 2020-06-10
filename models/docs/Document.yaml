@@ -4,17 +4,12 @@ description: Модель Документов
 properties:
   type:
     type: string
-  identificationId:
-    type: string
-  issuingAuthority:
-    type: string
-  issuingDate:
-    type: string
-    format: date-time
   details:
     $ref: ./DocResponse.yaml
   RelatedPartyRef:
     $ref: ../common/RelatedPartyRef.yaml
   metadata:
     $ref: ../common/metadata.yaml
-
+  id:
+    type: string
+    format: uuid

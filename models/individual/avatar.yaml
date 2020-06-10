@@ -4,6 +4,9 @@ description: |-
   Модель хранения аватара
   без версионирования
 properties:
+  individualUUID:
+    type: string
+    format: uuid
   id:
     format: uuid
     type: string
