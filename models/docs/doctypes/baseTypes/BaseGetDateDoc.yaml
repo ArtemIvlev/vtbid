@@ -1,9 +1,8 @@
 title: BaseGetDateDoc
 type: object
 properties:
-  get_date_doc:
+  receiptDocDate:
     type: string
-    format: date-time
     description: >
-      Дата и время получения документа (https://tools.ietf.org/html/rfc3339#section-5.6)
-    example: '2019-08-21T21:20:01Z'
+      Дата и время получения документа в формате unix timestamp
+    example: '1574237502'

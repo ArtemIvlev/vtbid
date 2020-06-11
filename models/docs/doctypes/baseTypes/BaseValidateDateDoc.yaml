@@ -1,9 +1,8 @@
 title: BaseValidateDateDoc
 type: object
 properties:
-  validate_date_doc:
+  validateDateDoc:
     type: string
-    format: date-time
     description: >
-      Дата и время валидации документа (https://tools.ietf.org/html/rfc3339#section-5.6)
-    example: '2019-08-21T21:20:01Z'
+      Дата и время валидации документа в формате unix timestamp
+    example: '1574237613'

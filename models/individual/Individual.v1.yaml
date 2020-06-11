@@ -2,6 +2,9 @@ title: Individual
 type: object
 description: Модель про физ лицо
 properties:
+  ucn:
+    type: string
+    description: Идентификатор УНК (ац)
   uuid:
     type: string
     format: uuid
