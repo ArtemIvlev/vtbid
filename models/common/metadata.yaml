@@ -2,6 +2,7 @@ title: metadata
 description: стандартные данные объекта
 allOf:
   - $ref: ../docs/doctypes/baseTypes/BaseTypeProofStatus.yaml
+  - $ref: ./validFor.yaml
   - type: object
     properties:
       createadAt:
@@ -11,21 +12,16 @@ allOf:
       createadBy:
         type: string
         description: имя создавшего пользователя
-      modifiedAt:
-        type: string
-        description: дата изменения
-        format: date-time
-      modifiedBy:
-        type: string
-        description: имя изменившего пользователя
       qaLevel:
         type: string
-        description: уровень доверия 1-100 (можно будет потом сделать по десяткам и субстатусы между ними)
-      valid:
-        $ref: ./validFor.yaml
+        description: уровень доверия 1-100 (можно будет потом сделать по десяткам и субстатусы между ними)     
       comment:
         type: string
         description: коментарии к статусу
       logRef:
         description: ссылка на логи на основании которых получена данная версия артефакта
         type: string
+    required:
+      - createadAt
+      - createadBy
+      - qaLevel

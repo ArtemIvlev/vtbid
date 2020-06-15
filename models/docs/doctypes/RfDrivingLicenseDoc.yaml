@@ -1,5 +1,60 @@
 title: RfDrivingLicenseDoc
-type: object
-x-tags:
-  - not implemented
-description: ''
+description: |
+  Водительское удостоверение гражданина РФ `type` будет равен `RF_DRIVING_LICENSE`  PermittedScope: drivers_licence_doc
+allOf:
+  - $ref: ./baseTypes/BaseTypeSid.yaml
+  - $ref: ../BaseTypeId.yaml
+  - $ref: ./baseTypes/BaseProofBlock.yaml
+  - $ref: ./baseTypes/BaseDoc.yaml
+  - $ref: ./baseTypes/BaseDepartmentDoc.yaml
+  - $ref: ./baseTypes/BaseGetDateDoc.yaml
+  - $ref: ./baseTypes/BaseValidateDateDoc.yaml
+  - $ref: ./baseTypes/BaseTypeName.yaml
+  - $ref: ./baseTypes/BaseTypePatronymic.yaml
+  - $ref: ./baseTypes/BaseTypeSurname.yaml
+  - $ref: ./baseTypes/BaseTypeBirthDate.yaml
+  - $ref: ./baseTypes/BaseTypeBirthPlace.yaml
+  - type: object
+    properties:
+      countryName:
+        type: string
+        example: RUS
+        description: Страна выдачи ВУ (Общероссийский классификатор стран мира)
+      issuedBy:
+        type: string
+        example: ФМС 404
+        description: Орган выдачи
+      expiryDate:
+        type: string
+        example: 29.08.2026
+        description: Действителен до (в формате ДД.ММ.ГГГГ)
+      categories:
+        description: 'Категории B, C, D'
+        type: array
+        items:
+          type: string
+          enum:
+            - А
+            - А1
+            - В
+            - ВE
+            - В1
+            - С
+            - СE
+            - С1
+            - С1E
+            - D
+            - DE
+            - D1
+            - D1E
+            - М
+            - Tm
+            - Tb
+          description: Категория ВУ
+          example: B
+      experience:
+        type: string
+        example: '2009'
+        description: Водительский стаж (указывается год)
+    required:
+      - issuedBy

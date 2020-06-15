@@ -1,0 +1,7 @@
+title: BaseTypeId 
+type: object
+properties:
+  id:
+    type: string
+    description: Уникальный идентификатор сущности
+    example: '91899952b06c4cc89746d38b2c8c72f3'

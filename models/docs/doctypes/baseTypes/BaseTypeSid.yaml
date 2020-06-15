@@ -1,0 +1,9 @@
+title: BaseTypeSid
+type: object
+properties:
+  oid: 
+    type: string
+    description: >
+      Человекочитаемый сквозной идентификатор (тот что в ЕСИА.obj oid и тот же что попадает в пользовательский маркер доступа). Идентификатор пользователя.
+    format: long
+    example: '10031415'
