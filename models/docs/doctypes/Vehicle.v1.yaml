@@ -1,5 +1,5 @@
 title: Vehicle
-description: Данные транспортных средств
+description: Данные транспортного средства
 allOf:
   - $ref: ./baseTypes/BaseProofBlock.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
