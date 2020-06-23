@@ -13,12 +13,6 @@ paths:
         - individual
       operationId: get-individual
       description: ''
-      parameters:
-        - schema:
-            type: string
-          name: id
-          in: path
-          required: true
       responses:
         '200':
           description: Success Individual
