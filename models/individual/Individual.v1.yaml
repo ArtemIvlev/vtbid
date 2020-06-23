@@ -1,6 +1,6 @@
 title: Individual
 type: object
-description: Модель про физ лицо
+description: Модель про физ лицо  
 properties:
   ucn:
     type: string

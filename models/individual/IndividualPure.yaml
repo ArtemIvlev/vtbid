@@ -1,0 +1,69 @@
+title: IndividualPure
+type: object
+description: Модель про физ лицо   без подобъектов
+properties:
+  ucn:
+    type: string
+    description: Идентификатор УНК (ац)
+  uuid:
+    type: string
+    format: uuid
+    description: Идентификатор partyId
+  crosslinks:
+    type: array
+    items:
+      $ref: crossRef.yaml
+  gender:
+    $ref: '../docs/doctypes/baseTypes/BaseTypeGender.yaml#/properties/gender'
+  placeOfBirth:
+    type: string
+    description: В модели это ссылка на место рождения (не уверен что нам оно надо)
+  countryOfBirth:
+    type: string
+    description: страна рождения
+  maritalStatus:
+    type: string
+    description: статус женат/замужем/холост/разведен и т.д.
+  birthDate:
+    type: string
+    format: date-time
+    description: Дата рождения
+  title:
+    type: string
+    description: Обращение
+  givenName:
+    type: string
+    description: Имя
+  familyName:
+    type: string
+    description: Фамилия
+  middleName:
+    type: string
+    description: Отчество
+  fullName:
+    type: string
+    description: Полное имя (будет использоваться для Name в ссылках)
+  formattedName:
+    type: string
+    description: 'Имеет смысл только для специфики Янонских, Китайских, Корейских имён'
+  location:
+    type: string
+    description: текущее положение пользователя (на имеет смысла?)
+  type:
+    type: array
+    description: тип профиля. массив из ролей про которые мы знаем `vip` - `клиент` - не привилигированный клиент `представитель юл` - признак что ФЛ являющееся представителем ЮЛ `проспект` - не клиент ФЛ данные которого переданны в МДМ `гость` - не клиент данные которого есть только у нас
+    items:
+      type: string
+      enum:
+        - vip
+        - клиент
+        - представитель юл
+        - проспект
+        - гость
+  metadata:
+    $ref: ../common/metadata.yaml
+  avatar:
+    $ref: ./avatar.yaml
+required:
+  - uuid
+  - type

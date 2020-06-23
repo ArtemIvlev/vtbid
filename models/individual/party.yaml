@@ -1,0 +1,12 @@
+title: party
+description: Базовый класс (ЧЕРНОВИК)
+allOf:
+  - type: object
+    properties:
+      uuid:
+        type: string
+        format: uuid
+        description: Идентификатор partyId
+
+
+
