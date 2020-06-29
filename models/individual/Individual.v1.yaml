@@ -55,11 +55,13 @@ properties:
     items:
       type: string
       enum:
-        - vip
+        # массовая розница, сегмент приват, сегмент привилегия, man of deal, (BS81 - ) 
+        - vip (галочка вип)
         - клиент
         - представитель юл
         - проспект
         - гость
+        - привиления (Список пакетов)        
   characteristic:
     type: array
     items:

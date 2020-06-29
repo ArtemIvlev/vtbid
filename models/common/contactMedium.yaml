@@ -1,6 +1,9 @@
 title: contactMedium
 type: object
 properties:
+  contactId: 
+    type: string
+    format: uuid
   type:
     type: string
     enum: [email, phone]
@@ -10,4 +13,3 @@ properties:
       - $ref: ./phoneNumber.yaml
   metadata:
     $ref: ./metadata.yaml
-x-examples: {}
