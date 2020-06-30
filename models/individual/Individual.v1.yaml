@@ -91,16 +91,16 @@ properties:
   addresses:
     type: array
     items:
-      address:
-        type: object
-        properties:
-          type: string
-          enum:
-            - регистрациии
-            - проживания
-            - свой вариант??
-          value:
-            $ref: ../common/address.yaml
+      allOf:
+        - type: object
+          properties:
+            type: string
+            enum:
+             - регистрациии
+             - проживания
+             - свой вариант??
+        - $ref: ../common/address.yaml
+            
 required:
   - uuid
   - type
