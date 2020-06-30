@@ -94,11 +94,12 @@ properties:
       allOf:
         - type: object
           properties:
-            type: string
-            enum:
-             - регистрациии
-             - проживания
-             - свой вариант??
+            type: 
+              type: string
+              enum:
+              - регистрациии
+              - проживания
+              - свой вариант??
         - $ref: ../common/address.yaml
             
 required:
