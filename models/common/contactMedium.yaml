@@ -4,9 +4,12 @@ properties:
   contactId: 
     type: string
     format: uuid
-  type:
+  mediumType:
     type: string
     enum: [email, phone]
+  contactType:
+    type: string
+    description: Типизация Домашний/Доверенный/Рабочий и т.д.
   value:
     oneOf: 
       - $ref: ./email.yaml
