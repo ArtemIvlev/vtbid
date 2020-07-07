@@ -1,11 +1,12 @@
 title: BaseProofBlock
-allOf:
-  - $ref: ./BaseTypeProofStatus.yaml
-  - $ref: ./BaseTypeProofRelevance.yaml
-  - $ref: ./BaseTypeProofMessage.yaml
-  - type: object
-    required: 
-      - hash
-      - sign
-      - status
-      - relevance
+#Закомитил так как этот объект повторяет то что у нас есть в metadata
+#allOf:
+#  - $ref: ./BaseTypeProofStatus.yaml
+#  - $ref: ./BaseTypeProofRelevance.yaml
+#  - $ref: ./BaseTypeProofMessage.yaml
+#  - type: object
+#    required: 
+#      - hash
+#      - sign
+#      - status
+#      - relevance
