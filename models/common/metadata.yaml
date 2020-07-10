@@ -21,6 +21,8 @@ allOf:
       logRef:
         description: ссылка на логи на основании которых получена данная версия артефакта
         type: string
+      error:
+        $ref: ./ErrorModel.yaml
     required:
       - createadAt
       - createadBy
