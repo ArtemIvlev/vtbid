@@ -9,7 +9,7 @@ properties:
   countryId:
     type: string
     description: Страна
-    example: 'RUS'
+    example: RUS
   zipCode:
     type: string
     description: Индекс
@@ -17,35 +17,51 @@ properties:
   region:
     type: string
     description: Регион
-    example: 'Воронежская обл.'
+    example: Воронежская обл.
   area:
     type: string
     description: Район
-    example: 'Бутурлиновский'
+    example: Бутурлиновский
   additionArea:
     type: string
     description: Дополнительная территория
-    example: 'Дополнительная территория'  
+    example: Дополнительная территория
   city:
     type: string
     description: Город
-    example: 'Воронеж'
+    example: Воронеж
   district:
     type: string
     description: Дополнительная территория
-    example: 'р-н Ленинский'
+    example: р-н Ленинский
   settlement:
     type: string
     description: Улица на дополнительной территории
-    example: 'р-н Ленинский'
+    example: р-н Ленинский
+  street_type:
+    type: string
+    description: тип улицы
+    example: ул
+    enum:
+      - ул
+      - пр-кт
+      #todo: добавить всё
+  street_type_full:
+    type: string
+    description: тип улицы
+    example: улица
+    enum:
+      - улица
+      - проспект
+      #todo: добавить всё
   street:
     type: string
     description: Улица
-    example: 'Станкевича'
+    example: Станкевича
   additionAreaStreet:
     type: string
     description: Улица
-    example: 'Улица на дополнительной территории'  
+    example: Улица на дополнительной территории
   house:
     type: string
     description: Дом
@@ -65,3 +81,4 @@ properties:
   fiasCode:
     type: string
     description: Идентификатор адресной единицы. Формат строки не определен
+x-examples: {}
