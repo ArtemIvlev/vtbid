@@ -1,0 +1,11 @@
+title: baseType
+type: object
+properties:
+  code:
+    type: string
+    enum:
+      - mass
+      - privelege
+      - vip
+  name:
+    type: string

@@ -1,6 +1,6 @@
 title: Individual
 type: object
-description: Модель про физ лицо  
+description: Модель про физ лицо
 properties:
   ucn:
     type: string
@@ -49,19 +49,13 @@ properties:
   location:
     type: string
     description: текущее положение пользователя (на имеет смысла?)
-  type:
-    type: array
-    description: тип профиля. массив из ролей про которые мы знаем `vip` - `клиент` - не привилигированный клиент `представитель юл` - признак что ФЛ являющееся представителем ЮЛ `проспект` - не клиент ФЛ данные которого переданны в МДМ `гость` - не клиент данные которого есть только у нас
-    items:
-      type: string
-      enum:
-        # массовая розница, сегмент приват, сегмент привилегия, man of deal, (BS81 - ) 
-        - vip (галочка вип)
-        - клиент
-        - представитель юл
-        - проспект
-        - гость
-        - привиления (Список пакетов)        
+  individualLifeCycle:
+    type: string
+    enum:
+      - Prospect
+      - Client
+      - UnverifiedProspect
+      - NotClient
   characteristic:
     type: array
     items:
@@ -94,14 +88,12 @@ properties:
       allOf:
         - type: object
           properties:
-            type: 
+            type:
               type: string
               enum:
-              - регистрациии
-              - проживания
-              - свой вариант??
+                - регистрациии
+                - проживания
+                - свой вариант??
         - $ref: ../common/address.yaml
-            
 required:
   - uuid
-  - type

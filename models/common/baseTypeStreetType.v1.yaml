@@ -1,0 +1,14 @@
+title: baseTypeStreetType
+type: object
+properties:
+  id:
+    type: string
+  longValue:
+    type: string
+    description: Длинное название
+    example: улица
+  shortValue:
+    type: string
+    description: короткое название
+    example: ул
+description: ''
