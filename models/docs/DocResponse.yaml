@@ -4,4 +4,4 @@ oneOf:
   - $ref: ./doctypes/RfPassportDoc.yaml
   - $ref: ./doctypes/Vehicle.v1.yaml
   - $ref: ./doctypes/RfDrivingLicenseDoc.yaml
-type: object
+  - $ref: ./doctypes/innDoc.yaml

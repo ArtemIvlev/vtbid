@@ -1,0 +1,8 @@
+title:   BaseTypeInn
+type: object
+properties:
+  inn:
+    type: string
+    description: ИНН гражданина
+    pattern: '^\d{12}$'
+    example: '770834234563'

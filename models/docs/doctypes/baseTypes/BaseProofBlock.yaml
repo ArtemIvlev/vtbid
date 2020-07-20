@@ -1,4 +1,5 @@
 title: BaseProofBlock
+type: object
 #Закомитил так как этот объект повторяет то что у нас есть в metadata
 #allOf:
 #  - $ref: ./BaseTypeProofStatus.yaml
