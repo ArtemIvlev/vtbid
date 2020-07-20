@@ -8,6 +8,7 @@ properties:
     enum: 
       - RF_PASSPORT
       - SNILS
+      - INN
       - FID_DOC
       - RF_DRIVING_LICENSE
       - MLTR_ID
@@ -30,6 +31,8 @@ properties:
       - ILS_PFR_CERT
       - EGRN_CERT
     description: >
+      * `INN` - ИНН
+
       * `SNILS` – СНИЛС
       
       * `RF_PASSPORT` – паспорт гражданина РФ
@@ -76,6 +79,7 @@ properties:
       
       * `EGRN_CERT` - Сведения, содержащиеся в кадастре недвижимости и реестре прав на недвижимость в составе Единого государственного реестра недвижимости, относящиеся к гражданам Российской Федерации - физическим лицам
       
+
 discriminator:
   propertyName: type
 

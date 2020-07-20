@@ -1,6 +1,5 @@
 title: FidDoc
-description: 
-  ИНН 
-  пока только поля кода.
+description: ИНН пока только поля кода.
 allOf:
   - $ref: ./baseTypes/BaseTypeInn.yaml
+  - $ref: ./baseTypes/BaseDocType.yaml
