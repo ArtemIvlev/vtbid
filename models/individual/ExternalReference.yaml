@@ -6,3 +6,7 @@ properties:
     type: string
   type:
     type: string
+  characteristic:
+    type: array
+    items:
+      $ref: ../common/characteristic.yaml
