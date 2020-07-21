@@ -1,11 +1,16 @@
 title: BaseTypeAddress
 description: Адрес
 type: object
+x-examples: {}
 properties:
-  addressStr:
+  notFormAddrName:
     type: string
-    description: Адрес (одной строкой)
-    example: 'г. Москва, Ленинский пр-т, д.112, кв.22'
+    description: неотформатированный полный адрес
+    example:  '115230 Россия г Москва проезд Электролитный дом 16 корп 2 кв 96'
+  addressName:
+    type: string
+    description: полный нормализованный адрес
+    example: '115230,Москва,проезд Электролитный,16,2,96'
   countryId:
     type: string
     description: Страна
@@ -30,14 +35,26 @@ properties:
     type: string
     description: Город
     example: Воронеж
+  prefcitytype:
+    type: string
+    description: тип населенного пункта
+    example: деревня, город
   district:
     type: string
-    description: Дополнительная территория
+    description: Дополнительная территория, район
     example: р-н Ленинский
+  prefdistricttype:
+    type: string
+    description: тип дополнительной территории
+    example: район
   settlement:
     type: string
     description: Улица на дополнительной территории
     example: р-н Ленинский
+  prefsettlementtype:
+    type: string
+    description: тип улицы
+    example: улица, тупик, переулок
   street_type:
     type: string
     description: тип улицы
@@ -45,7 +62,6 @@ properties:
     enum:
       - ул
       - пр-кт
-      #todo: добавить всё
   street_type_full:
     type: string
     description: тип улицы
@@ -53,7 +69,6 @@ properties:
     enum:
       - улица
       - проспект
-      #todo: добавить всё
   street:
     type: string
     description: Улица
@@ -66,7 +81,7 @@ properties:
     type: string
     description: Дом
     example: '4'
-  frame:
+  housing:
     type: string
     description: Корпус
     example: '5'
@@ -81,4 +96,4 @@ properties:
   fiasCode:
     type: string
     description: Идентификатор адресной единицы. Формат строки не определен
-x-examples: {}
+
