@@ -68,6 +68,7 @@ properties:
       - Active
       - Inactive
       - Reorganization
+    description: 'Prospect, Client, UnverifiedProspect, NotClient, None, Active, Inactive, Reorganization'
   characteristic:
     type: array
     items:
