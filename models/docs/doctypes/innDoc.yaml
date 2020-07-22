@@ -1,5 +1,17 @@
-title: FidDoc
+title: InnDoc
 description: ИНН пока только поля кода.
 allOf:
   - $ref: ./baseTypes/BaseTypeInn.yaml
   - $ref: ./baseTypes/BaseDocType.yaml
+  - $ref: ./baseTypes/BaseTypeName.yaml
+  - $ref: ./baseTypes/BaseTypePatronymic.yaml
+  - $ref: ./baseTypes/BaseTypeSurname.yaml
+  - $ref: ./baseTypes/BaseTypeGender.yaml
+  - $ref: ./baseTypes/BaseTypeBirthDate.yaml
+  - $ref: ./baseTypes/BaseProofBlock.yaml
+  - $ref: ./baseTypes/BaseDepartmentDoc.yaml
+  - $ref: ./baseTypes/BaseGetDateDoc.yaml
+  - $ref: ./baseTypes/BaseValidateDateDoc.yaml
+
+x-tags:
+  - ready to implement
