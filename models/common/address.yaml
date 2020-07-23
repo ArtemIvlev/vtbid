@@ -62,13 +62,6 @@ properties:
     enum:
       - ул
       - пр-кт
-  street_type_full:
-    type: string
-    description: тип улицы
-    example: улица
-    enum:
-      - улица
-      - проспект
   street:
     type: string
     description: Улица
