@@ -19,14 +19,26 @@ properties:
     type: string
     description: Индекс
     example: '394018'
-  region:
+  state:
     type: string
-    description: Регион
-    example: Воронежская обл.
-  area:
+    description: Код региона
+    example: cm.region.Altay
+  province:
+    type: string
+    description: Область
+    example: Воронежская
+  provinceType:
+    type: string
+    description: тип области
+    example: обл.
+  region:
     type: string
     description: Район
     example: Бутурлиновский
+  regionType:
+    type: string
+    description: тип района
+    example: район
   additionArea:
     type: string
     description: Дополнительная территория
@@ -35,33 +47,22 @@ properties:
     type: string
     description: Город
     example: Воронеж
-  prefcitytype:
+  cityType:
     type: string
-    description: тип населенного пункта
-    example: деревня, город
-  district:
-    type: string
-    description: Дополнительная территория, район
-    example: р-н Ленинский
-  prefdistricttype:
-    type: string
-    description: тип дополнительной территории
-    example: район
+    description: Тип города
+    example: город
   settlement:
     type: string
-    description: Улица на дополнительной территории
-    example: р-н Ленинский
-  prefsettlementtype:
+    description: поселок
+    example: деревня Иваново
+  settlementType:
     type: string
-    description: тип улицы
-    example: улица, тупик, переулок
-  street_type:
+    description: Тип поселка, деревни
+    example: деревня
+  streetType:
     type: string
     description: тип улицы
     example: ул
-    enum:
-      - ул
-      - пр-кт
   street:
     type: string
     description: Улица
