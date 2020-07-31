@@ -2,9 +2,20 @@ title: CrossRefDTO
 type: object
 description: Кросс-ссылка на систему
 properties:
+  endDate:
+    type: string
+    format: date-time
+    description: Дата-время окончания кросс-ссылки
   externalId:
     type: string
     description: Кросс-ссылка на систему
+  partyUId:
+    type: string
+    description: УИК клиента (или же MDM_ID)
+  savedAt:
+    type: string
+    format: date-time
+    description: Дата-время записи кросс-ссылки в кеше
   systemNumber:
     type: string
     description: Код системы (в канонике)
