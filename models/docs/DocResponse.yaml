@@ -5,3 +5,4 @@ oneOf:
   - $ref: ./doctypes/Vehicle.v1.yaml
   - $ref: ./doctypes/RfDrivingLicenseDoc.yaml
   - $ref: ./doctypes/innDoc.yaml
+  - $ref: ./doctypes/FrgnPassportDoc.yaml
