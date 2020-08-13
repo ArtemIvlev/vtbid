@@ -12,6 +12,10 @@ allOf:
       createadBy:
         type: string
         description: имя создавшего пользователя
+      updatedAt:
+        type: string
+        description: дата последнего изменения
+        format: date-time
       qaLevel:
         type: string
         description: уровень доверия 1-100 (можно будет потом сделать по десяткам и субстатусы между ними)

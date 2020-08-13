@@ -1,5 +1,6 @@
 title: CrossRefDTO
 type: object
+description: Кросс-ссылка на систему
 properties:
   endDate:
     type: string
@@ -18,5 +19,6 @@ properties:
   systemNumber:
     type: string
     description: Код системы (в канонике)
-description: Кросс-ссылка на систему
-  
+required:
+  - externalId
+  - systemNumber
