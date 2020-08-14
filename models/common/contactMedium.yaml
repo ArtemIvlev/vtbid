@@ -16,3 +16,6 @@ properties:
       - $ref: ./phoneNumber.yaml
   metadata:
     $ref: ./metadata.yaml
+    
+required:
+- metadata

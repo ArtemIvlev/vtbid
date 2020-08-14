@@ -31,3 +31,4 @@ allOf:
       - createadAt
       - createadBy
       - qaLevel
+      - validFor

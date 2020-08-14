@@ -13,3 +13,5 @@ properties:
     format: uuid
   type:
     type: string
+required:
+- metadata

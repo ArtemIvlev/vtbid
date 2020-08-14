@@ -90,4 +90,12 @@ properties:
   fiasCode:
     type: string
     description: Идентификатор адресной единицы. Формат строки не определен
-
+  type:
+    type: string
+    description: Тип адреса
+  metadata:
+    $ref: ./metadata.yaml
+    
+required:
+- metadata
+- type
