@@ -44,3 +44,24 @@ allOf:
         type: string
         example: '29.08.2026'
         description: Действителен до (в формате ДД.ММ.ГГГГ)
+      passport_status:
+        type: string
+        enum:
+          - valid
+          - invalid
+          - no_information
+        description: Статус паспорта
+        example: valid
+      invalidity_reason:
+        type: string
+        enum:
+          - expired
+          - replaced
+          - with_violation
+          - in_search
+          - destroyes
+          - owner_death
+          - technical_defect
+          - lost
+        description: Причина недействительности
+        example: replaced
