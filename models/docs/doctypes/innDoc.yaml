@@ -8,10 +8,21 @@ allOf:
   - $ref: ./baseTypes/BaseTypeSurname.yaml
   - $ref: ./baseTypes/BaseTypeGender.yaml
   - $ref: ./baseTypes/BaseTypeBirthDate.yaml
+  - $ref: ./baseTypes/BaseTypeBirthPlace.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
+  - $ref: ./baseTypes/BaseTypeDocIssued.yaml
   - $ref: ./baseTypes/BaseGetDateDoc.yaml
   - $ref: ./baseTypes/BaseValidateDateDoc.yaml
-
+  - type: object
+    properties:
+      issued_by:
+        type: string
+        example: Гагаринским отделением милиции №5 по г.Москве МВД России
+        description: Кем выдан документ
+      division:
+        type: string
+        description: Код подразделения
+        example: 503-078
 x-tags:
   - ready to implement

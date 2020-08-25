@@ -1,5 +1,39 @@
 title: MarriedCertDoc
-type: object
+description: Свидетельство о заключении брака `type` равен `marriage_cert_doc`
+allOf:
+  - $ref: ./baseTypes/BaseProofBlock.yaml
+  - $ref: ./baseTypes/BaseDoc.yaml
+  - $ref: ./baseTypes/BaseDepartmentDoc.yaml
+  - $ref: ./baseTypes/BaseGetDateDoc.yaml
+  - $ref: ./baseTypes/BaseValidateDateDoc.yaml
+  - $ref: ./baseTypes/BaseTypeName.yaml
+  - $ref: ./baseTypes/BaseTypePatronymic.yaml
+  - $ref: ./baseTypes/BaseTypeSurname.yaml
+  - $ref: ./baseTypes/BaseTypeGender.yaml
+  - $ref: ./baseTypes/BaseTypeBirthDate.yaml
+  - type: object
+    properties:
+      issued_by:
+        type: string
+        example: отделением ЗАГС №1 гор. Москвы
+        description: Полное наименование органа ЗАГС, которым произведена государственная регистрация акта гражданского состояния
+      status:
+        type: string
+        enum:
+          - valid
+          - invalid
+          - no_information
+        description: Статус документа
+        example: invalid
+      actNo:
+        type: string
+        example: 3254
+        description: Номер записи акта гражданского состояния состояния
+      actDate:
+        type: data
+        example: ДД.ММ.ГГГГ
+        description: Дата составления записи акта гражданского состояния
+    required:
+      - issued_by
 x-tags:
-  - not implemented
-description: ''
+  - ready to implement

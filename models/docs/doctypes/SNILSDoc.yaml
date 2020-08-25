@@ -12,5 +12,7 @@ allOf:
   - $ref: ./baseTypes/BaseTypeSurname.yaml
   - $ref: ./baseTypes/BaseTypeGender.yaml
   - $ref: ./baseTypes/BaseTypeBirthDate.yaml
+  - $ref: ./baseTypes/BaseTypeBirthPlace.yaml
+  - $ref: ./baseTypes/BaseTypeDocIssued.yaml
 x-tags:
   - to check
