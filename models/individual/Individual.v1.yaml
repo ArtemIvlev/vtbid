@@ -5,6 +5,9 @@ properties:
   ucn:
     type: string
     description: Идентификатор УНК (ац)
+  mdm_id:
+    type: string
+    description: Идентификатор MDM
   uuid:
     type: string
     format: uuid

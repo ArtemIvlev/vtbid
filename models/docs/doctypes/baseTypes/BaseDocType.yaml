@@ -13,6 +13,7 @@ properties:
       - RF_DRIVING_LICENSE
       - MLTR_ID
       - FRGN_PASS
+      - PASSPORT_HISTORY
       - MDCL_PLCY
       - FID_BRTH_CERT
       - OLD_BRTH_CERT
@@ -44,6 +45,8 @@ properties:
       * `MLTR_ID` – военный билет
       
       * `FRGN_PASS` – заграничный паспорт
+      
+      * 'PASSPORT_HISTORY' - История выданных паспортов
       
       * `MDCL_PLCY` – полис ОМС
       
