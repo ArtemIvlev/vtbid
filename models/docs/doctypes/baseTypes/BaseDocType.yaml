@@ -18,7 +18,7 @@ properties:
       - FID_BRTH_CERT
       - OLD_BRTH_CERT
       - REGISTRATION
-      - RF_BRTH_CERT
+      - BRTH_CERT
       - MARRIED_CERT
       - DIVORCE_CERT
       - NAME_CHANGE_CERT
