@@ -13,7 +13,6 @@ properties:
       - RF_DRIVING_LICENSE
       - MLTR_ID
       - FRGN_PASS
-      - PASSPORT_HISTORY
       - MDCL_PLCY
       - FID_BRTH_CERT
       - OLD_BRTH_CERT
@@ -31,6 +30,7 @@ properties:
       - PRISON_CERT
       - ILS_PFR_CERT
       - EGRN_CERT
+      - ILS_PFR
     description: >
       * `INN` - ИНН
 
@@ -81,6 +81,8 @@ properties:
       * `ILS_PFR_CERT` - Сведения о состоянии индивидуального страхового счета застрахованного лица
       
       * `EGRN_CERT` - Сведения, содержащиеся в кадастре недвижимости и реестре прав на недвижимость в составе Единого государственного реестра недвижимости, относящиеся к гражданам Российской Федерации - физическим лицам
+      
+      * `ILS_PFR` - Сведения о состоянии индивидуального страхового счета застрахованного лица
       
 
 discriminator:

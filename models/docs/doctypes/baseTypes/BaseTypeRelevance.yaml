@@ -1,0 +1,19 @@
+title: BaseTypeRelevance
+type: object
+description: Релевантность
+properties:
+  relevance:
+    type: string
+    enum: 
+      - actual
+      - expired
+      - invalid
+    example: 'actual'
+    description: >
+      Релевантность сведений (документа).
+      
+      * `actual` — актуальные сведения (документ)
+      
+      * `expired` — не актуальные сведения (документ), был заменён или срок действия завершён
+      
+      * `invalid` — не валидные сведения (документ). Причины не валидности могут быть различными. 
