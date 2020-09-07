@@ -2,6 +2,7 @@ title: RfPassportDoc
 description: |
   Паспорт гражданина России `type` будет равен `RF_PASSPORT`
 allOf:
+  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
   - $ref: ./baseTypes/BaseDoc.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
@@ -44,7 +45,11 @@ allOf:
           - lost
         description: Причина недействительности
         example: replaced
+      legalForce:
+        type: boolean
+        description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
     required:
+      - uuid
       - issued_by
       - division
 x-tags:

@@ -1,7 +1,7 @@
 title: ils_doc
 description: ИЛС (Сведения о состоянии индивидуального страхового счета застрахованного лица)
 allOf:
-  - $ref: ./baseTypes/BaseTypeRelevance.yaml
+  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
   - $ref: ./baseTypes/BaseGetDateDoc.yaml
   - $ref: ./baseTypes/BaseValidateDateDoc.yaml
@@ -40,3 +40,5 @@ allOf:
           - 1
           - 2
         description: Вариант пенсионного обеспечения в системе ОПС, выбранные застрахованным лицом года рождения и моложе. Возможные значения `1` – направление страховых взносов на формирование только страховой пенсии;`2` – направление страховых взносов на формирование страховой и накопительной пенсии
+    required:
+      - uuid

@@ -1,10 +1,17 @@
 title: Vehicle
-description: Данные транспортного средства
+description: Сведения о транспортном средстве (СТС)
 allOf:
+  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
   - $ref: ./baseTypes/BaseGetDateDoc.yaml
   - $ref: ./baseTypes/BaseValidateDateDoc.yaml
+  - $ref: ./baseTypes/BaseDoc.yaml 
+  - $ref: ./baseTypes/BaseTypeName.yaml
+  - $ref: ./baseTypes/BaseTypePatronymic.yaml
+  - $ref: ./baseTypes/BaseTypeSurname.yaml
+  - $ref: ./baseTypes/BaseTypeBirthDate.yaml
+  - $ref: ./baseTypes/BaseTypeBirthPlace.yaml
   - type: object
     properties:
       car_name:
@@ -47,19 +54,18 @@ allOf:
         type: string
         example: '2074681'
         description: Номер шасси (рамы)
-      registration_doc:
-        type: object
-        description: Серия и номер регистрационного документа (СТС)
-        properties:
-          registration_doc_series:
-            type: string
-            example: 72АА
-            description: Серия регистрационного документа
-          registration_doc_number:
-            type: integer
-            example: '160000'
-            description: Номер регистрационного документа
+      status:
+        type: string
+        enum:
+          - valid
+          - invalid
+          - no_information
+        description: Статус
+      legalForce:
+        type: boolean
+        description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
     required:
+      - uuid
       - registration_plate
 x-tags:
   - to check

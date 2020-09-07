@@ -14,11 +14,16 @@ allOf:
         description: имя создавшего пользователя
       updatedAt:
         type: string
-        description: дата последнего изменения
+        description: дата последнего изменения, для данных,полученных через ЕСИА заполнять значением receiptDocDate
         format: date-time
       qaLevel:
-        type: string
-        description: уровень доверия 1-100 (можно будет потом сделать по десяткам и субстатусы между ними)
+        enum: 
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        description: уровень доверия 0..4 (0 - для загруженных вручную, 2 - для ЕСИА, 4 - для МДМ)
       comment:
         type: string
         description: коментарии к статусу

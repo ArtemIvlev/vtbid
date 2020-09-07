@@ -1,6 +1,7 @@
 title: FatherHoodCertDoc
 description: Свидетельство об установлении отцовства `type` равен `FATHERHOOD_CERT`
 allOf:
+  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
   - $ref: ./baseTypes/BaseDoc.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
@@ -32,7 +33,11 @@ allOf:
         type: data
         example: ДД.ММ.ГГГГ
         description: Дата составления записи акта гражданского состояния
+      legalForce:
+        type: boolean
+        description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
     required:
+      - uuid
       - issued_by
 x-tags:
   - ready to implement

@@ -1,6 +1,7 @@
 title: InnDoc
 description: ИНН пока только поля кода.
 allOf:
+  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
   - $ref: ./baseTypes/BaseTypeInn.yaml
   - $ref: ./baseTypes/BaseDocType.yaml
   - $ref: ./baseTypes/BaseTypeName.yaml
@@ -24,5 +25,7 @@ allOf:
         type: string
         description: Код подразделения
         example: 503-078
+    required:
+      - uuid
 x-tags:
   - ready to implement

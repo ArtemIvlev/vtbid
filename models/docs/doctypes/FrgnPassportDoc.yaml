@@ -5,6 +5,7 @@ description: >
   PermittedScope: id_doc (если заграничный паспорт гражданина России указан как ДУЛ в УЗ гражданина)
                   foreign_passport_doc (если заграничный паспорт гражданина России не указан как ДУЛ)
 allOf:
+  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
   - $ref: ./baseTypes/BaseTypeSid.yaml
   - $ref: ./baseTypes/BaseTypeId.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
@@ -19,14 +20,6 @@ allOf:
   - $ref: ./baseTypes/BaseTypeBirthDate.yaml
   - $ref: ./baseTypes/BaseTypeBirthPlace.yaml
   - type: object
-    required:
-      - expiryDate
-      - latinFirstName
-      - latinLastName
-      - issuedBy
-      - gender
-      - birthDate
-      - birthPlace
     properties:
       latinFirstName:
         type: string
@@ -65,3 +58,15 @@ allOf:
           - lost
         description: Причина недействительности
         example: replaced
+      legalForce:
+        type: boolean
+        description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
+    required:
+      - uuid
+      - expiryDate
+      - latinFirstName
+      - latinLastName
+      - issuedBy
+      - gender
+      - birthDate
+      - birthPlace

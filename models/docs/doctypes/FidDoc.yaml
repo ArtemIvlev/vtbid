@@ -1,5 +1,32 @@
 title: FidDoc
-type: object
+description: 'Документ иностранного гражданина, удостоверяющий личность на территории РФ `type` равен `FID_DOC`'
+allOf:
+  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
+  - $ref: ./baseTypes/BaseDoc.yaml
+  - $ref: ./baseTypes/BaseDepartmentDoc.yaml
+  - $ref: ./baseTypes/BaseGetDateDoc.yaml
+  - $ref: ./baseTypes/BaseValidateDateDoc.yaml
+  - $ref: ./baseTypes/BaseTypeSurname.yaml
+  - $ref: ./baseTypes/BaseTypeName.yaml
+  - $ref: ./baseTypes/BaseTypePatronymic.yaml
+  - $ref: ./baseTypes/BaseTypeGender.yaml
+  - $ref: ./baseTypes/BaseTypeBirthDate.yaml
+  - $ref: ./baseTypes/BaseTypeBirthPlace.yaml
+  - type: object
+    properties:
+       status:
+        type: string
+        enum:
+          - valid
+          - invalid
+          - no_information
+        description: Статус
+        example: invalid
+    required:
+      - uuid
+      - issued_by
+      - division
 x-tags:
-  - not implemented
-description: ''
+  - ready to implement
+
+

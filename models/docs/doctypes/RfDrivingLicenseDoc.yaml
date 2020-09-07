@@ -2,6 +2,7 @@ title: RfDrivingLicenseDoc
 description: |
   Водительское удостоверение гражданина РФ `type` будет равен `RF_DRIVING_LICENSE`  PermittedScope: drivers_licence_doc
 allOf:
+  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
   - $ref: ./baseTypes/BaseTypeSid.yaml
   - $ref: ../BaseTypeId.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
@@ -56,5 +57,9 @@ allOf:
         type: string
         example: '2009'
         description: Водительский стаж (указывается год)
+      legalForce:
+        type: boolean
+        description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
     required:
+      - uuid
       - issuedBy
