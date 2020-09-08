@@ -8,6 +8,7 @@ allOf:
   - $ref: ./baseTypes/BaseTypeRelevance.yaml
   - $ref: ./baseTypes/BaseGetDateDoc.yaml
   - $ref: ./baseTypes/BaseValidateDateDoc.yaml
+  - $ref: ./baseTypes/BaseTypeRelevance.yaml
   - $ref: ./baseTypes/BaseTypeName.yaml
   - $ref: ./baseTypes/BaseTypePatronymic.yaml
   - $ref: ./baseTypes/BaseTypeSurname.yaml
