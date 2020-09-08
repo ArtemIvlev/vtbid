@@ -26,15 +26,7 @@ properties:
     description: страна рождения
   maritalStatus:
     type: string
-    description: Single, Divorced, Widow, Married, Remarriage, CivilMarriage, Unknown
-    enum:
-      - Single
-      - Divorced
-      - Widow
-      - Married
-      - Remarriage
-      - CivilMarriage
-      - Unknown
+    description: Тип контакта в Dictionary catalogName =`MaritalStatus` Single, Divorced, Widow, Married, Remarriage, CivilMarriage, Unknown
   birthDate:
     type: string
     format: date-time
@@ -62,16 +54,7 @@ properties:
     description: текущее положение пользователя (на имеет смысла?)
   individualLifeCycle:
     type: string
-    enum:
-      - Prospect
-      - Client
-      - UnverifiedProspect
-      - NotClient
-      - None
-      - Active
-      - Inactive
-      - Reorganization
-    description: 'Prospect, Client, UnverifiedProspect, NotClient, None, Active, Inactive, Reorganization'
+    description: Тип контакта в Dictionary catalogName =`CustomerLifeCycleStatus` 'Prospect, Client, UnverifiedProspect, NotClient, None, Active, Inactive, Reorganization'
   characteristic:
     type: array
     items:

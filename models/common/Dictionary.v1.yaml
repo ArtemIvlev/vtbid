@@ -1,0 +1,16 @@
+title: Dictionary
+description: Словари Тип адреса, Тип контакта, Жизненный цикл Клиента, Семейное положение
+type: object
+properties:
+  description:
+    type: string
+    description: описание для отображения на фронте
+    example: "cm.PhoneType.ForNotifications"
+  code:
+    type: string
+    description: код значения
+    example: "Для нотификаций"
+  catalogName:
+    type: string
+    description: 
+    example: "ContactType"

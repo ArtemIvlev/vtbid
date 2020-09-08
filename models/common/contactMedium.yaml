@@ -9,7 +9,7 @@ properties:
     enum: [email, phone]
   contactType:
     type: string
-    description: Типизация Домашний/Доверенный/Рабочий и т.д.
+    description: Тип контакта в Dictionary catalogName =`ContactType`
   value:
     oneOf: 
       - $ref: ./email.yaml
