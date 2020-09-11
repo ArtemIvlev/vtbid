@@ -15,18 +15,17 @@ allOf:
   - $ref: ./baseTypes/BaseTypeBirthPlace.yaml
   - type: object
     properties:
-       status:
-        type: string
-        enum:
-          - valid
-          - invalid
-          - no_information
-        description: Статус
-        example: invalid
+     legalForce:
+        type: boolean
+        description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
     required:
       - uuid
+      - type
+      - name
+      - surname
+      - birthdate
+      - birthplace
       - issued_by
-      - division
 x-tags:
   - ready to implement
 

@@ -63,4 +63,10 @@ allOf:
         description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
     required:
       - uuid
+      - type
+      - name
+      - surname
+      - birthdate
+      - birthplace
       - issuedBy
+      - expiryDate

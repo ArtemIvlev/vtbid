@@ -14,6 +14,7 @@ allOf:
   - $ref: ./baseTypes/BaseTypeSurname.yaml
   - $ref: ./baseTypes/BaseTypeGender.yaml
   - $ref: ./baseTypes/BaseTypeBirthDate.yaml
+  - $ref: ./baseTypes/BaseTypeBirthPlace.yaml
   - type: object
     properties:
       type_BrthCert:
@@ -23,19 +24,11 @@ allOf:
           - RF_BRTH_CERT
           - OLD_BRTH_CERT
           - FID_BRTH_CERT
-        description: тип свидетельства о рождении (RF_BRTH_CERT - РФ, OLD_BRTH_CERT - СССР, FID_BRTH_CERT - другая страна)
+        description: тип свидетельства о рождении (RF_BRTH_CERT - РФ - значение по умолчанию, OLD_BRTH_CERT - СССР, FID_BRTH_CERT - другая страна)
       issued_by:
         type: string
         example: отделением ЗАГС №1 гор. Москвы
         description: Полное наименование органа ЗАГС, которым произведена государственная регистрация акта гражданского состояния
-      status:
-        type: string
-        enum:
-          - valid
-          - invalid
-          - no_information
-        description: Статус документа
-        example: invalid
       actNo:
         type: string
         example: 3254
@@ -49,6 +42,11 @@ allOf:
         description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
     required:
       - uuid
+      - type
+      - name
+      - surname
+      - birthdate
+      - birthplace
       - issued_by
 x-tags:
   - ready to implement

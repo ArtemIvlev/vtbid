@@ -38,14 +38,6 @@ allOf:
         type: string
         example: '29.08.2026'
         description: Действителен до (в формате ДД.ММ.ГГГГ)
-      passport_status:
-        type: string
-        enum:
-          - valid
-          - invalid
-          - no_information
-        description: Статус паспорта
-        example: valid
       invalidity_reason:
         type: string
         enum:
@@ -64,6 +56,7 @@ allOf:
         description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
     required:
       - uuid
+      - type
       - expiryDate
       - latinFirstName
       - latinLastName

@@ -16,13 +16,6 @@ allOf:
       id:
        type: string
        description: Уникальный идентификатор документа
-      status:
-        type: string
-        description: статус 
-        enum:
-          - valid
-          - invalid
-          - no_information
       formationDate:
        type: date
        description: Дата, на которую сформированы сведения
@@ -42,3 +35,10 @@ allOf:
         description: Вариант пенсионного обеспечения в системе ОПС, выбранные застрахованным лицом года рождения и моложе. Возможные значения `1` – направление страховых взносов на формирование только страховой пенсии;`2` – направление страховых взносов на формирование страховой и накопительной пенсии
     required:
       - uuid
+      - type
+      - snils
+      - name
+      - formationDate
+      - Date
+      - surname
+      - ilsJson
