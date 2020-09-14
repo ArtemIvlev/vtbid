@@ -43,7 +43,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "individual"
+        ]
       }
     },
     "/individual/avatar/upload": {
@@ -84,7 +87,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "individual"
+        ]
       },
       "options": {
         "summary": "Доступные опции загрузка аватара",
@@ -101,7 +107,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "individual"
+        ]
       }
     },
     "/individual/avatar/accessUpload": {
@@ -131,7 +140,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "individual"
+        ]
       }
     }
   },
@@ -160,7 +172,10 @@
           "metadata": {
             "$ref": "#/components/schemas/AvatarMetadataDto"
           }
-        }
+        },
+        "x-tags": [
+          "model"
+        ]
       },
       "AvatarMetadataDto": {
         "required": [
@@ -220,7 +235,10 @@
           "error": {
             "$ref": "#/components/schemas/ErrorDto"
           }
-        }
+        },
+        "x-tags": [
+          "model"
+        ]
       },
       "ErrorDto": {
         "type": "object",
@@ -240,7 +258,10 @@
           "message": {
             "type": "string"
           }
-        }
+        },
+        "x-tags": [
+          "model"
+        ]
       },
       "ValidDateDto": {
         "required": [
@@ -256,7 +277,11 @@
             "type": "string",
             "format": "date-time"
           }
-        }
+        },
+        "x-tags": [
+          "model"
+        ],
+        "description": ""
       },
       "AvatarUploadDto": {
         "required": [
@@ -291,7 +316,10 @@
           "file": {
             "type": "string"
           }
-        }
+        },
+        "x-tags": [
+          "model"
+        ]
       },
       "AvatarProperties": {
         "type": "object",
@@ -322,7 +350,10 @@
             "type": "integer",
             "format": "int64"
           }
-        }
+        },
+        "x-tags": [
+          "model"
+        ]
       }
     }
   }
