@@ -1,0 +1,333 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8083/",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/individual/avatar/pend/{avatarId}": {
+      "get": {
+        "summary": "Пендинг / получение аватара по ИД",
+        "description": "загружает / получает аватар",
+        "operationId": "pendAvatar",
+        "parameters": [
+          {
+            "name": "sub",
+            "in": "header",
+            "description": "Идентификатор УНК физ лица",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "avatarId",
+            "in": "path",
+            "description": "Идентификатор аватара",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Аватар",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvatarDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/avatar/upload": {
+      "post": {
+        "summary": "Загрузка аватара",
+        "description": "инициализирует процесс создания аватара / создает аватар",
+        "operationId": "uploadAvatar",
+        "parameters": [
+          {
+            "name": "sub",
+            "in": "header",
+            "description": "Идентификатор УНК физ лица",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Параметры изображения",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/AvatarUploadDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Созданный аватар",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvatarDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "summary": "Доступные опции загрузка аватара",
+        "description": "возвращает ограничения / требования для загрузки",
+        "operationId": "uploadAvatarOptions",
+        "responses": {
+          "200": {
+            "description": "Параметры",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvatarProperties"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/avatar/accessUpload": {
+      "get": {
+        "summary": "Определяет возможность загрузки аватара",
+        "description": "True если загрузка возможна",
+        "operationId": "getAccessUpload",
+        "parameters": [
+          {
+            "name": "sub",
+            "in": "header",
+            "description": "Идентификатор УНК физ лица",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AvatarDto": {
+        "required": [
+          "file",
+          "isPublic",
+          "metadata"
+        ],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "isPublic": {
+            "type": "boolean"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AvatarMetadataDto"
+          }
+        }
+      },
+      "AvatarMetadataDto": {
+        "required": [
+          "createdBy",
+          "qaLevel",
+          "validFor"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "LOADING",
+              "ACTIVE",
+              "REMOVED",
+              "ERROR_LOADING",
+              "LOADING_TIMEOUT",
+              "BLOCKED_BY_ANTIVIRUS"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "enum": [
+              "PROFILE_LOADER",
+              "MDM",
+              "GOSUSLUGI",
+              "AVATAR_UPLOADER"
+            ]
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "qaLevel": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/ValidDateDto"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "logRef": {
+            "type": "string"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorDto"
+          }
+        }
+      },
+      "ErrorDto": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "50",
+              "99"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ValidDateDto": {
+        "required": [
+          "startDateTime"
+        ],
+        "type": "object",
+        "properties": {
+          "startDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AvatarUploadDto": {
+        "required": [
+          "file",
+          "height",
+          "posX",
+          "posY",
+          "ucn",
+          "width"
+        ],
+        "type": "object",
+        "properties": {
+          "ucn": {
+            "type": "string"
+          },
+          "posX": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "posY": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "width": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "file": {
+            "type": "string"
+          }
+        }
+      },
+      "AvatarProperties": {
+        "type": "object",
+        "properties": {
+          "inputWidth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "inputHeight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resolutionSelectionWidth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resolutionSelectionHeight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "formats": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "inputSizeBytes": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    }
+  }
+}
