@@ -1,15 +1,11 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "OpenAPI definition",
-    "version": "v0"
+    "title": "Avatar upload service",
+    "version": "v0",
+    "description": ""
   },
-  "servers": [
-    {
-      "url": "http://localhost:8083/",
-      "description": "Generated server url"
-    }
-  ],
+  "servers": [],
   "paths": {
     "/individual/avatar/pend/{avatarId}": {
       "get": {
