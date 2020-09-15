@@ -8,10 +8,12 @@ properties:
     $ref: ../common/RelatedPartyRef.yaml
   metadata:
     $ref: ../common/metadata.yaml
+  externalRef:
+    $ref: ../individual/ExternalReference.yaml
   id:
     type: string
     format: uuid
   type:
     type: string
 required:
-- metadata
+  - metadata
