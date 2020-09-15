@@ -12,9 +12,6 @@ properties:
   partyUId:
     type: string
     description: УИК клиента (или же MDM_ID)
-  oid:
-    type: string
-    description: Идентификатор пользователя ЕСИА
   savedAt:
     type: string
     format: date-time

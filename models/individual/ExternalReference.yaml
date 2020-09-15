@@ -7,7 +7,7 @@ properties:
     description: идентификатор объекта в tdg
     type: string
   href:
-    description: идентификатор объекта в системе-источнике
+    description: идентификатор объекта в системе-источнике, например, идентификатор пользователя в ЕСИА
     type: string
   type:
     description: тип-источник информации
