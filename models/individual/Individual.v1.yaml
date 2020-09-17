@@ -1,98 +1,99 @@
 title: Individual
 type: object
 description: Модель про физ лицо
-properties:
-  ucn:
-    type: string
-    description: Идентификатор УНК (ац)
-  mdm_id:
-    type: string
-    description: Идентификатор MDM
-  uuid:
-    type: string
-    format: uuid
-    description: Идентификатор partyId
-  crosslinks:
-    type: array
-    items:
-      $ref: crossRef.yaml
-  gender:
-    $ref: '../docs/doctypes/baseTypes/BaseTypeGender.yaml#/properties/gender'
-  placeOfBirth:
-    type: string
-    description: В модели это ссылка на место рождения (не уверен что нам оно надо)
-  countryOfBirth:
-    type: string
-    description: страна рождения
-  maritalStatus:
-    type: string
-    description: Тип контакта в Dictionary catalogName =`MaritalStatus` Single, Divorced, Widow, Married, Remarriage, CivilMarriage, Unknown
-  birthDate:
-    type: string
-    format: date-time
-    description: Дата рождения
-  title:
-    type: string
-    description: Обращение
-  givenName:
-    type: string
-    description: Имя
-  familyName:
-    type: string
-    description: Фамилия
-  middleName:
-    type: string
-    description: Отчество
-  fullName:
-    type: string
-    description: Полное имя (будет использоваться для Name в ссылках)
-  formattedName:
-    type: string
-    description: 'Имеет смысл только для специфики Янонских, Китайских, Корейских имён'
-  location:
-    type: string
-    description: текущее положение пользователя (на имеет смысла?)
-  individualLifeCycle:
-    type: string
-    description: Тип контакта в Dictionary catalogName =`CustomerLifeCycleStatus` 'Prospect, Client, UnverifiedProspect, NotClient, None, Active, Inactive, Reorganization'
-  characteristic:
-    type: array
-    items:
-      $ref: ../common/characteristic.yaml
-  documents:
-    description: документы идентифицирующие ФЛ
-    type: array
-    items:
-      $ref: ../docs/Document.yaml
-  externalReference:
-    type: array
-    items:
-      $ref: ExternalReference.yaml
-  relatedParty:
-    type: array
-    items:
-      $ref: ../common/RelatedPartyRef.yaml
-  contactMedium:
-    type: array
-    description: Контактные данные
-    items:
-      $ref: ../common/contactMedium.yaml
-  metadata:
-    $ref: ../common/metadata.yaml
-  avatar:
-    $ref: ./avatar.yaml
-  addresses:
-    type: array
-    items:
-      allOf:
-        - type: object
-          properties:
-            type:
-              type: string
-              enum:
-                - регистрациии
-                - проживания
-                - свой вариант??
-        - $ref: ../common/address.yaml
+allOf:
+  - $ref: ../docs/doctypes/baseTypes/BaseTypeGender.yaml
+  - type: object
+    properties:
+      ucn:
+        type: string
+        description: Идентификатор УНК (ац)
+      mdm_id:
+        type: string
+        description: Идентификатор MDM
+      uuid:
+        type: string
+        format: uuid
+        description: Идентификатор partyId
+      crosslinks:
+        type: array
+        items:
+          $ref: crossRef.yaml        
+      placeOfBirth:
+        type: string
+        description: В модели это ссылка на место рождения (не уверен что нам оно надо)
+      countryOfBirth:
+        type: string
+        description: страна рождения
+      maritalStatus:
+        type: string
+        description: 'Тип контакта в Dictionary catalogName =`MaritalStatus` Single, Divorced, Widow, Married, Remarriage, CivilMarriage, Unknown'
+      birthDate:
+        type: string
+        format: date-time
+        description: Дата рождения
+      title:
+        type: string
+        description: Обращение
+      givenName:
+        type: string
+        description: Имя
+      familyName:
+        type: string
+        description: Фамилия
+      middleName:
+        type: string
+        description: Отчество
+      fullName:
+        type: string
+        description: Полное имя (будет использоваться для Name в ссылках)
+      formattedName:
+        type: string
+        description: 'Имеет смысл только для специфики Янонских, Китайских, Корейских имён'
+      location:
+        type: string
+        description: текущее положение пользователя (на имеет смысла?)
+      individualLifeCycle:
+        type: string
+        description: "Тип контакта в Dictionary catalogName =`CustomerLifeCycleStatus` 'Prospect, Client, UnverifiedProspect, NotClient, None, Active, Inactive, Reorganization'"
+      characteristic:
+        type: array
+        items:
+          $ref: ../common/characteristic.yaml
+      documents:
+        description: документы идентифицирующие ФЛ
+        type: array
+        items:
+          $ref: ../docs/Document.yaml
+      externalReference:
+        type: array
+        items:
+          $ref: ExternalReference.yaml
+      relatedParty:
+        type: array
+        items:
+          $ref: ../common/RelatedPartyRef.yaml
+      contactMedium:
+        type: array
+        description: Контактные данные
+        items:
+          $ref: ../common/contactMedium.yaml
+      metadata:
+        $ref: ../common/metadata.yaml
+      avatar:
+        $ref: ./avatar.yaml
+      addresses:
+        type: array
+        items:
+          allOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                    - регистрациии
+                    - проживания
+                    - свой вариант??
+            - $ref: ../common/address.yaml
 required:
   - uuid
