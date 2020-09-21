@@ -8,7 +8,6 @@ allOf:
   - $ref: ./baseTypes/BaseTypeRelevance.yaml
   - $ref: ./baseTypes/BaseGetDateDoc.yaml
   - $ref: ./baseTypes/BaseValidateDateDoc.yaml
-  - $ref: ./baseTypes/BaseTypeRelevance.yaml
   - $ref: ./baseTypes/BaseTypeName.yaml
   - $ref: ./baseTypes/BaseTypePatronymic.yaml
   - $ref: ./baseTypes/BaseTypeSurname.yaml
@@ -40,13 +39,12 @@ allOf:
       legalForce:
         type: boolean
         description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
+      metadata:
+        $ref: ../../common/metadata.yaml    
     required:
       - uuid
       - type
-      - name
-      - surname
-      - birthdate
-      - birthplace
       - issued_by
+      - metadata
 x-tags:
   - ready to implement

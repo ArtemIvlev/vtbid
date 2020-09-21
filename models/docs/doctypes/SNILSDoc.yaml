@@ -15,7 +15,14 @@ allOf:
   - $ref: ./baseTypes/BaseTypeBirthDate.yaml
   - $ref: ./baseTypes/BaseTypeBirthPlace.yaml
   - $ref: ./baseTypes/BaseTypeDocIssued.yaml
+  - type: object
+    properties:
+     metadata:
+      $ref: ../../common/metadata.yaml    
     required:
       - uuid
+      - type
+      - snils
+      - metadata
 x-tags:
   - to check

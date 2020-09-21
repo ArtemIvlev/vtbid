@@ -30,12 +30,15 @@ allOf:
       legalForce:
         type: boolean
         description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
+      metadata:
+        $ref: ../../common/metadata.yaml    
     required:
       - uuid
       - type
-      - name
-      - surname
-      - birthdate
+      - number
+      - actDate
+      - actNo
       - issued_by
+      - metadata
 x-tags:
   - ready to implement

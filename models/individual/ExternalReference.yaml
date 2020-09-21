@@ -13,6 +13,10 @@ properties:
     description: тип-источник информации
     type: string 
     example: ESIA
+  '@referredType':
+    type: string
+    description: признак типа объекта, например, Document, Individual, Address, contactMedium
+    example: "Document"
   characteristic:
     description: может использоваться для хранения информации о token
     type: array
@@ -20,3 +24,4 @@ properties:
       $ref: ../common/characteristic.yaml
 required:
     - referredUUID
+    - referredType
