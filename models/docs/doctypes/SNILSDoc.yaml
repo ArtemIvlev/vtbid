@@ -3,6 +3,7 @@ description: |
   СНИЛС `type` будет равен `SNILS`
 allOf:
   - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
+  - $ref: ./baseTypes/BaseDocType.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
   - $ref: ./baseTypes/BaseGetDateDoc.yaml
