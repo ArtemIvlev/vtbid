@@ -3,6 +3,7 @@ description: |
   СНИЛС `type` будет равен `SNILS`
 allOf:
   - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
+  - $ref: ./baseTypes/BaseDocType.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
   - $ref: ./baseTypes/BaseGetDateDoc.yaml
@@ -15,7 +16,14 @@ allOf:
   - $ref: ./baseTypes/BaseTypeBirthDate.yaml
   - $ref: ./baseTypes/BaseTypeBirthPlace.yaml
   - $ref: ./baseTypes/BaseTypeDocIssued.yaml
+  - type: object
+    properties:
+     metadata:
+      $ref: ../../common/metadata.yaml    
     required:
       - uuid
+      - type
+      - snils
+      - metadata
 x-tags:
   - to check

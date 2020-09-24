@@ -51,16 +51,19 @@ allOf:
           - lost
         description: Причина недействительности
         example: replaced
+      passportstatus:
+        type: string
+        enum:
+          - valid
+          - invalid
+          - noInformation
+        description: Статус паспорта - заполняется только для паспортов, пришедших в истории из ЕСИА
       legalForce:
         type: boolean
         description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
+      metadata:
+        $ref: ../../common/metadata.yaml    
     required:
       - uuid
       - type
-      - expiryDate
-      - latinFirstName
-      - latinLastName
-      - issuedBy
-      - gender
-      - birthDate
-      - birthPlace
+      - metadata

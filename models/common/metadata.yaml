@@ -5,6 +5,12 @@ allOf:
   - $ref: ./validFor.yaml
   - type: object
     properties:
+      status:
+        enum: 
+          - CREATED
+          - LOADED
+          - ERROR
+        description: системный статус 'CREATED' - создан, 'LOADED' - загружен, 'ERROR' - ошибка 
       createadAt:
         type: string
         description: дата создания

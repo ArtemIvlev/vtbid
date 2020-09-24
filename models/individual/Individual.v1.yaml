@@ -35,13 +35,13 @@ allOf:
       title:
         type: string
         description: Обращение
-      givenName:
+      name:
         type: string
         description: Имя
-      familyName:
+      surname:
         type: string
         description: Фамилия
-      middleName:
+      patronymic:
         type: string
         description: Отчество
       fullName:
