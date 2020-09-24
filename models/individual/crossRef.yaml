@@ -9,7 +9,7 @@ properties:
   externalId:
     type: string
     description: Кросс-ссылка на систему
-  partyUId:
+  partyId:
     type: string
     description: УИК клиента (или же MDM_ID)
   savedAt:
