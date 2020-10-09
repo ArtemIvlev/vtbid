@@ -7,6 +7,7 @@ properties:
     type: string
     enum: 
       - RF_PASSPORT
+      - USSR_PASSPORT
       - SNILS
       - INN
       - FID_DOC
@@ -37,6 +38,8 @@ properties:
       * `SNILS` – СНИЛС
       
       * `RF_PASSPORT` – паспорт гражданина РФ
+
+      * 'USSR_PASSPORT' - паспорт гражданина СССР
       
       * `FID_DOC` – документ иностранного гражданина, удостоверяющий личность на территории РФ
       
