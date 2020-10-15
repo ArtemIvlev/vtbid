@@ -1,12 +1,10 @@
 title: Vehicle
 description: Сведения о транспортном средстве (СТС)
 allOf:
-  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
   - $ref: ./baseTypes/BaseGetDateDoc.yaml
   - $ref: ./baseTypes/BaseValidateDateDoc.yaml
-  - $ref: ./baseTypes/BaseTypeRelevance.yaml
   - $ref: ./baseTypes/BaseDoc.yaml 
   - $ref: ./baseTypes/BaseTypeName.yaml
   - $ref: ./baseTypes/BaseTypePatronymic.yaml
@@ -61,7 +59,6 @@ allOf:
       metadata:
         $ref: ../../common/metadata.yaml    
     required:
-      - uuid
       - type
       - registration_plate
       - metadata

@@ -1,0 +1,20 @@
+title: TypeBrthCert
+type: object
+description: >
+  тип для сивдетельств о рождении.
+properties:
+  typeBrthCert:
+    type: string
+    enum: 
+      - RF_BRTH_CERT
+      - OLD_BRTH_CERT
+      - FID_BRTH_CERT
+    description: >
+      * `RF_BRTH_CERT` - RF_BRTH_CERT
+
+      * `OLD_BRTH_CERT` – Свидетельство о рождении СССР
+            
+      * `FID_BRTH_CERT` – Для свидетельства о рождении (другая страна)
+
+discriminator:
+  propertyName: type

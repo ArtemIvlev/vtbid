@@ -2,7 +2,6 @@ title: SNILSDoc
 description: |
   СНИЛС `type` будет равен `SNILS`
 allOf:
-  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
   - $ref: ./baseTypes/BaseDocType.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
@@ -21,7 +20,6 @@ allOf:
      metadata:
       $ref: ../../common/metadata.yaml    
     required:
-      - uuid
       - type
       - snils
       - metadata

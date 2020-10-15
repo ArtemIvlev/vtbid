@@ -1,7 +1,6 @@
 title: InnDoc
 description: ИНН пока только поля кода.
 allOf:
-  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
   - $ref: ./baseTypes/BaseTypeInn.yaml
   - $ref: ./baseTypes/BaseDocType.yaml
   - $ref: ./baseTypes/BaseTypeName.yaml
@@ -28,7 +27,6 @@ allOf:
       metadata:
         $ref: ../../common/metadata.yaml    
     required:
-      - uuid
       - type
       - inn
       - metadata

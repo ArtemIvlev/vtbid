@@ -1,11 +1,9 @@
 title: ils_doc
 description: ИЛС (Сведения о состоянии индивидуального страхового счета застрахованного лица)
 allOf:
-  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
   - $ref: ./baseTypes/BaseGetDateDoc.yaml
   - $ref: ./baseTypes/BaseValidateDateDoc.yaml
-  - $ref: ./baseTypes/BaseTypeRelevance.yaml
   - $ref: ./baseTypes/BaseTypeSnils.yaml
   - $ref: ./baseTypes/BaseTypeSurname.yaml
   - $ref: ./baseTypes/BaseTypeName.yaml
@@ -36,7 +34,6 @@ allOf:
       metadata:
         $ref: ../../common/metadata.yaml    
     required:
-      - uuid
       - type
       - snils
       - formationDate

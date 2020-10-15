@@ -1,11 +1,9 @@
 title: BrthCertDoc
 description: Свидетельство о рождении `type` равен `BRTH_CERT`
 allOf:
-  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
   - $ref: ./baseTypes/BaseDoc.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
-  - $ref: ./baseTypes/BaseTypeRelevance.yaml
   - $ref: ./baseTypes/BaseGetDateDoc.yaml
   - $ref: ./baseTypes/BaseValidateDateDoc.yaml
   - $ref: ./baseTypes/BaseTypeName.yaml
@@ -14,16 +12,9 @@ allOf:
   - $ref: ./baseTypes/BaseTypeGender.yaml
   - $ref: ./baseTypes/BaseTypeBirthDate.yaml
   - $ref: ./baseTypes/BaseTypeBirthPlace.yaml
+  - $ref: ./baseTypes/TypeBrthCert.v1.yaml
   - type: object
     properties:
-      type_BrthCert:
-        type: string
-        example: RF_BRTH_CERT
-        enum:
-          - RF_BRTH_CERT
-          - OLD_BRTH_CERT
-          - FID_BRTH_CERT
-        description: тип свидетельства о рождении (RF_BRTH_CERT - РФ - значение по умолчанию, OLD_BRTH_CERT - СССР, FID_BRTH_CERT - другая страна)
       issued_by:
         type: string
         example: отделением ЗАГС №1 гор. Москвы
@@ -42,7 +33,7 @@ allOf:
       metadata:
         $ref: ../../common/metadata.yaml    
     required:
-      - uuid
+      - typeBrthCert
       - type
       - issued_by
       - metadata

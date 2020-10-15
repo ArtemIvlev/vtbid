@@ -1,12 +1,10 @@
 title: FatherHoodCertDoc
 description: Свидетельство об установлении отцовства `type` равен `FATHERHOOD_CERT`
 allOf:
-  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
   - $ref: ./baseTypes/BaseDoc.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
   - $ref: ./baseTypes/BaseGetDateDoc.yaml
-  - $ref: ./baseTypes/BaseTypeRelevance.yaml
   - $ref: ./baseTypes/BaseTypeName.yaml
   - $ref: ./baseTypes/BaseTypePatronymic.yaml
   - $ref: ./baseTypes/BaseTypeSurname.yaml
@@ -32,7 +30,6 @@ allOf:
       metadata:
         $ref: ../../common/metadata.yaml    
     required:
-      - uuid
       - type
       - issued_by
       - actNo

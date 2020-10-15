@@ -5,15 +5,11 @@ description: >
   PermittedScope: id_doc (если заграничный паспорт гражданина России указан как ДУЛ в УЗ гражданина)
                   foreign_passport_doc (если заграничный паспорт гражданина России не указан как ДУЛ)
 allOf:
-  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
-  - $ref: ./baseTypes/BaseTypeSid.yaml
-  - $ref: ./baseTypes/BaseTypeId.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
   - $ref: ./baseTypes/BaseDoc.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
   - $ref: ./baseTypes/BaseGetDateDoc.yaml
   - $ref: ./baseTypes/BaseValidateDateDoc.yaml
-  - $ref: ./baseTypes/BaseTypeRelevance.yaml
   - $ref: ./baseTypes/BaseTypeName.yaml
   - $ref: ./baseTypes/BaseTypePatronymic.yaml
   - $ref: ./baseTypes/BaseTypeSurname.yaml
@@ -64,6 +60,5 @@ allOf:
       metadata:
         $ref: ../../common/metadata.yaml    
     required:
-      - uuid
       - type
       - metadata

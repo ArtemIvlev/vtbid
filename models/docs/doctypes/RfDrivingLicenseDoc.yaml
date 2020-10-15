@@ -2,15 +2,11 @@ title: RfDrivingLicenseDoc
 description: |
   Водительское удостоверение гражданина РФ `type` будет равен `RF_DRIVING_LICENSE`  PermittedScope: drivers_licence_doc
 allOf:
-  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
-  - $ref: ./baseTypes/BaseTypeSid.yaml
-  - $ref: ../BaseTypeId.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
   - $ref: ./baseTypes/BaseDoc.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
   - $ref: ./baseTypes/BaseGetDateDoc.yaml
   - $ref: ./baseTypes/BaseValidateDateDoc.yaml
-  - $ref: ./baseTypes/BaseTypeRelevance.yaml
   - $ref: ./baseTypes/BaseTypeName.yaml
   - $ref: ./baseTypes/BaseTypePatronymic.yaml
   - $ref: ./baseTypes/BaseTypeSurname.yaml
@@ -64,7 +60,6 @@ allOf:
       metadata:
         $ref: ../../common/metadata.yaml    
     required:
-      - uuid
       - type
       - issuedBy
       - metadata

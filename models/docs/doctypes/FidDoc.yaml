@@ -1,12 +1,10 @@
 title: FidDoc
 description: 'Документ иностранного гражданина, удостоверяющий личность на территории РФ `type` равен `FID_DOC`'
 allOf:
-  - $ref: ./baseTypes/BaseTypeUUID.v1.yaml
   - $ref: ./baseTypes/BaseDoc.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
   - $ref: ./baseTypes/BaseGetDateDoc.yaml
   - $ref: ./baseTypes/BaseValidateDateDoc.yaml
-  - $ref: ./baseTypes/BaseTypeRelevance.yaml
   - $ref: ./baseTypes/BaseTypeSurname.yaml
   - $ref: ./baseTypes/BaseTypeName.yaml
   - $ref: ./baseTypes/BaseTypePatronymic.yaml
@@ -21,7 +19,6 @@ allOf:
      metadata:
         $ref: ../../common/metadata.yaml    
     required:
-      - uuid
       - type
       - issued
       - metadata
