@@ -25,6 +25,13 @@ allOf:
       ilsJson:
        type: string
        description: Файл, содержащий весь документ в формате JSON
+      legalForce:
+        type: boolean
+        description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
+      version:
+        type: string
+        example: 'v1'
+        description: Версия документа
       pensionType:
         type: string
         enum:
