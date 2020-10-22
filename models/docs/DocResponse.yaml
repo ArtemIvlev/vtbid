@@ -11,5 +11,7 @@ oneOf:
   - $ref: ./doctypes/FatherHoodCertDoc.yaml
   - $ref: ./doctypes/FidDoc.yaml
   - $ref: ./doctypes/ils_doc.v1.yaml
+  - $ref: ./doctypes/Model2NDFLDoc.yaml
   - $ref: ./doctypes/MarriedCertDoc.yaml
   - $ref: ./doctypes/NameChangeCertDoc.yaml
+  
