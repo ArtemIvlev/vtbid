@@ -1,235 +1,99 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "vtbid-profile-service-facade",
+    "title": "vtbid-profile-service",
     "version": "v0"
   },
   "servers": [
     {
-      "url": "http://localhost:8090",
+      "url": "http://localhost:8088",
       "description": "Generated server url"
     }
   ],
   "paths": {
+    "/version": {
+      "get": {
+        "tags": [
+          "version-controller"
+        ],
+        "operationId": "getCurrentUserProfile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/individual": {
       "get": {
-        "summary": "Получение полной информации о физ лице с контактами и адресами",
-        "description": "Получает модель физ лица, содержащую полную информацию с контактами и адресами.",
-        "operationId": "getByIdPure",
-        "parameters": [
-          {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК физ лица",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
+        "tags": [
+          "individual-controller"
         ],
-        "responses": {
-          "200": {
-            "description": "Полная модель физ лица с контактами и адресами",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/IndividualPureDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/individualShort": {
-      "get": {
-        "summary": "Получение краткой информации о физ лице без вложенных объектов",
-        "description": "Получает модель физ лица, содержащую краткую информацию без вложенных объектов.",
-        "operationId": "getByIdShort",
+        "operationId": "getById",
         "parameters": [
           {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК физ лица",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Краткая модель физ лица без вложенных объектов",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/IndividualShortDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/individualShort/privilege": {
-      "get": {
-        "summary": "Получение краткой информации о физ лице без вложенных объектов с признаком привилегии",
-        "description": "Получает модель физ лица, содержащую краткую информацию без вложенных объектов с запросом на признак привилегий.",
-        "operationId": "getByIdPrivilegeShort",
-        "parameters": [
-          {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК физ лица",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Краткая модель физ лица без вложенных объектов",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/IndividualShortDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/individual/avatar": {
-      "get": {
-        "summary": "Получение список аватаров физ лица",
-        "description": "Получает аватары переданного физ лица",
-        "operationId": "getAvatarsByIndividualUcn",
-        "parameters": [
-          {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК физ лица",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Список аватаров",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AvatarDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/individual/avatar/{avatarId}": {
-      "delete": {
-        "summary": "Удаление аватара физ лица",
-        "description": "Удаляет активный аватар",
-        "operationId": "deleteAvatarByIndividualUcn",
-        "parameters": [
-          {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК физ лица",
+            "name": "id",
+            "in": "query",
+            "description": "The individual user id",
             "required": true,
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "avatarId",
-            "in": "path",
-            "description": "Идентификатор аватара",
-            "required": true,
+            "name": "type",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "default response"
-          }
-        }
-      }
-    },
-    "/individual/avatar/active": {
-      "get": {
-        "summary": "Получение активных аватаров физ лица",
-        "description": "Получает активный и загружаемый аватар",
-        "operationId": "getActiveAvatarsByIndividualUcn",
-        "parameters": [
+          },
           {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК физ лица",
-            "required": true,
+            "name": "fields",
+            "in": "query",
+            "description": "The list of the requested field in the response; Example: fields=uuid,document.uuid",
+            "required": false,
             "schema": {
-              "type": "string"
+              "$ref": "#/components/schemas/RequestedFields"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Список аватаров",
+            "description": "OK",
             "content": {
-              "application/json": {
+              "*/*": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AvatarDto"
-                  }
+                  "$ref": "#/components/schemas/IndividualDto"
                 }
               }
             }
           }
         }
-      }
-    },
-    "/individual/contactMedium/{contactMediumId}": {
-      "patch": {
-        "summary": "Обновление контакта (телефон или email) физ лица",
-        "description": "Обновляет телефон или mail для физ лица",
-        "operationId": "patchContact",
-        "parameters": [
-          {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК физ лица",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "contactMediumId",
-            "in": "path",
-            "description": "Идентификатор контакта",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
+      },
+      "post": {
+        "tags": [
+          "individual-controller"
         ],
+        "operationId": "createIndividual",
         "requestBody": {
-          "description": "Модель контакта с необходимыми изменениями",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ContactMediumDto"
+                "$ref": "#/components/schemas/IndividualDto"
               }
             }
           },
@@ -237,11 +101,11 @@
         },
         "responses": {
           "200": {
-            "description": "Модель контакта",
+            "description": "OK",
             "content": {
-              "application/json": {
+              "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/ContactMediumDto"
+                  "$ref": "#/components/schemas/IndividualDto"
                 }
               }
             }
@@ -249,70 +113,17 @@
         }
       }
     },
-    "/individual/contactMedium": {
-      "get": {
-        "summary": "Получение контактов физ лица",
-        "description": "Получает все контакты переданного физ лица",
-        "operationId": "getContactMediumsByIndividualUcn",
-        "parameters": [
-          {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК физ лица",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
+    "/individual/load": {
+      "post": {
+        "tags": [
+          "individual-controller"
         ],
-        "responses": {
-          "200": {
-            "description": "Список контактов",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ContactMediumDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/individual/address/{addressId}": {
-      "patch": {
-        "summary": "Обновление адреса (регистрации или проживания) физ лица",
-        "description": "Обновляет адрес регистрации или проживания для физ лица",
-        "operationId": "patchAddress",
-        "parameters": [
-          {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК физ лица",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "addressId",
-            "in": "path",
-            "description": "Идентификатор адреса",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "operationId": "loadIndividual",
         "requestBody": {
-          "description": "Модель адреса с необходимыми изменениями",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddressDto"
+                "$ref": "#/components/schemas/ExternalId"
               }
             }
           },
@@ -320,44 +131,11 @@
         },
         "responses": {
           "200": {
-            "description": "Модель адреса",
+            "description": "OK",
             "content": {
-              "application/json": {
+              "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/AddressDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/individual/address": {
-      "get": {
-        "summary": "Получение адресов физ лица",
-        "description": "Получает все адреса переданного физ лица",
-        "operationId": "getAddressByIndividualUcn",
-        "parameters": [
-          {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК физ лица",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Список адресов",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AddressDto"
-                  }
+                  "$ref": "#/components/schemas/IndividualDto"
                 }
               }
             }
@@ -367,23 +145,37 @@
     },
     "/individual/document/{documentId}": {
       "get": {
-        "summary": "Получение документа физ лица по ID",
-        "description": "Получает документ физ лица по ID",
+        "tags": [
+          "document-controller"
+        ],
         "operationId": "getDocumentById",
         "parameters": [
           {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК физ лица",
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
             "required": true,
             "schema": {
               "type": "string"
             }
           },
           {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
             "name": "documentId",
             "in": "path",
-            "description": "Идентификатор документа",
             "required": true,
             "schema": {
               "type": "string"
@@ -392,9 +184,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Модель документа",
+            "description": "OK",
             "content": {
-              "application/json": {
+              "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/DocumentDto"
                 }
@@ -406,14 +198,93 @@
     },
     "/individual/document": {
       "get": {
-        "summary": "Получение документов физ лица",
-        "description": "Получает все документы переданного физ лица",
-        "operationId": "getDocumentByIndividualUcn",
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "getDocumentsByIndividualUcn",
         "parameters": [
           {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК физ лица",
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "filterParams",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DocumentFilterParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DocumentDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/avatar/{avatarId}": {
+      "get": {
+        "tags": [
+          "avatar-controller"
+        ],
+        "operationId": "getAvatarsById",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "avatarId",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -422,14 +293,711 @@
         ],
         "responses": {
           "200": {
-            "description": "Модель документа",
+            "description": "OK",
             "content": {
-              "application/json": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvatarDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "avatar-controller"
+        ],
+        "operationId": "udpateAvatar",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "avatarId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvatarDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvatarDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "avatar-controller"
+        ],
+        "operationId": "deleteAvatar",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "avatarId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/individual/avatar": {
+      "get": {
+        "tags": [
+          "avatar-controller"
+        ],
+        "operationId": "getAvatarsByIndividualUcn",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/FacadeDocumentDto"
+                    "$ref": "#/components/schemas/AvatarDto"
                   }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "avatar-controller"
+        ],
+        "operationId": "createAvatar",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvatarDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvatarDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/avatar/active": {
+      "get": {
+        "tags": [
+          "avatar-controller"
+        ],
+        "operationId": "getAvatarActiveByIndividualUcn",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvatarDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/contactMedium": {
+      "get": {
+        "tags": [
+          "contact-medium-controller"
+        ],
+        "operationId": "getContactMediumsByIndividualUcn",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "filterParams",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ContactMediumFilterParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContactMediumDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "contact-medium-controller"
+        ],
+        "operationId": "createContactMedium",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactMediumDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactMediumDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/contactMedium/{contactMediumId}": {
+      "get": {
+        "tags": [
+          "contact-medium-controller"
+        ],
+        "operationId": "getContactMediumsById",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "contactMediumId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactMediumDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "contact-medium-controller"
+        ],
+        "operationId": "updateContactMedium",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "contactMediumId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactMediumDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactMediumDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/address": {
+      "get": {
+        "tags": [
+          "address-controller"
+        ],
+        "operationId": "getAddressByIndividualId",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "addressFilterParams",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AddressFilterParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AddressDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "address-controller"
+        ],
+        "operationId": "createAddress",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/address/{addressId}": {
+      "get": {
+        "tags": [
+          "address-controller"
+        ],
+        "operationId": "getAddressById",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "addressId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "address-controller"
+        ],
+        "operationId": "updateAddress",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "addressId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressDto"
                 }
               }
             }
@@ -440,6 +1008,25 @@
   },
   "components": {
     "schemas": {
+      "VersionDto": {
+        "type": "object",
+        "properties": {
+          "versionNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "RequestedFields": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "AddressDto": {
         "required": [
           "metadata",
@@ -636,6 +1223,99 @@
           }
         }
       },
+      "AvatarDto": {
+        "required": [
+          "file",
+          "isPublic",
+          "metadata"
+        ],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "isPublic": {
+            "type": "boolean"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AvatarMetadataDto"
+          }
+        }
+      },
+      "AvatarMetadataDto": {
+        "required": [
+          "createdBy",
+          "qaLevel",
+          "validFor"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "LOADING",
+              "ACTIVE",
+              "REMOVED",
+              "ERROR_LOADING",
+              "LOADING_TIMEOUT",
+              "BLOCKED_BY_ANTIVIRUS"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "enum": [
+              "PROFILE_LOADER",
+              "MDM",
+              "ESIA",
+              "AVATAR_UPLOADER"
+            ]
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "qaLevel": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/ValidDateDto"
+          },
+          "proofStatus": {
+            "type": "string",
+            "enum": [
+              "VERIFIED",
+              "UNVERIFIED",
+              "UNKNOWN"
+            ]
+          },
+          "comment": {
+            "type": "string"
+          },
+          "logRef": {
+            "type": "string"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorDto"
+          }
+        }
+      },
       "BaseMetadataDto": {
         "required": [
           "createdBy",
@@ -779,160 +1459,10 @@
           }
         }
       },
-      "EmailDto": {
+      "CrossLinksDto": {
         "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string"
-          }
-        }
-      },
-      "ErrorDto": {
-        "type": "object",
-        "properties": {
-          "errorCode": {
-            "type": "string",
-            "enum": [
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "50",
-              "99"
-            ]
-          },
-          "message": {
-            "type": "string"
-          }
-        }
-      },
-      "IndividualPureDto": {
-        "type": "object",
-        "properties": {
-          "uuid": {
-            "type": "string"
-          },
-          "ucn": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "surname": {
-            "type": "string"
-          },
-          "patronymic": {
-            "type": "string"
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/BaseMetadataDto"
-          },
-          "contactMedium": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContactMediumDto"
-            }
-          },
-          "address": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AddressDto"
-            }
-          },
-          "characteristic": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CharacteristicDto"
-            }
-          }
-        }
-      },
-      "PhoneNumberDto": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string"
-          }
-        }
-      },
-      "ValidDateDto": {
-        "required": [
-          "startDateTime"
-        ],
-        "type": "object",
-        "properties": {
-          "startDateTime": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "endDateTime": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "IndividualShortDto": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": [
-              "CREATED",
-              "LOADED",
-              "ERROR"
-            ]
-          },
-          "uuid": {
-            "type": "string"
-          },
-          "ucn": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "surname": {
-            "type": "string"
-          },
-          "patronymic": {
-            "type": "string"
-          },
-          "characteristic": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CharacteristicDto"
-            }
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/MetadataWithStatusDto"
-          }
-        }
-      },
-      "MetadataWithStatusDto": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": [
-              "CREATED",
-              "LOADED",
-              "ERROR"
-            ]
-          }
-        }
-      },
-      "AvatarDto": {
-        "required": [
-          "file",
-          "isPublic",
-          "metadata"
+          "externalId",
+          "systemNumber"
         ],
         "type": "object",
         "properties": {
@@ -942,82 +1472,22 @@
           "individualUUID": {
             "type": "string"
           },
-          "file": {
-            "type": "string"
-          },
-          "isPublic": {
-            "type": "boolean"
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/AvatarMetadataDto"
-          }
-        }
-      },
-      "AvatarMetadataDto": {
-        "required": [
-          "createdBy",
-          "qaLevel",
-          "validFor"
-        ],
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": [
-              "LOADING",
-              "ACTIVE",
-              "REMOVED",
-              "ERROR_LOADING",
-              "LOADING_TIMEOUT",
-              "BLOCKED_BY_ANTIVIRUS"
-            ]
-          },
-          "createdAt": {
+          "endDate": {
             "type": "string",
             "format": "date-time"
           },
-          "createdBy": {
-            "type": "string",
-            "enum": [
-              "PROFILE_LOADER",
-              "MDM",
-              "ESIA",
-              "AVATAR_UPLOADER"
-            ]
+          "externalId": {
+            "type": "string"
           },
-          "updatedAt": {
+          "partyId": {
+            "type": "string"
+          },
+          "savedAt": {
             "type": "string",
             "format": "date-time"
           },
-          "qaLevel": {
-            "type": "string",
-            "enum": [
-              "0",
-              "1",
-              "2",
-              "3",
-              "4"
-            ]
-          },
-          "validFor": {
-            "$ref": "#/components/schemas/ValidDateDto"
-          },
-          "proofStatus": {
-            "type": "string",
-            "enum": [
-              "VERIFIED",
-              "UNVERIFIED",
-              "UNKNOWN"
-            ]
-          },
-          "comment": {
+          "systemNumber": {
             "type": "string"
-          },
-          "logRef": {
-            "type": "string"
-          },
-          "error": {
-            "$ref": "#/components/schemas/ErrorDto"
           }
         }
       },
@@ -1184,6 +1654,37 @@
             "items": {
               "$ref": "#/components/schemas/ReferenceDto"
             }
+          }
+        }
+      },
+      "EmailDto": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorDto": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "50",
+              "99"
+            ]
+          },
+          "message": {
+            "type": "string"
           }
         }
       },
@@ -1573,6 +2074,135 @@
           }
         }
       },
+      "IndividualDto": {
+        "required": [
+          "metadata"
+        ],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "ucn": {
+            "type": "string"
+          },
+          "mdm_id": {
+            "type": "string"
+          },
+          "individualLifeCycle": {
+            "type": "string",
+            "enum": [
+              "cm.CustomerLifeCycleStatus.Prospect",
+              "cm.CustomerLifeCycleStatus.Client",
+              "cm.CustomerLifeCycleStatus.UnverifiedProspect",
+              "cm.CustomerLifeCycleStatus.NotClient",
+              "cm.CustomerLifeCycleStatus.None",
+              "cm.CustomerLifeCycleStatus.Active",
+              "cm.CustomerLifeCycleStatus.Inactive",
+              "cm.CustomerLifeCycleStatus.Reorganization"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "formattedName": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "F",
+              "M",
+              "U"
+            ]
+          },
+          "placeOfBirth": {
+            "type": "string"
+          },
+          "countryOfBirth": {
+            "type": "string"
+          },
+          "maritalStatus": {
+            "type": "string",
+            "enum": [
+              "cm.MaritalStatus.Single",
+              "cm.MaritalStatus.Divorced",
+              "cm.MaritalStatus.Widow",
+              "cm.MaritalStatus.Married",
+              "cm.MaritalStatus.Remarriage",
+              "cm.MaritalStatus.CivilMarriage",
+              "cm.MaritalStatus.Unknown"
+            ]
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "location": {
+            "type": "string"
+          },
+          "characteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicDto"
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentDto"
+            }
+          },
+          "contactMedium": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactMediumDto"
+            }
+          },
+          "crossLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrossLinksDto"
+            }
+          },
+          "avatar": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvatarDto"
+            }
+          },
+          "address": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressDto"
+            }
+          },
+          "externalReference": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReferenceDto"
+            }
+          }
+        }
+      },
       "MarriedCertDocDto": {
         "required": [
           "actDate",
@@ -1708,6 +2338,17 @@
           },
           "legalForce": {
             "type": "boolean"
+          }
+        }
+      },
+      "PhoneNumberDto": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
           }
         }
       },
@@ -2069,6 +2710,22 @@
           }
         }
       },
+      "ValidDateDto": {
+        "required": [
+          "startDateTime"
+        ],
+        "type": "object",
+        "properties": {
+          "startDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "VehicleDocDto": {
         "required": [
           "registrationPlate"
@@ -2168,16 +2825,35 @@
           }
         }
       },
-      "FacadeDocumentDto": {
+      "ExternalId": {
         "type": "object",
         "properties": {
-          "uuid": {
-            "type": "string"
-          },
-          "individualUUID": {
+          "id": {
             "type": "string"
           },
           "type": {
+            "type": "string",
+            "enum": [
+              "MDM",
+              "UCN",
+              "UUID"
+            ]
+          }
+        }
+      },
+      "DocumentFilterParams": {
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string",
+            "enum": [
+              "PROFILE_LOADER",
+              "MDM",
+              "ESIA",
+              "AVATAR_UPLOADER"
+            ]
+          },
+          "documentType": {
             "type": "string",
             "enum": [
               "RF_PASSPORT",
@@ -2205,26 +2881,36 @@
               "INCOME_REFERENCE"
             ]
           },
-          "snilsDoc": {
-            "$ref": "#/components/schemas/SNILSDocDto"
-          },
-          "rfPassportDoc": {
-            "$ref": "#/components/schemas/RFPassportDocDto"
-          },
-          "rfDrivingLicenseDoc": {
-            "$ref": "#/components/schemas/RFDrivingLicenseDocDto"
-          },
-          "vehicleDoc": {
-            "$ref": "#/components/schemas/VehicleDocDto"
-          },
-          "innDoc": {
-            "$ref": "#/components/schemas/INNDocDto"
-          },
-          "frgnPassportDoc": {
-            "$ref": "#/components/schemas/FrgnPassportDocDto"
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/BaseMetadataDto"
+          "valid": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ContactMediumFilterParams": {
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string",
+            "enum": [
+              "PROFILE_LOADER",
+              "MDM",
+              "ESIA",
+              "AVATAR_UPLOADER"
+            ]
+          }
+        }
+      },
+      "AddressFilterParams": {
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string",
+            "enum": [
+              "PROFILE_LOADER",
+              "MDM",
+              "ESIA",
+              "AVATAR_UPLOADER"
+            ]
           }
         }
       }

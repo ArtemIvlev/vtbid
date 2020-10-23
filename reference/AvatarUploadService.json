@@ -1,11 +1,15 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Avatar upload service",
-    "version": "v0",
-    "description": ""
+    "title": "vtbid-avatar-upload-service",
+    "version": "v0"
   },
-  "servers": [],
+  "servers": [
+    {
+      "url": "http://localhost:8089",
+      "description": "Generated server url"
+    }
+  ],
   "paths": {
     "/individual/avatar/pend/{avatarId}": {
       "get": {
@@ -43,10 +47,7 @@
               }
             }
           }
-        },
-        "tags": [
-          "individual"
-        ]
+        }
       }
     },
     "/individual/avatar/upload": {
@@ -87,10 +88,7 @@
               }
             }
           }
-        },
-        "tags": [
-          "individual"
-        ]
+        }
       },
       "options": {
         "summary": "Доступные опции загрузка аватара",
@@ -107,10 +105,7 @@
               }
             }
           }
-        },
-        "tags": [
-          "individual"
-        ]
+        }
       }
     },
     "/individual/avatar/accessUpload": {
@@ -140,10 +135,7 @@
               }
             }
           }
-        },
-        "tags": [
-          "individual"
-        ]
+        }
       }
     }
   },
@@ -172,10 +164,7 @@
           "metadata": {
             "$ref": "#/components/schemas/AvatarMetadataDto"
           }
-        },
-        "x-tags": [
-          "model"
-        ]
+        }
       },
       "AvatarMetadataDto": {
         "required": [
@@ -205,7 +194,7 @@
             "enum": [
               "PROFILE_LOADER",
               "MDM",
-              "GOSUSLUGI",
+              "ESIA",
               "AVATAR_UPLOADER"
             ]
           },
@@ -226,6 +215,14 @@
           "validFor": {
             "$ref": "#/components/schemas/ValidDateDto"
           },
+          "proofStatus": {
+            "type": "string",
+            "enum": [
+              "VERIFIED",
+              "UNVERIFIED",
+              "UNKNOWN"
+            ]
+          },
           "comment": {
             "type": "string"
           },
@@ -235,10 +232,7 @@
           "error": {
             "$ref": "#/components/schemas/ErrorDto"
           }
-        },
-        "x-tags": [
-          "model"
-        ]
+        }
       },
       "ErrorDto": {
         "type": "object",
@@ -258,10 +252,7 @@
           "message": {
             "type": "string"
           }
-        },
-        "x-tags": [
-          "model"
-        ]
+        }
       },
       "ValidDateDto": {
         "required": [
@@ -277,11 +268,7 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "x-tags": [
-          "model"
-        ],
-        "description": ""
+        }
       },
       "AvatarUploadDto": {
         "required": [
@@ -316,27 +303,24 @@
           "file": {
             "type": "string"
           }
-        },
-        "x-tags": [
-          "model"
-        ]
+        }
       },
       "AvatarProperties": {
         "type": "object",
         "properties": {
-          "inputWidth": {
+          "input-width": {
             "type": "integer",
             "format": "int32"
           },
-          "inputHeight": {
+          "input-height": {
             "type": "integer",
             "format": "int32"
           },
-          "resolutionSelectionWidth": {
+          "resolution-selection-width": {
             "type": "integer",
             "format": "int32"
           },
-          "resolutionSelectionHeight": {
+          "resolution-selection-height": {
             "type": "integer",
             "format": "int32"
           },
@@ -346,14 +330,11 @@
               "type": "string"
             }
           },
-          "inputSizeBytes": {
+          "input-size-bytes": {
             "type": "integer",
             "format": "int64"
           }
-        },
-        "x-tags": [
-          "model"
-        ]
+        }
       }
     }
   }
