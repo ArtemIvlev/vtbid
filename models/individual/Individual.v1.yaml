@@ -50,9 +50,6 @@ allOf:
       formattedName:
         type: string
         description: 'Имеет смысл только для специфики Янонских, Китайских, Корейских имён'
-      location:
-        type: string
-        description: текущее положение пользователя (на имеет смысла?)
       individualLifeCycle:
         type: string
         description: "Тип контакта в Dictionary catalogName =`CustomerLifeCycleStatus` 'Prospect, Client, UnverifiedProspect, NotClient, None, Active, Inactive, Reorganization'"
