@@ -10,7 +10,13 @@ properties:
     description: Unique url identifying the agreement as a resource
   agreementType:
     type: string
-    description: The type of the agreement. For example commercial
+    enum: 
+      - vtb-lite-personal-data-agreement
+      - vtb-dko-agreement
+    description: >
+      * Тип договора согласия
+      * `vtb-lite-personal-data-agreement` - договора согласия для ВТБ Лайт
+      * `vtb-dko-agreement` - ДКО
   description:
     type: string
     description: 'Narrative that explains the agreement and details about the it , such as why the agreement is taking place.'
@@ -60,5 +66,4 @@ properties:
     $ref: ../common/metadata.yaml
 required:
   - agreementType
-  - name
-  - engagedParty
+  - metadata
