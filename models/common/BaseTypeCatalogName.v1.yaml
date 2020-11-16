@@ -4,15 +4,6 @@ description: Наименование справочника. Базовый т�
 properties:
   CatalogName:
     type: string
-    enum: 
-      - AddressType
-      - ContactType
-      - CustomerLifeCycleStatus
-      - MaritalStatus
-      - Region
-      - InfoSystems
-      - ErrorMobile
-      - ErrorWeb
     description: >
       * AddressType - Тип адреса
       * ContactType - Тип контакта (используется для телефонов и e-mail)
@@ -22,6 +13,11 @@ properties:
       * InfoSystems - Информационная система
       * ErrorMobile - ошибки для APP
       * ErrorWeb - ошибки для интенет банка
+  CatalogNameDecription:
+    type: string
+    description: Описание справочника, текстовый коментарий
+required:
+- CatalogName
 discriminator:
   propertyName: type
 
