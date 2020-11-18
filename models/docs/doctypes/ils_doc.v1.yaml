@@ -22,7 +22,7 @@ allOf:
        type: date
        description: Дата заполнения выписки
        example: 22.08.2018
-      ilsJson:
+      linkJson:
        type: string
        description: Файл, содержащий весь документ в формате JSON
       legalForce:
