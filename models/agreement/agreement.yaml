@@ -36,7 +36,7 @@ properties:
   status:
     type: string
     description: 'The current status of the agreement. Typical values are: in process, approved and rejected'
-  version:
+  agreement_version:
     type: string
     description: A string identifying the version of the agreement
   agreementPeriod:
