@@ -41,36 +41,6 @@
         }
       }
     },
-    "/individualShort": {
-      "get": {
-        "summary": "Получение краткой информации о физ лице без вложенных объектов",
-        "description": "Получает модель физ лица, содержащую краткую информацию без вложенных объектов.",
-        "operationId": "getByIdShort",
-        "parameters": [
-          {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК физ лица",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Краткая модель физ лица без вложенных объектов",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/IndividualShortDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/individualShort/privilege": {
       "get": {
         "summary": "Получение краткой информации о физ лице без вложенных объектов с признаком привилегии",
@@ -101,11 +71,11 @@
         }
       }
     },
-    "/individual/avatar": {
+    "/individualShort": {
       "get": {
-        "summary": "Получение список аватаров физ лица",
-        "description": "Получает аватары переданного физ лица",
-        "operationId": "getAvatarsByIndividualUcn",
+        "summary": "Получение краткой информации о физ лице без вложенных объектов",
+        "description": "Получает модель физ лица, содержащую краткую информацию без вложенных объектов.",
+        "operationId": "getByIdShort",
         "parameters": [
           {
             "name": "sub",
@@ -119,14 +89,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Список аватаров",
+            "description": "Краткая модель физ лица без вложенных объектов",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AvatarDto"
-                  }
+                  "$ref": "#/components/schemas/IndividualShortDto"
                 }
               }
             }
@@ -199,6 +166,72 @@
         }
       }
     },
+    "/individual/avatar": {
+      "get": {
+        "summary": "Получение список аватаров физ лица",
+        "description": "Получает аватары переданного физ лица",
+        "operationId": "getAvatarsByIndividualUcn",
+        "parameters": [
+          {
+            "name": "sub",
+            "in": "header",
+            "description": "Идентификатор УНК физ лица",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список аватаров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvatarDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/contactMedium": {
+      "get": {
+        "summary": "Получение контактов физ лица",
+        "description": "Получает все контакты переданного физ лица",
+        "operationId": "getContactMediumsByIndividualUcn",
+        "parameters": [
+          {
+            "name": "sub",
+            "in": "header",
+            "description": "Идентификатор УНК физ лица",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список контактов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContactMediumDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/individual/contactMedium/{contactMediumId}": {
       "patch": {
         "summary": "Обновление контакта (телефон или email) физ лица",
@@ -249,11 +282,11 @@
         }
       }
     },
-    "/individual/contactMedium": {
+    "/individual/address": {
       "get": {
-        "summary": "Получение контактов физ лица",
-        "description": "Получает все контакты переданного физ лица",
-        "operationId": "getContactMediumsByIndividualUcn",
+        "summary": "Получение адресов физ лица",
+        "description": "Получает все адреса переданного физ лица",
+        "operationId": "getAddressByIndividualUcn",
         "parameters": [
           {
             "name": "sub",
@@ -267,13 +300,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Список контактов",
+            "description": "Список адресов",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ContactMediumDto"
+                    "$ref": "#/components/schemas/AddressDto"
                   }
                 }
               }
@@ -332,11 +365,11 @@
         }
       }
     },
-    "/individual/address": {
+    "/individual/document": {
       "get": {
-        "summary": "Получение адресов физ лица",
-        "description": "Получает все адреса переданного физ лица",
-        "operationId": "getAddressByIndividualUcn",
+        "summary": "Получение документов физ лица",
+        "description": "Получает все документы переданного физ лица",
+        "operationId": "getDocumentByIndividualUcn",
         "parameters": [
           {
             "name": "sub",
@@ -350,13 +383,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Список адресов",
+            "description": "Модель документа",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AddressDto"
+                    "$ref": "#/components/schemas/FacadeDocumentDto"
                   }
                 }
               }
@@ -404,11 +437,11 @@
         }
       }
     },
-    "/individual/document": {
+    "/individual/esiaToken": {
       "get": {
-        "summary": "Получение документов физ лица",
-        "description": "Получает все документы переданного физ лица",
-        "operationId": "getDocumentByIndividualUcn",
+        "summary": "Получение информации о флаге согласия ЕСИА",
+        "description": "Получение информации о флаге согласия ЕСИА.",
+        "operationId": "getEsiaToken",
         "parameters": [
           {
             "name": "sub",
@@ -422,14 +455,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Модель документа",
+            "description": "Полная модель физ лица с контактами и адресами",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/FacadeDocumentDto"
-                  }
+                  "$ref": "#/components/schemas/IndividualPureDto"
                 }
               }
             }
@@ -649,13 +679,7 @@
             "format": "date-time"
           },
           "createdBy": {
-            "type": "string",
-            "enum": [
-              "PROFILE_LOADER",
-              "MDM",
-              "ESIA",
-              "AVATAR_UPLOADER"
-            ]
+            "type": "string"
           },
           "updatedAt": {
             "type": "string",
@@ -721,6 +745,25 @@
           }
         }
       },
+      "ClientProduct": {
+        "type": "object",
+        "properties": {
+          "package": {
+            "type": "string"
+          },
+          "packageStartDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "segment": {
+            "type": "string",
+            "enum": [
+              "VIP",
+              "PRIVILEGE"
+            ]
+          }
+        }
+      },
       "ContactMediumDto": {
         "required": [
           "contactType",
@@ -779,6 +822,77 @@
           }
         }
       },
+      "DocumentDto": {
+        "required": [
+          "metadata",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "RF_PASSPORT",
+              "SNILS",
+              "INN",
+              "FID_DOC",
+              "RF_DRIVING_LICENSE",
+              "FRGN_PASS",
+              "RF_BRTH_CERT",
+              "MARRIED_CERT",
+              "DIVORCE_CERT",
+              "NAME_CHANGE_CERT",
+              "FATHERHOOD_CERT",
+              "DEATH_CERT",
+              "VEHICLE_CERT",
+              "ILS_DOC",
+              "INCOME_REFERENCE",
+              "ELECTRONIC_WORKBOOK"
+            ]
+          },
+          "relevance": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "expired",
+              "invalid"
+            ]
+          },
+          "snilsDoc": {
+            "$ref": "#/components/schemas/SNILSDocDto"
+          },
+          "rfPassportDoc": {
+            "$ref": "#/components/schemas/RFPassportDocDto"
+          },
+          "rfDrivingLicenseDoc": {
+            "$ref": "#/components/schemas/RFDrivingLicenseDocDto"
+          },
+          "vehicleDoc": {
+            "$ref": "#/components/schemas/VehicleDocDto"
+          },
+          "innDoc": {
+            "$ref": "#/components/schemas/INNDocDto"
+          },
+          "frgnPassportDoc": {
+            "$ref": "#/components/schemas/FrgnPassportDocDto"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          },
+          "externalReference": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReferenceDto"
+            }
+          }
+        }
+      },
       "EmailDto": {
         "required": [
           "value"
@@ -802,515 +916,12 @@
               "4",
               "5",
               "50",
-              "99"
+              "99",
+              "200"
             ]
           },
           "message": {
             "type": "string"
-          }
-        }
-      },
-      "IndividualPureDto": {
-        "type": "object",
-        "properties": {
-          "uuid": {
-            "type": "string"
-          },
-          "ucn": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "surname": {
-            "type": "string"
-          },
-          "patronymic": {
-            "type": "string"
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/BaseMetadataDto"
-          },
-          "contactMedium": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContactMediumDto"
-            }
-          },
-          "address": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AddressDto"
-            }
-          },
-          "characteristic": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CharacteristicDto"
-            }
-          }
-        }
-      },
-      "PhoneNumberDto": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string"
-          }
-        }
-      },
-      "ValidDateDto": {
-        "required": [
-          "startDateTime"
-        ],
-        "type": "object",
-        "properties": {
-          "startDateTime": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "endDateTime": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "IndividualShortDto": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": [
-              "CREATED",
-              "LOADED",
-              "ERROR"
-            ]
-          },
-          "uuid": {
-            "type": "string"
-          },
-          "ucn": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "surname": {
-            "type": "string"
-          },
-          "patronymic": {
-            "type": "string"
-          },
-          "characteristic": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CharacteristicDto"
-            }
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/MetadataWithStatusDto"
-          }
-        }
-      },
-      "MetadataWithStatusDto": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": [
-              "CREATED",
-              "LOADED",
-              "ERROR"
-            ]
-          }
-        }
-      },
-      "AvatarDto": {
-        "required": [
-          "file",
-          "isPublic",
-          "metadata"
-        ],
-        "type": "object",
-        "properties": {
-          "uuid": {
-            "type": "string"
-          },
-          "individualUUID": {
-            "type": "string"
-          },
-          "file": {
-            "type": "string"
-          },
-          "isPublic": {
-            "type": "boolean"
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/AvatarMetadataDto"
-          }
-        }
-      },
-      "AvatarMetadataDto": {
-        "required": [
-          "createdBy",
-          "qaLevel",
-          "validFor"
-        ],
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": [
-              "LOADING",
-              "ACTIVE",
-              "REMOVED",
-              "ERROR_LOADING",
-              "LOADING_TIMEOUT",
-              "BLOCKED_BY_ANTIVIRUS"
-            ]
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "string",
-            "enum": [
-              "PROFILE_LOADER",
-              "MDM",
-              "ESIA",
-              "AVATAR_UPLOADER"
-            ]
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "qaLevel": {
-            "type": "string",
-            "enum": [
-              "0",
-              "1",
-              "2",
-              "3",
-              "4"
-            ]
-          },
-          "validFor": {
-            "$ref": "#/components/schemas/ValidDateDto"
-          },
-          "proofStatus": {
-            "type": "string",
-            "enum": [
-              "VERIFIED",
-              "UNVERIFIED",
-              "UNKNOWN"
-            ]
-          },
-          "comment": {
-            "type": "string"
-          },
-          "logRef": {
-            "type": "string"
-          },
-          "error": {
-            "$ref": "#/components/schemas/ErrorDto"
-          }
-        }
-      },
-      "DivorceCertDocDto": {
-        "required": [
-          "actDate",
-          "actNo",
-          "issuedBy",
-          "number"
-        ],
-        "type": "object",
-        "properties": {
-          "series": {
-            "type": "string"
-          },
-          "number": {
-            "type": "string"
-          },
-          "issued": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "departmentDoc": {
-            "type": "string"
-          },
-          "receiptDocDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "validateDateDoc": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "actNo": {
-            "type": "string"
-          },
-          "actDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "issuedBy": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "patronymic": {
-            "type": "string"
-          },
-          "surname": {
-            "type": "string"
-          },
-          "gender": {
-            "type": "string",
-            "enum": [
-              "F",
-              "M",
-              "U"
-            ]
-          },
-          "birthDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "relevance": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "legalForce": {
-            "type": "boolean"
-          }
-        }
-      },
-      "DocumentDto": {
-        "required": [
-          "metadata",
-          "type"
-        ],
-        "type": "object",
-        "properties": {
-          "uuid": {
-            "type": "string"
-          },
-          "individualUUID": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "RF_PASSPORT",
-              "SNILS",
-              "INN",
-              "FID_DOC",
-              "RF_DRIVING_LICENSE",
-              "MLTR_ID",
-              "FRGN_PASS",
-              "MDCL_PLCY",
-              "REGISTRATION",
-              "RF_BRTH_CERT",
-              "MARRIED_CERT",
-              "DIVORCE_CERT",
-              "NAME_CHANGE_CERT",
-              "FATHERHOOD_CERT",
-              "DEATH_CERT",
-              "VEHICLE_CERT",
-              "MLTR_CONTRACT_CERT",
-              "LGL_CPCT_CERT",
-              "PRISON_CERT",
-              "ILS_PFR_CERT",
-              "EGRN_CERT",
-              "ILS_DOC",
-              "INCOME_REFERENCE"
-            ]
-          },
-          "snilsDoc": {
-            "$ref": "#/components/schemas/SNILSDocDto"
-          },
-          "rfPassportDoc": {
-            "$ref": "#/components/schemas/RFPassportDocDto"
-          },
-          "rfDrivingLicenseDoc": {
-            "$ref": "#/components/schemas/RFDrivingLicenseDocDto"
-          },
-          "vehicleDoc": {
-            "$ref": "#/components/schemas/VehicleDocDto"
-          },
-          "marriedCertDoc": {
-            "$ref": "#/components/schemas/MarriedCertDocDto"
-          },
-          "innDoc": {
-            "$ref": "#/components/schemas/INNDocDto"
-          },
-          "frgnPassportDoc": {
-            "$ref": "#/components/schemas/FrgnPassportDocDto"
-          },
-          "nameChangeCertDoc": {
-            "$ref": "#/components/schemas/NameChangeCertDocDto"
-          },
-          "divorceCertDoc": {
-            "$ref": "#/components/schemas/DivorceCertDocDto"
-          },
-          "ilsDoc": {
-            "$ref": "#/components/schemas/ILSDocDto"
-          },
-          "fidDoc": {
-            "$ref": "#/components/schemas/FIDDocDto"
-          },
-          "rfBrthCertDoc": {
-            "$ref": "#/components/schemas/RFBrthCertDocDto"
-          },
-          "fatherHoodCertDoc": {
-            "$ref": "#/components/schemas/FatherHoodCertDocDto"
-          },
-          "incomeReferenceDocDto": {
-            "$ref": "#/components/schemas/IncomeReferenceDocDto"
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/BaseMetadataDto"
-          },
-          "externalReference": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ReferenceDto"
-            }
-          }
-        }
-      },
-      "FIDDocDto": {
-        "required": [
-          "issued",
-          "number"
-        ],
-        "type": "object",
-        "properties": {
-          "series": {
-            "type": "string"
-          },
-          "number": {
-            "type": "string"
-          },
-          "issued": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "departmentDoc": {
-            "type": "string"
-          },
-          "receiptDocDate": {
-            "type": "string"
-          },
-          "validateDateDoc": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "relevance": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "patronymic": {
-            "type": "string"
-          },
-          "surname": {
-            "type": "string"
-          },
-          "birthdate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "birthplace": {
-            "type": "string"
-          },
-          "gender": {
-            "type": "string",
-            "enum": [
-              "F",
-              "M",
-              "U"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "legalForce": {
-            "type": "boolean"
-          }
-        }
-      },
-      "FatherHoodCertDocDto": {
-        "required": [
-          "actDate",
-          "actNo",
-          "issuedBy",
-          "number"
-        ],
-        "type": "object",
-        "properties": {
-          "relevance": {
-            "type": "string"
-          },
-          "series": {
-            "type": "string"
-          },
-          "number": {
-            "type": "string"
-          },
-          "issued": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "departmentDoc": {
-            "type": "string"
-          },
-          "receiptDocDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "name": {
-            "type": "string"
-          },
-          "patronymic": {
-            "type": "string"
-          },
-          "surname": {
-            "type": "string"
-          },
-          "gender": {
-            "type": "string",
-            "enum": [
-              "F",
-              "M",
-              "U"
-            ]
-          },
-          "birthDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "issuedBy": {
-            "type": "string"
-          },
-          "actNo": {
-            "type": "string"
-          },
-          "actDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "legalForce": {
-            "type": "boolean"
           }
         }
       },
@@ -1393,14 +1004,6 @@
               "lost"
             ]
           },
-          "relevance": {
-            "type": "string",
-            "enum": [
-              "actual",
-              "expired",
-              "invalid"
-            ]
-          },
           "message": {
             "type": "string"
           },
@@ -1412,66 +1015,678 @@
           }
         }
       },
-      "ILSDocDto": {
-        "required": [
-          "birthDate",
-          "formationDate",
-          "linkIlsJson",
-          "snils"
-        ],
+      "IndividualPureDto": {
         "type": "object",
         "properties": {
-          "snils": {
+          "uuid": {
             "type": "string"
           },
-          "receiptDocDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "validateDateDoc": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "relevance": {
+          "ucn": {
             "type": "string"
           },
           "name": {
             "type": "string"
           },
-          "patronymic": {
-            "type": "string"
-          },
           "surname": {
             "type": "string"
           },
-          "birthDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "departmentDoc": {
+          "patronymic": {
             "type": "string"
           },
-          "formationDate": {
-            "type": "string",
-            "format": "date-time"
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
           },
-          "pensionType": {
-            "type": "string"
+          "contactMedium": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactMediumDto"
+            }
           },
-          "servLenYearsAll": {
-            "type": "string"
+          "address": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressDto"
+            }
           },
-          "servLenMonthsAll": {
-            "type": "string"
+          "characteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicDto"
+            }
           },
-          "servLenDaysAll": {
-            "type": "string"
+          "clientProduct": {
+            "$ref": "#/components/schemas/ClientProduct"
           },
-          "date": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "linkIlsJson": {
+          "documents": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "required": [
+                    "metadata",
+                    "type",
+                    "issued",
+                    "number",
+                    "series"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "uuid": {
+                      "type": "string"
+                    },
+                    "individualUUID": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "FRGN_PASS"
+                    },
+                    "relevance": {
+                      "type": "string",
+                      "enum": [
+                        "actual",
+                        "expired",
+                        "invalid"
+                      ]
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/BaseMetadataDto"
+                    },
+                    "series": {
+                      "type": "string"
+                    },
+                    "number": {
+                      "type": "string"
+                    },
+                    "issued": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "departmentDoc": {
+                      "type": "string"
+                    },
+                    "receiptDocDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "validateDateDoc": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "patronymic": {
+                      "type": "string"
+                    },
+                    "surname": {
+                      "type": "string"
+                    },
+                    "gender": {
+                      "type": "string",
+                      "enum": [
+                        "F",
+                        "M",
+                        "U"
+                      ]
+                    },
+                    "birthdate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "birthplace": {
+                      "type": "string"
+                    },
+                    "issuedBy": {
+                      "type": "string"
+                    },
+                    "latinName": {
+                      "type": "string"
+                    },
+                    "latinSurname": {
+                      "type": "string"
+                    },
+                    "expiryDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "invalidityReason": {
+                      "type": "string",
+                      "enum": [
+                        "expired",
+                        "replaced",
+                        "with_violation",
+                        "in_search",
+                        "destroyes",
+                        "owner_death",
+                        "technical_defect",
+                        "lost"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "legalForce": {
+                      "type": "boolean"
+                    },
+                    "passportStatus": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "metadata",
+                    "type",
+                    "birthdate",
+                    "gender",
+                    "inn",
+                    "name",
+                    "surname"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "uuid": {
+                      "type": "string"
+                    },
+                    "individualUUID": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "INN"
+                    },
+                    "relevance": {
+                      "type": "string",
+                      "enum": [
+                        "actual",
+                        "expired",
+                        "invalid"
+                      ]
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/BaseMetadataDto"
+                    },
+                    "departmentDoc": {
+                      "type": "string"
+                    },
+                    "receiptDocDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "validateDateDoc": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "inn": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "patronymic": {
+                      "type": "string"
+                    },
+                    "surname": {
+                      "type": "string"
+                    },
+                    "gender": {
+                      "type": "string",
+                      "enum": [
+                        "F",
+                        "M",
+                        "U"
+                      ]
+                    },
+                    "birthdate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "issued": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "issued_by": {
+                      "type": "string"
+                    },
+                    "division": {
+                      "type": "string"
+                    },
+                    "birthplace": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "metadata",
+                    "type",
+                    "issuedBy",
+                    "number",
+                    "series"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "uuid": {
+                      "type": "string"
+                    },
+                    "individualUUID": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "RF_DRIVING_LICENSE"
+                    },
+                    "relevance": {
+                      "type": "string",
+                      "enum": [
+                        "actual",
+                        "expired",
+                        "invalid"
+                      ]
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/BaseMetadataDto"
+                    },
+                    "series": {
+                      "type": "string"
+                    },
+                    "number": {
+                      "type": "string"
+                    },
+                    "issued": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "departmentDoc": {
+                      "type": "string"
+                    },
+                    "receiptDocDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "validateDateDoc": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "patronymic": {
+                      "type": "string"
+                    },
+                    "surname": {
+                      "type": "string"
+                    },
+                    "birthdate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "birthplace": {
+                      "type": "string"
+                    },
+                    "countryName": {
+                      "type": "string"
+                    },
+                    "issuedBy": {
+                      "type": "string"
+                    },
+                    "expiryDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "А",
+                          "А1",
+                          "В",
+                          "ВE",
+                          "В1",
+                          "С",
+                          "СE",
+                          "С1",
+                          "С1E",
+                          "D",
+                          "DE",
+                          "D1",
+                          "D1E",
+                          "М",
+                          "Tm",
+                          "Tb"
+                        ]
+                      }
+                    },
+                    "experience": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "legalForce": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "metadata",
+                    "type",
+                    "issued",
+                    "number",
+                    "series"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "uuid": {
+                      "type": "string"
+                    },
+                    "individualUUID": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "RF_PASSPORT"
+                    },
+                    "relevance": {
+                      "type": "string",
+                      "enum": [
+                        "actual",
+                        "expired",
+                        "invalid"
+                      ]
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/BaseMetadataDto"
+                    },
+                    "externalReference": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ReferenceDto"
+                      }
+                    },
+                    "series": {
+                      "type": "string"
+                    },
+                    "number": {
+                      "type": "string"
+                    },
+                    "issued": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "departmentDoc": {
+                      "type": "string"
+                    },
+                    "receiptDocDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "validateDateDoc": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "patronymic": {
+                      "type": "string"
+                    },
+                    "surname": {
+                      "type": "string"
+                    },
+                    "gender": {
+                      "type": "string",
+                      "enum": [
+                        "F",
+                        "M",
+                        "U"
+                      ]
+                    },
+                    "birthdate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "birthplace": {
+                      "type": "string"
+                    },
+                    "issuedBy": {
+                      "type": "string"
+                    },
+                    "division": {
+                      "type": "string"
+                    },
+                    "invalidityReason": {
+                      "type": "string",
+                      "enum": [
+                        "expired",
+                        "replaced",
+                        "with_violation",
+                        "in_search",
+                        "destroyes",
+                        "owner_death",
+                        "technical_defect",
+                        "lost"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "legalForce": {
+                      "type": "boolean"
+                    },
+                    "passportStatus": {
+                      "type": "string"
+                    },
+                    "registration": {
+                      "$ref": "#/components/schemas/AddressDto"
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "metadata",
+                    "type",
+                    "birthdate",
+                    "gender",
+                    "name",
+                    "snils",
+                    "surname"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "uuid": {
+                      "type": "string"
+                    },
+                    "individualUUID": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "SNILS"
+                    },
+                    "relevance": {
+                      "type": "string",
+                      "enum": [
+                        "actual",
+                        "expired",
+                        "invalid"
+                      ]
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/BaseMetadataDto"
+                    },
+                    "externalReference": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ReferenceDto"
+                      }
+                    },
+                    "departmentDoc": {
+                      "type": "string"
+                    },
+                    "receiptDocDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "validateDateDoc": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "snils": {
+                      "type": "string"
+                    },
+                    "issued": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "patronymic": {
+                      "type": "string"
+                    },
+                    "surname": {
+                      "type": "string"
+                    },
+                    "gender": {
+                      "type": "string",
+                      "enum": [
+                        "F",
+                        "M",
+                        "U"
+                      ]
+                    },
+                    "birthdate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "birthplace": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "metadata",
+                    "type",
+                    "number",
+                    "registrationPlate",
+                    "series"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "uuid": {
+                      "type": "string"
+                    },
+                    "individualUUID": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "VEHICLE_CERT"
+                    },
+                    "relevance": {
+                      "type": "string",
+                      "enum": [
+                        "actual",
+                        "expired",
+                        "invalid"
+                      ]
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/BaseMetadataDto"
+                    },
+                    "series": {
+                      "type": "string"
+                    },
+                    "number": {
+                      "type": "string"
+                    },
+                    "issued": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "departmentDoc": {
+                      "type": "string"
+                    },
+                    "receiptDocDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "validateDateDoc": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "carName": {
+                      "type": "string"
+                    },
+                    "registrationPlate": {
+                      "type": "string"
+                    },
+                    "vin": {
+                      "type": "string"
+                    },
+                    "brand": {
+                      "type": "string"
+                    },
+                    "model": {
+                      "type": "string"
+                    },
+                    "vehicleCategory": {
+                      "type": "string"
+                    },
+                    "productionYear": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "engineNumber": {
+                      "type": "string"
+                    },
+                    "bodyNumber": {
+                      "type": "string"
+                    },
+                    "chassisNumber": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "legalForce": {
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "patronymic": {
+                      "type": "string"
+                    },
+                    "surname": {
+                      "type": "string"
+                    },
+                    "birthDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "birthPlace": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "PhoneNumberDto": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
             "type": "string"
           }
         }
@@ -1533,263 +1748,6 @@
           },
           "birthplace": {
             "type": "string"
-          }
-        }
-      },
-      "IncomeReferenceDocDto": {
-        "required": [
-          "linkJson"
-        ],
-        "type": "object",
-        "properties": {
-          "relevance": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "legalForce": {
-            "type": "boolean"
-          },
-          "departmentDoc": {
-            "type": "string"
-          },
-          "receiptDocDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "validateDateDoc": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "year": {
-            "type": "string"
-          },
-          "version": {
-            "type": "string"
-          },
-          "linkJson": {
-            "type": "string"
-          }
-        }
-      },
-      "MarriedCertDocDto": {
-        "required": [
-          "actDate",
-          "actNo",
-          "issuedBy",
-          "number"
-        ],
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string"
-          },
-          "series": {
-            "type": "string"
-          },
-          "number": {
-            "type": "string"
-          },
-          "issued": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "departmentDoc": {
-            "type": "string"
-          },
-          "receiptDocDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "actNo": {
-            "type": "string"
-          },
-          "actDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "issuedBy": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "patronymic": {
-            "type": "string"
-          },
-          "surname": {
-            "type": "string"
-          },
-          "gender": {
-            "type": "string",
-            "enum": [
-              "F",
-              "M",
-              "U"
-            ]
-          },
-          "birthDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "birthPlace": {
-            "type": "string"
-          },
-          "relevance": {
-            "type": "string"
-          },
-          "legalForce": {
-            "type": "boolean"
-          }
-        }
-      },
-      "NameChangeCertDocDto": {
-        "required": [
-          "actNo",
-          "issuedBy",
-          "number"
-        ],
-        "type": "object",
-        "properties": {
-          "series": {
-            "type": "string"
-          },
-          "number": {
-            "type": "string"
-          },
-          "issued": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "departmentDoc": {
-            "type": "string"
-          },
-          "receiptDocDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "name": {
-            "type": "string"
-          },
-          "patronymic": {
-            "type": "string"
-          },
-          "surname": {
-            "type": "string"
-          },
-          "gender": {
-            "type": "string",
-            "enum": [
-              "F",
-              "M",
-              "U"
-            ]
-          },
-          "birthDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "issuedBy": {
-            "type": "string"
-          },
-          "actNo": {
-            "type": "string"
-          },
-          "actDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "relevance": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "legalForce": {
-            "type": "boolean"
-          }
-        }
-      },
-      "RFBrthCertDocDto": {
-        "required": [
-          "issued",
-          "issuedBy",
-          "number"
-        ],
-        "type": "object",
-        "properties": {
-          "relevance": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "series": {
-            "type": "string"
-          },
-          "number": {
-            "type": "string"
-          },
-          "issued": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "departmentDoc": {
-            "type": "string"
-          },
-          "receiptDocDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "validateDateDoc": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "name": {
-            "type": "string"
-          },
-          "patronymic": {
-            "type": "string"
-          },
-          "surname": {
-            "type": "string"
-          },
-          "gender": {
-            "type": "string",
-            "enum": [
-              "F",
-              "M",
-              "U"
-            ]
-          },
-          "birthDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "birthPlace": {
-            "type": "string"
-          },
-          "typeBrthCert": {
-            "type": "string",
-            "enum": [
-              "RF_BRTH_CERT",
-              "OLD_BRTH_CERT",
-              "FID_BRTH_CERT"
-            ]
-          },
-          "issuedBy": {
-            "type": "string"
-          },
-          "actNo": {
-            "type": "string"
-          },
-          "actDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "legalForce": {
-            "type": "boolean"
           }
         }
       },
@@ -1875,9 +1833,6 @@
           "experience": {
             "type": "string"
           },
-          "relevance": {
-            "type": "string"
-          },
           "message": {
             "type": "string"
           },
@@ -1956,14 +1911,6 @@
               "owner_death",
               "technical_defect",
               "lost"
-            ]
-          },
-          "relevance": {
-            "type": "string",
-            "enum": [
-              "actual",
-              "expired",
-              "invalid"
             ]
           },
           "message": {
@@ -2069,9 +2016,27 @@
           }
         }
       },
+      "ValidDateDto": {
+        "required": [
+          "startDateTime"
+        ],
+        "type": "object",
+        "properties": {
+          "startDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "VehicleDocDto": {
         "required": [
-          "registrationPlate"
+          "number",
+          "registrationPlate",
+          "series"
         ],
         "type": "object",
         "properties": {
@@ -2127,12 +2092,6 @@
           "chassisNumber": {
             "type": "string"
           },
-          "registration": {
-            "$ref": "#/components/schemas/VehicleRegistrationDto"
-          },
-          "relevance": {
-            "type": "string"
-          },
           "message": {
             "type": "string"
           },
@@ -2157,14 +2116,135 @@
           }
         }
       },
-      "VehicleRegistrationDto": {
+      "IndividualShortDto": {
         "type": "object",
         "properties": {
-          "registrationDocSeries": {
+          "uuid": {
             "type": "string"
           },
-          "registrationDocNumber": {
+          "ucn": {
             "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "characteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicDto"
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetadataWithStatusDto"
+          },
+          "clientProduct": {
+            "$ref": "#/components/schemas/ClientProduct"
+          }
+        }
+      },
+      "MetadataWithStatusDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "LOADED",
+              "ERROR"
+            ]
+          }
+        }
+      },
+      "AvatarDto": {
+        "required": [
+          "file",
+          "isPublic",
+          "metadata"
+        ],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "isPublic": {
+            "type": "boolean"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AvatarMetadataDto"
+          }
+        }
+      },
+      "AvatarMetadataDto": {
+        "required": [
+          "createdBy",
+          "qaLevel",
+          "validFor"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "LOADING",
+              "ACTIVE",
+              "REMOVED",
+              "ERROR_LOADING",
+              "LOADING_TIMEOUT",
+              "BLOCKED_BY_ANTIVIRUS"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "qaLevel": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/ValidDateDto"
+          },
+          "proofStatus": {
+            "type": "string",
+            "enum": [
+              "VERIFIED",
+              "UNVERIFIED",
+              "UNKNOWN"
+            ]
+          },
+          "comment": {
+            "type": "string"
+          },
+          "logRef": {
+            "type": "string"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorDto"
           }
         }
       },
@@ -2185,10 +2265,7 @@
               "INN",
               "FID_DOC",
               "RF_DRIVING_LICENSE",
-              "MLTR_ID",
               "FRGN_PASS",
-              "MDCL_PLCY",
-              "REGISTRATION",
               "RF_BRTH_CERT",
               "MARRIED_CERT",
               "DIVORCE_CERT",
@@ -2196,13 +2273,9 @@
               "FATHERHOOD_CERT",
               "DEATH_CERT",
               "VEHICLE_CERT",
-              "MLTR_CONTRACT_CERT",
-              "LGL_CPCT_CERT",
-              "PRISON_CERT",
-              "ILS_PFR_CERT",
-              "EGRN_CERT",
               "ILS_DOC",
-              "INCOME_REFERENCE"
+              "INCOME_REFERENCE",
+              "ELECTRONIC_WORKBOOK"
             ]
           },
           "snilsDoc": {
