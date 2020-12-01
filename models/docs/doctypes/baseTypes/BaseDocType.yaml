@@ -32,6 +32,7 @@ properties:
       - ILS_PFR
       - INCOME_REFERENCE
       - ELECTRONIC_WORKBOOK
+      - PENSION_REFERENCE
     description: >
       * `INN` - ИНН
 
@@ -86,6 +87,7 @@ properties:
       * `INCOME_REFERENCE` - Cправки о доходах и суммах налога физического лица (форма 2-НДФЛ)
 
       * `ELECTRONIC_WORKBOOK` - Сведения о трудовой деятельности (выписка из электронной трудовой книжки)
+      * `PENSION_REFERENCE` - Справка о назначенных пенсиях и социальных выплатах на дату
       
 
 discriminator:

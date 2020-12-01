@@ -1,0 +1,22 @@
+title: PensionReference
+description: Справка о назначенных пенсиях и социальных выплатах на дату (TYPE 'PENSION_REFERENCE')
+allOf:
+  - $ref: ./baseTypes/BaseDocType.yaml
+  - $ref: ./baseTypes/BaseGetDateDoc.yaml
+  - $ref: ./baseTypes/BaseDepartmentDoc.yaml
+  - $ref: ./baseTypes/BaseValidateDateDoc.yaml
+  - type: object
+    properties:
+      linkJson:
+       type: string
+       description: Файл, содержащий весь документ в формате JSON
+      legalForce:
+        type: boolean
+        description: 'Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)'
+      metadata:
+        $ref: ../../common/metadata.yaml
+    required:
+      - type
+      - metadata
+x-tags:
+  - ready to implement
