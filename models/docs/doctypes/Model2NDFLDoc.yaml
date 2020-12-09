@@ -1,4 +1,4 @@
-title: Model2NDFLDoc
+title: 2NDFLDoc
 description: Cправка о доходах и суммах налога физического лица (форма 2-НДФЛ)
 allOf:
   - $ref: ./baseTypes/BaseDocType.yaml
@@ -11,7 +11,7 @@ allOf:
         type: string
         example: 'Признан недействительным после утери'
         description: Дополнительная информация о сведениях. Например тут может быть информация поясняющая причину невалидности документа.
-      version:
+      DocVersion:
         type: string
         example: 'v1'
         description: Версия документа
