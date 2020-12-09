@@ -6,50 +6,11 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8089",
+      "url": "http://localhost:8083",
       "description": "Generated server url"
     }
   ],
   "paths": {
-    "/individual/avatar/pend/{avatarId}": {
-      "get": {
-        "summary": "Пендинг / получение аватара по ИД",
-        "description": "загружает / получает аватар",
-        "operationId": "pendAvatar",
-        "parameters": [
-          {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК физ лица",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "avatarId",
-            "in": "path",
-            "description": "Идентификатор аватара",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Аватар",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AvatarDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/individual/avatar/upload": {
       "post": {
         "summary": "Загрузка аватара",
@@ -108,6 +69,36 @@
         }
       }
     },
+    "/individual/avatar/auth": {
+      "get": {
+        "summary": "Получает токен для загрузки аватара в сервис чатбота",
+        "description": "token, если загрузка возможна",
+        "operationId": "getUploadToken",
+        "parameters": [
+          {
+            "name": "sub",
+            "in": "header",
+            "description": "Идентификатор УНК физ лица",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/individual/avatar/accessUpload": {
       "get": {
         "summary": "Определяет возможность загрузки аватара",
@@ -130,7 +121,46 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "boolean"
+                  "$ref": "#/components/schemas/AccessUpload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/avatar/pend/{avatarId}": {
+      "get": {
+        "summary": "Пендинг / получение аватара по ИД",
+        "description": "загружает / получает аватар",
+        "operationId": "pendAvatar",
+        "parameters": [
+          {
+            "name": "sub",
+            "in": "header",
+            "description": "Идентификатор УНК физ лица",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "avatarId",
+            "in": "path",
+            "description": "Идентификатор аватара",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Аватар",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvatarDto"
                 }
               }
             }
@@ -141,6 +171,53 @@
   },
   "components": {
     "schemas": {
+      "AvatarProperties": {
+        "type": "object",
+        "properties": {
+          "input-width": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "input-height": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resolution-selection-width": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resolution-selection-height": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "formats": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "input-size-bytes": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "Token": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "messengerType": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "AvatarDto": {
         "required": [
           "file",
@@ -190,13 +267,7 @@
             "format": "date-time"
           },
           "createdBy": {
-            "type": "string",
-            "enum": [
-              "PROFILE_LOADER",
-              "MDM",
-              "ESIA",
-              "AVATAR_UPLOADER"
-            ]
+            "type": "string"
           },
           "updatedAt": {
             "type": "string",
@@ -246,7 +317,13 @@
               "4",
               "5",
               "50",
-              "99"
+              "99",
+              "INCONSISTENCY_ERROR_CODE",
+              "GOVERNMENT_ERROR_CALLBACK_CODE",
+              "GOVERNMENT_ERROR_CALLBACK_PARAMS_CODE",
+              "GOVERNMENT_ERROR_ID_EMPTY_CODE",
+              "GOVERNMENT_ERROR_FORCE_UPDATE_CODE",
+              "GOVERNMENT_ERROR_STATE_NOT_FOUND"
             ]
           },
           "message": {
@@ -305,34 +382,11 @@
           }
         }
       },
-      "AvatarProperties": {
+      "AccessUpload": {
         "type": "object",
         "properties": {
-          "input-width": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "input-height": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "resolution-selection-width": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "resolution-selection-height": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "formats": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "input-size-bytes": {
-            "type": "integer",
-            "format": "int64"
+          "isAccess": {
+            "type": "boolean"
           }
         }
       }
