@@ -484,25 +484,7 @@
             "type": "string"
           },
           "type": {
-            "type": "string",
-            "enum": [
-              "cm.AddressType.NotSpecified",
-              "cm.AddressType.PermanentRegistration",
-              "cm.AddressType.TemporaryRegistration",
-              "cm.AddressType.Actual",
-              "cm.AddressType.RegisteredAddressEmployer",
-              "cm.AddressType.Legal",
-              "cm.AddressType.LegalOrg",
-              "cm.AddressType.Correspondence",
-              "cm.AddressType.Old",
-              "cm.AddressType.LatinFont",
-              "cm.AddressType.FactualWorking",
-              "cm.AddressType.Mail",
-              "cm.AddressType.OccupiedArea",
-              "cm.AddressType.CreateApplicationOffice",
-              "cm.AddressType.IssueOffice",
-              "cm.AddressType.NonResident"
-            ]
+            "$ref": "#/components/schemas/AddressType"
           },
           "notFormAddrName": {
             "type": "string"
@@ -517,95 +499,7 @@
             "type": "string"
           },
           "state": {
-            "type": "string",
-            "enum": [
-              "cm.region.Altay",
-              "cm.region.Krasnodar",
-              "cm.region.Krasnoyarsk",
-              "cm.region.Primor",
-              "cm.region.Stavropol",
-              "cm.region.Khabarovsk",
-              "cm.region.Amur",
-              "cm.region.Arkhangelsk",
-              "cm.region.Astrakhan",
-              "cm.region.Belgorod",
-              "cm.region.Bryansk",
-              "cm.region.Vladimir",
-              "cm.region.Volgograd",
-              "cm.region.Vologda",
-              "cm.region.Voronezh",
-              "cm.region.NizhnyNovgorod",
-              "cm.region.Ivanovo",
-              "cm.region.Irkutsk",
-              "cm.region.Ingushetia",
-              "cm.region.Kaliningrad",
-              "cm.region.Tver",
-              "cm.region.Kaluga",
-              "cm.region.Kamchatka",
-              "cm.region.Kemerovo",
-              "cm.region.Kirov",
-              "cm.region.Kostroma",
-              "cm.region.Samara",
-              "cm.region.Kurgan",
-              "cm.region.Kursk",
-              "cm.region.StPetersburg",
-              "cm.region.LeningradRegion",
-              "cm.region.Lipetsk",
-              "cm.region.Magadan",
-              "cm.region.Moscow",
-              "cm.region.MoscowRegion",
-              "cm.region.Murmansk",
-              "cm.region.Novgorod",
-              "cm.region.Novosibirsk",
-              "cm.region.Omsk",
-              "cm.region.Orenburg",
-              "cm.region.Orel",
-              "cm.region.Penza",
-              "cm.region.Perm",
-              "cm.region.Pskov",
-              "cm.region.Rostov",
-              "cm.region.Ryazan",
-              "cm.region.Saratov",
-              "cm.region.Sakhalin",
-              "cm.region.Sverdlovsk",
-              "cm.region.Smolensk",
-              "cm.region.Tambov",
-              "cm.region.Tomsk",
-              "cm.region.Tula",
-              "cm.region.Tyumen",
-              "cm.region.Ulyanovsk",
-              "cm.region.Chelyabinsk",
-              "cm.region.Trans-Baikal",
-              "cm.region.ChukotkaAutonomous",
-              "cm.region.Yaroslavl",
-              "cm.region.Adygea",
-              "cm.region.Bashkortostan",
-              "cm.region.Buryatia",
-              "cm.region.Dagestan",
-              "cm.region.KabardinoBalkar",
-              "cm.region.Altai",
-              "cm.region.Kalmykia",
-              "cm.region.Karelia",
-              "cm.region.Komi",
-              "cm.region.MariEl",
-              "cm.region.Mordovia",
-              "cm.region.NorthOssetiaAlania",
-              "cm.region.KarachayCherkessia",
-              "cm.region.Tatarstan",
-              "cm.region.Tyva",
-              "cm.region.Udmurtia",
-              "cm.region.Khakassia",
-              "cm.region.Chechen",
-              "cm.region.Chuvashia",
-              "cm.region.Yakutia",
-              "cm.region.JewishAutonomous",
-              "cm.region.KhantyMansi",
-              "cm.region.YamalNenets",
-              "cm.region.Crimea",
-              "cm.region.Sevastopol",
-              "cm.region.NotSpecified",
-              "cm.region.Nenets"
-            ]
+            "$ref": "#/components/schemas/Region"
           },
           "province": {
             "type": "string"
@@ -666,6 +560,48 @@
           }
         }
       },
+      "AddressType": {
+        "required": [
+          "active",
+          "catalogName",
+          "code",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "cm.AddressType.NotSpecified",
+              "cm.AddressType.PermanentRegistration",
+              "cm.AddressType.TemporaryRegistration",
+              "cm.AddressType.Actual",
+              "cm.AddressType.RegisteredAddressEmployer",
+              "cm.AddressType.Legal",
+              "cm.AddressType.LegalOrg",
+              "cm.AddressType.Correspondence",
+              "cm.AddressType.Old",
+              "cm.AddressType.LatinFont",
+              "cm.AddressType.FactualWorking",
+              "cm.AddressType.Mail",
+              "cm.AddressType.OccupiedArea",
+              "cm.AddressType.CreateApplicationOffice",
+              "cm.AddressType.IssueOffice",
+              "cm.AddressType.NonResident"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "catalogName": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          }
+        },
+        "description": "Load from DictionaryDto"
+      },
       "BaseMetadataDto": {
         "required": [
           "createdBy",
@@ -679,7 +615,23 @@
             "format": "date-time"
           },
           "createdBy": {
-            "type": "string"
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "DefaultMetadataCreatedBy",
+                "enum": [
+                  "PROFILE_LOADER",
+                  "MDM",
+                  "ESIA",
+                  "AVATAR_UPLOADER",
+                  "AC"
+                ]
+              },
+              {
+                "type": "string",
+                "description": "any-custom-value"
+              }
+            ]
           },
           "updatedAt": {
             "type": "string",
@@ -779,6 +731,36 @@
             "type": "string"
           },
           "contactType": {
+            "$ref": "#/components/schemas/ContactType"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          },
+          "objectType": {
+            "type": "string",
+            "enum": [
+              "phone",
+              "email"
+            ]
+          },
+          "phoneNumber": {
+            "$ref": "#/components/schemas/PhoneNumberDto"
+          },
+          "email": {
+            "$ref": "#/components/schemas/EmailDto"
+          }
+        }
+      },
+      "ContactType": {
+        "required": [
+          "active",
+          "catalogName",
+          "code",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
             "type": "string",
             "enum": [
               "cm.PhoneType.Home",
@@ -804,21 +786,113 @@
               ""
             ]
           },
-          "metadata": {
-            "$ref": "#/components/schemas/BaseMetadataDto"
+          "description": {
+            "type": "string"
           },
-          "objectType": {
+          "catalogName": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          }
+        },
+        "description": "Load from DictionaryDto"
+      },
+      "CustomerLifeCycleStatus": {
+        "required": [
+          "active",
+          "catalogName",
+          "code",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
             "type": "string",
             "enum": [
-              "phone",
-              "email"
+              "cm.CustomerLifeCycleStatus.Prospect",
+              "cm.CustomerLifeCycleStatus.Client",
+              "cm.CustomerLifeCycleStatus.UnverifiedProspect",
+              "cm.CustomerLifeCycleStatus.NotClient",
+              "cm.CustomerLifeCycleStatus.None",
+              "cm.CustomerLifeCycleStatus.Active",
+              "cm.CustomerLifeCycleStatus.Inactive",
+              "cm.CustomerLifeCycleStatus.Reorganization"
             ]
           },
-          "phoneNumber": {
-            "$ref": "#/components/schemas/PhoneNumberDto"
+          "description": {
+            "type": "string"
           },
-          "email": {
-            "$ref": "#/components/schemas/EmailDto"
+          "catalogName": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          }
+        },
+        "description": "Load from DictionaryDto"
+      },
+      "DivorceCertDocDto": {
+        "required": [
+          "actDate",
+          "actNo",
+          "issuedBy",
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actNo": {
+            "type": "string"
+          },
+          "actDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderDto"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
           }
         }
       },
@@ -876,11 +950,38 @@
           "vehicleDoc": {
             "$ref": "#/components/schemas/VehicleDocDto"
           },
+          "marriedCertDoc": {
+            "$ref": "#/components/schemas/MarriedCertDocDto"
+          },
           "innDoc": {
             "$ref": "#/components/schemas/INNDocDto"
           },
           "frgnPassportDoc": {
             "$ref": "#/components/schemas/FrgnPassportDocDto"
+          },
+          "nameChangeCertDoc": {
+            "$ref": "#/components/schemas/NameChangeCertDocDto"
+          },
+          "divorceCertDoc": {
+            "$ref": "#/components/schemas/DivorceCertDocDto"
+          },
+          "ilsDoc": {
+            "$ref": "#/components/schemas/ILSDocDto"
+          },
+          "fidDoc": {
+            "$ref": "#/components/schemas/FIDDocDto"
+          },
+          "rfBrthCertDoc": {
+            "$ref": "#/components/schemas/RFBrthCertDocDto"
+          },
+          "fatherHoodCertDoc": {
+            "$ref": "#/components/schemas/FatherHoodCertDocDto"
+          },
+          "incomeReferenceDoc": {
+            "$ref": "#/components/schemas/IncomeReferenceDocDto"
+          },
+          "electronicWorkBookDoc": {
+            "$ref": "#/components/schemas/ElectronicWorkBookDocDto"
           },
           "metadata": {
             "$ref": "#/components/schemas/BaseMetadataDto"
@@ -890,6 +991,38 @@
             "items": {
               "$ref": "#/components/schemas/ReferenceDto"
             }
+          }
+        }
+      },
+      "ElectronicWorkBookDocDto": {
+        "required": [
+          "linkJson"
+        ],
+        "type": "object",
+        "properties": {
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "message": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "linkJson": {
+            "type": "string",
+            "description": "any-custom-value"
+          },
+          "legalForce": {
+            "type": "boolean"
           }
         }
       },
@@ -917,11 +1050,128 @@
               "5",
               "50",
               "99",
-              "200"
+              "INCONSISTENCY_ERROR_CODE",
+              "GOVERNMENT_ERROR_CALLBACK_CODE",
+              "GOVERNMENT_ERROR_CALLBACK_PARAMS_CODE",
+              "GOVERNMENT_ERROR_ID_EMPTY_CODE",
+              "GOVERNMENT_ERROR_FORCE_UPDATE_CODE",
+              "GOVERNMENT_ERROR_STATE_NOT_FOUND"
             ]
           },
           "message": {
             "type": "string"
+          }
+        }
+      },
+      "FIDDocDto": {
+        "required": [
+          "issued",
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "birthdate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "birthplace": {
+            "type": "string"
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderDto"
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          }
+        }
+      },
+      "FatherHoodCertDocDto": {
+        "required": [
+          "actDate",
+          "actNo",
+          "issuedBy",
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderDto"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "actNo": {
+            "type": "string"
+          },
+          "actDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "legalForce": {
+            "type": "boolean"
           }
         }
       },
@@ -964,12 +1214,7 @@
             "type": "string"
           },
           "gender": {
-            "type": "string",
-            "enum": [
-              "F",
-              "M",
-              "U"
-            ]
+            "$ref": "#/components/schemas/GenderDto"
           },
           "birthdate": {
             "type": "string",
@@ -1015,6 +1260,193 @@
           }
         }
       },
+      "GenderDto": {
+        "required": [
+          "active",
+          "catalogName",
+          "code",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "F",
+              "M",
+              "U"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "catalogName": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          }
+        },
+        "description": "Load from DictionaryDto"
+      },
+      "ILSDocDto": {
+        "required": [
+          "birthDate",
+          "formationDate",
+          "linkJson",
+          "snils"
+        ],
+        "type": "object",
+        "properties": {
+          "snils": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "formationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "pensionType": {
+            "type": "string"
+          },
+          "servLenYearsAll": {
+            "type": "string"
+          },
+          "servLenMonthsAll": {
+            "type": "string"
+          },
+          "servLenDaysAll": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          },
+          "linkJson": {
+            "type": "string",
+            "description": "any-custom-value"
+          }
+        }
+      },
+      "INNDocDto": {
+        "required": [
+          "birthdate",
+          "gender",
+          "inn",
+          "name",
+          "surname"
+        ],
+        "type": "object",
+        "properties": {
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "inn": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderDto"
+          },
+          "birthdate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "issued_by": {
+            "type": "string"
+          },
+          "division": {
+            "type": "string"
+          },
+          "birthplace": {
+            "type": "string"
+          }
+        }
+      },
+      "IncomeReferenceDocDto": {
+        "required": [
+          "linkJson"
+        ],
+        "type": "object",
+        "properties": {
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "year": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "linkJson": {
+            "type": "string",
+            "description": "any-custom-value"
+          },
+          "legalForce": {
+            "type": "boolean"
+          }
+        }
+      },
       "IndividualPureDto": {
         "type": "object",
         "properties": {
@@ -1033,8 +1465,18 @@
           "patronymic": {
             "type": "string"
           },
+          "gender": {
+            "$ref": "#/components/schemas/GenderDto"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
           "metadata": {
             "$ref": "#/components/schemas/BaseMetadataDto"
+          },
+          "individualLifeCycle": {
+            "$ref": "#/components/schemas/CustomerLifeCycleStatus"
           },
           "contactMedium": {
             "type": "array",
@@ -1064,10 +1506,7 @@
                 {
                   "required": [
                     "metadata",
-                    "type",
-                    "issued",
-                    "number",
-                    "series"
+                    "type"
                   ],
                   "type": "object",
                   "properties": {
@@ -1079,18 +1518,15 @@
                     },
                     "type": {
                       "type": "string",
-                      "example": "FRGN_PASS"
+                      "example": "RF_PASSPORT"
                     },
                     "relevance": {
                       "type": "string",
                       "enum": [
-                        "actual",
-                        "expired",
-                        "invalid"
+                        "ACTUAL",
+                        "EXPIRED",
+                        "INVALID"
                       ]
-                    },
-                    "metadata": {
-                      "$ref": "#/components/schemas/BaseMetadataDto"
                     },
                     "series": {
                       "type": "string"
@@ -1123,44 +1559,25 @@
                       "type": "string"
                     },
                     "gender": {
-                      "type": "string",
-                      "enum": [
-                        "F",
-                        "M",
-                        "U"
-                      ]
-                    },
-                    "birthdate": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "birthplace": {
-                      "type": "string"
+                      "$ref": "#/components/schemas/GenderDto"
                     },
                     "issuedBy": {
                       "type": "string"
                     },
-                    "latinName": {
+                    "division": {
                       "type": "string"
-                    },
-                    "latinSurname": {
-                      "type": "string"
-                    },
-                    "expiryDate": {
-                      "type": "string",
-                      "format": "date-time"
                     },
                     "invalidityReason": {
                       "type": "string",
                       "enum": [
-                        "expired",
-                        "replaced",
-                        "with_violation",
-                        "in_search",
-                        "destroyes",
-                        "owner_death",
-                        "technical_defect",
-                        "lost"
+                        "EXPIRED",
+                        "REPLACED",
+                        "WITH_VIOLATION",
+                        "IN_SEARCH",
+                        "DESTROYES",
+                        "OWNER_DEATH",
+                        "TECHNICAL_DEFECT",
+                        "LOST"
                       ]
                     },
                     "message": {
@@ -1171,18 +1588,22 @@
                     },
                     "passportStatus": {
                       "type": "string"
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/BaseMetadataDto"
+                    },
+                    "externalReference": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ReferenceDto"
+                      }
                     }
                   }
                 },
                 {
                   "required": [
                     "metadata",
-                    "type",
-                    "birthdate",
-                    "gender",
-                    "inn",
-                    "name",
-                    "surname"
+                    "type"
                   ],
                   "type": "object",
                   "properties": {
@@ -1199,13 +1620,10 @@
                     "relevance": {
                       "type": "string",
                       "enum": [
-                        "actual",
-                        "expired",
-                        "invalid"
+                        "ACTUAL",
+                        "EXPIRED",
+                        "INVALID"
                       ]
-                    },
-                    "metadata": {
-                      "$ref": "#/components/schemas/BaseMetadataDto"
                     },
                     "departmentDoc": {
                       "type": "string"
@@ -1231,16 +1649,7 @@
                       "type": "string"
                     },
                     "gender": {
-                      "type": "string",
-                      "enum": [
-                        "F",
-                        "M",
-                        "U"
-                      ]
-                    },
-                    "birthdate": {
-                      "type": "string",
-                      "format": "date-time"
+                      "$ref": "#/components/schemas/GenderDto"
                     },
                     "issued": {
                       "type": "string",
@@ -1252,152 +1661,6 @@
                     "division": {
                       "type": "string"
                     },
-                    "birthplace": {
-                      "type": "string"
-                    }
-                  }
-                },
-                {
-                  "required": [
-                    "metadata",
-                    "type",
-                    "issuedBy",
-                    "number",
-                    "series"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "uuid": {
-                      "type": "string"
-                    },
-                    "individualUUID": {
-                      "type": "string"
-                    },
-                    "type": {
-                      "type": "string",
-                      "example": "RF_DRIVING_LICENSE"
-                    },
-                    "relevance": {
-                      "type": "string",
-                      "enum": [
-                        "actual",
-                        "expired",
-                        "invalid"
-                      ]
-                    },
-                    "metadata": {
-                      "$ref": "#/components/schemas/BaseMetadataDto"
-                    },
-                    "series": {
-                      "type": "string"
-                    },
-                    "number": {
-                      "type": "string"
-                    },
-                    "issued": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "departmentDoc": {
-                      "type": "string"
-                    },
-                    "receiptDocDate": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "validateDateDoc": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "patronymic": {
-                      "type": "string"
-                    },
-                    "surname": {
-                      "type": "string"
-                    },
-                    "birthdate": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "birthplace": {
-                      "type": "string"
-                    },
-                    "countryName": {
-                      "type": "string"
-                    },
-                    "issuedBy": {
-                      "type": "string"
-                    },
-                    "expiryDate": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "categories": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "enum": [
-                          "А",
-                          "А1",
-                          "В",
-                          "ВE",
-                          "В1",
-                          "С",
-                          "СE",
-                          "С1",
-                          "С1E",
-                          "D",
-                          "DE",
-                          "D1",
-                          "D1E",
-                          "М",
-                          "Tm",
-                          "Tb"
-                        ]
-                      }
-                    },
-                    "experience": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "legalForce": {
-                      "type": "boolean"
-                    }
-                  }
-                },
-                {
-                  "required": [
-                    "metadata",
-                    "type",
-                    "issued",
-                    "number",
-                    "series"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "uuid": {
-                      "type": "string"
-                    },
-                    "individualUUID": {
-                      "type": "string"
-                    },
-                    "type": {
-                      "type": "string",
-                      "example": "RF_PASSPORT"
-                    },
-                    "relevance": {
-                      "type": "string",
-                      "enum": [
-                        "actual",
-                        "expired",
-                        "invalid"
-                      ]
-                    },
                     "metadata": {
                       "$ref": "#/components/schemas/BaseMetadataDto"
                     },
@@ -1406,6 +1669,33 @@
                       "items": {
                         "$ref": "#/components/schemas/ReferenceDto"
                       }
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "metadata",
+                    "type"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "uuid": {
+                      "type": "string"
+                    },
+                    "individualUUID": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "FRGN_PASS"
+                    },
+                    "relevance": {
+                      "type": "string",
+                      "enum": [
+                        "ACTUAL",
+                        "EXPIRED",
+                        "INVALID"
+                      ]
                     },
                     "series": {
                       "type": "string"
@@ -1438,37 +1728,32 @@
                       "type": "string"
                     },
                     "gender": {
-                      "type": "string",
-                      "enum": [
-                        "F",
-                        "M",
-                        "U"
-                      ]
-                    },
-                    "birthdate": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "birthplace": {
-                      "type": "string"
+                      "$ref": "#/components/schemas/GenderDto"
                     },
                     "issuedBy": {
                       "type": "string"
                     },
-                    "division": {
+                    "latinName": {
                       "type": "string"
+                    },
+                    "latinSurname": {
+                      "type": "string"
+                    },
+                    "expiryDate": {
+                      "type": "string",
+                      "format": "date-time"
                     },
                     "invalidityReason": {
                       "type": "string",
                       "enum": [
-                        "expired",
-                        "replaced",
-                        "with_violation",
-                        "in_search",
-                        "destroyes",
-                        "owner_death",
-                        "technical_defect",
-                        "lost"
+                        "EXPIRED",
+                        "REPLACED",
+                        "WITH_VIOLATION",
+                        "IN_SEARCH",
+                        "DESTROYES",
+                        "OWNER_DEATH",
+                        "TECHNICAL_DEFECT",
+                        "LOST"
                       ]
                     },
                     "message": {
@@ -1480,20 +1765,21 @@
                     "passportStatus": {
                       "type": "string"
                     },
-                    "registration": {
-                      "$ref": "#/components/schemas/AddressDto"
+                    "metadata": {
+                      "$ref": "#/components/schemas/BaseMetadataDto"
+                    },
+                    "externalReference": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ReferenceDto"
+                      }
                     }
                   }
                 },
                 {
                   "required": [
                     "metadata",
-                    "type",
-                    "birthdate",
-                    "gender",
-                    "name",
-                    "snils",
-                    "surname"
+                    "type"
                   ],
                   "type": "object",
                   "properties": {
@@ -1510,19 +1796,10 @@
                     "relevance": {
                       "type": "string",
                       "enum": [
-                        "actual",
-                        "expired",
-                        "invalid"
+                        "ACTUAL",
+                        "EXPIRED",
+                        "INVALID"
                       ]
-                    },
-                    "metadata": {
-                      "$ref": "#/components/schemas/BaseMetadataDto"
-                    },
-                    "externalReference": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/ReferenceDto"
-                      }
                     },
                     "departmentDoc": {
                       "type": "string"
@@ -1552,29 +1829,132 @@
                       "type": "string"
                     },
                     "gender": {
-                      "type": "string",
-                      "enum": [
-                        "F",
-                        "M",
-                        "U"
-                      ]
+                      "$ref": "#/components/schemas/GenderDto"
                     },
-                    "birthdate": {
-                      "type": "string",
-                      "format": "date-time"
+                    "metadata": {
+                      "$ref": "#/components/schemas/BaseMetadataDto"
                     },
-                    "birthplace": {
-                      "type": "string"
+                    "externalReference": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ReferenceDto"
+                      }
                     }
                   }
                 },
                 {
                   "required": [
                     "metadata",
-                    "type",
-                    "number",
-                    "registrationPlate",
-                    "series"
+                    "type"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "uuid": {
+                      "type": "string"
+                    },
+                    "individualUUID": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "RF_DRIVING_LICENSE"
+                    },
+                    "relevance": {
+                      "type": "string",
+                      "enum": [
+                        "ACTUAL",
+                        "EXPIRED",
+                        "INVALID"
+                      ]
+                    },
+                    "series": {
+                      "type": "string"
+                    },
+                    "number": {
+                      "type": "string"
+                    },
+                    "issued": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "departmentDoc": {
+                      "type": "string"
+                    },
+                    "receiptDocDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "validateDateDoc": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "patronymic": {
+                      "type": "string"
+                    },
+                    "surname": {
+                      "type": "string"
+                    },
+                    "countryName": {
+                      "type": "string"
+                    },
+                    "issuedBy": {
+                      "type": "string"
+                    },
+                    "expiryDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "A",
+                          "A1",
+                          "V",
+                          "VE",
+                          "V1",
+                          "S",
+                          "SE",
+                          "S1",
+                          "S1E",
+                          "D",
+                          "DE",
+                          "D1",
+                          "D1E",
+                          "M",
+                          "TM",
+                          "TB"
+                        ]
+                      }
+                    },
+                    "experience": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "legalForce": {
+                      "type": "boolean"
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/BaseMetadataDto"
+                    },
+                    "externalReference": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ReferenceDto"
+                      }
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "metadata",
+                    "type"
                   ],
                   "type": "object",
                   "properties": {
@@ -1591,13 +1971,10 @@
                     "relevance": {
                       "type": "string",
                       "enum": [
-                        "actual",
-                        "expired",
-                        "invalid"
+                        "ACTUAL",
+                        "EXPIRED",
+                        "INVALID"
                       ]
-                    },
-                    "metadata": {
-                      "$ref": "#/components/schemas/BaseMetadataDto"
                     },
                     "series": {
                       "type": "string"
@@ -1666,17 +2043,141 @@
                     "surname": {
                       "type": "string"
                     },
-                    "birthDate": {
-                      "type": "string",
-                      "format": "date-time"
+                    "metadata": {
+                      "$ref": "#/components/schemas/BaseMetadataDto"
                     },
-                    "birthPlace": {
-                      "type": "string"
+                    "externalReference": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ReferenceDto"
+                      }
                     }
                   }
                 }
               ]
             }
+          }
+        }
+      },
+      "MarriedCertDocDto": {
+        "required": [
+          "actDate",
+          "actNo",
+          "issuedBy",
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actNo": {
+            "type": "string"
+          },
+          "actDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderDto"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "birthPlace": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NameChangeCertDocDto": {
+        "required": [
+          "actNo",
+          "issuedBy",
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderDto"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "actNo": {
+            "type": "string"
+          },
+          "actDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
           }
         }
       },
@@ -1691,16 +2192,27 @@
           }
         }
       },
-      "INNDocDto": {
+      "RFBrthCertDocDto": {
         "required": [
-          "birthdate",
-          "gender",
-          "inn",
-          "name",
-          "surname"
+          "issued",
+          "issuedBy",
+          "number"
         ],
         "type": "object",
         "properties": {
+          "message": {
+            "type": "string"
+          },
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
           "departmentDoc": {
             "type": "string"
           },
@@ -1712,9 +2224,6 @@
             "type": "string",
             "format": "date-time"
           },
-          "inn": {
-            "type": "string"
-          },
           "name": {
             "type": "string"
           },
@@ -1725,29 +2234,35 @@
             "type": "string"
           },
           "gender": {
+            "$ref": "#/components/schemas/GenderDto"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "birthPlace": {
+            "type": "string"
+          },
+          "typeBrthCert": {
             "type": "string",
             "enum": [
-              "F",
-              "M",
-              "U"
+              "RF_BRTH_CERT",
+              "OLD_BRTH_CERT",
+              "FID_BRTH_CERT"
             ]
           },
-          "birthdate": {
+          "issuedBy": {
+            "type": "string"
+          },
+          "actNo": {
+            "type": "string"
+          },
+          "actDate": {
             "type": "string",
             "format": "date-time"
           },
-          "issued": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "issued_by": {
-            "type": "string"
-          },
-          "division": {
-            "type": "string"
-          },
-          "birthplace": {
-            "type": "string"
+          "legalForce": {
+            "type": "boolean"
           }
         }
       },
@@ -1880,12 +2395,7 @@
             "type": "string"
           },
           "gender": {
-            "type": "string",
-            "enum": [
-              "F",
-              "M",
-              "U"
-            ]
+            "$ref": "#/components/schemas/GenderDto"
           },
           "birthdate": {
             "type": "string",
@@ -1962,6 +2472,118 @@
           }
         }
       },
+      "Region": {
+        "required": [
+          "active",
+          "catalogName",
+          "code",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "cm.region.Altay",
+              "cm.region.Krasnodar",
+              "cm.region.Krasnoyarsk",
+              "cm.region.Primor",
+              "cm.region.Stavropol",
+              "cm.region.Khabarovsk",
+              "cm.region.Amur",
+              "cm.region.Arkhangelsk",
+              "cm.region.Astrakhan",
+              "cm.region.Belgorod",
+              "cm.region.Bryansk",
+              "cm.region.Vladimir",
+              "cm.region.Volgograd",
+              "cm.region.Vologda",
+              "cm.region.Voronezh",
+              "cm.region.NizhnyNovgorod",
+              "cm.region.Ivanovo",
+              "cm.region.Irkutsk",
+              "cm.region.Ingushetia",
+              "cm.region.Kaliningrad",
+              "cm.region.Tver",
+              "cm.region.Kaluga",
+              "cm.region.Kamchatka",
+              "cm.region.Kemerovo",
+              "cm.region.Kirov",
+              "cm.region.Kostroma",
+              "cm.region.Samara",
+              "cm.region.Kurgan",
+              "cm.region.Kursk",
+              "cm.region.StPetersburg",
+              "cm.region.LeningradRegion",
+              "cm.region.Lipetsk",
+              "cm.region.Magadan",
+              "cm.region.Moscow",
+              "cm.region.MoscowRegion",
+              "cm.region.Murmansk",
+              "cm.region.Novgorod",
+              "cm.region.Novosibirsk",
+              "cm.region.Omsk",
+              "cm.region.Orenburg",
+              "cm.region.Orel",
+              "cm.region.Penza",
+              "cm.region.Perm",
+              "cm.region.Pskov",
+              "cm.region.Rostov",
+              "cm.region.Ryazan",
+              "cm.region.Saratov",
+              "cm.region.Sakhalin",
+              "cm.region.Sverdlovsk",
+              "cm.region.Smolensk",
+              "cm.region.Tambov",
+              "cm.region.Tomsk",
+              "cm.region.Tula",
+              "cm.region.Tyumen",
+              "cm.region.Ulyanovsk",
+              "cm.region.Chelyabinsk",
+              "cm.region.Trans-Baikal",
+              "cm.region.ChukotkaAutonomous",
+              "cm.region.Yaroslavl",
+              "cm.region.Adygea",
+              "cm.region.Bashkortostan",
+              "cm.region.Buryatia",
+              "cm.region.Dagestan",
+              "cm.region.KabardinoBalkar",
+              "cm.region.Altai",
+              "cm.region.Kalmykia",
+              "cm.region.Karelia",
+              "cm.region.Komi",
+              "cm.region.MariEl",
+              "cm.region.Mordovia",
+              "cm.region.NorthOssetiaAlania",
+              "cm.region.KarachayCherkessia",
+              "cm.region.Tatarstan",
+              "cm.region.Tyva",
+              "cm.region.Udmurtia",
+              "cm.region.Khakassia",
+              "cm.region.Chechen",
+              "cm.region.Chuvashia",
+              "cm.region.Yakutia",
+              "cm.region.JewishAutonomous",
+              "cm.region.KhantyMansi",
+              "cm.region.YamalNenets",
+              "cm.region.Crimea",
+              "cm.region.Sevastopol",
+              "cm.region.NotSpecified",
+              "cm.region.Nenets"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "catalogName": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          }
+        },
+        "description": "Load from DictionaryDto"
+      },
       "SNILSDocDto": {
         "required": [
           "birthdate",
@@ -2000,12 +2622,7 @@
             "type": "string"
           },
           "gender": {
-            "type": "string",
-            "enum": [
-              "F",
-              "M",
-              "U"
-            ]
+            "$ref": "#/components/schemas/GenderDto"
           },
           "birthdate": {
             "type": "string",
@@ -2210,7 +2827,23 @@
             "format": "date-time"
           },
           "createdBy": {
-            "type": "string"
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "DefaultMetadataCreatedBy",
+                "enum": [
+                  "PROFILE_LOADER",
+                  "MDM",
+                  "ESIA",
+                  "AVATAR_UPLOADER",
+                  "AC"
+                ]
+              },
+              {
+                "type": "string",
+                "description": "any-custom-value"
+              }
+            ]
           },
           "updatedAt": {
             "type": "string",
