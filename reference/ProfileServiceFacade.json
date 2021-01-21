@@ -799,7 +799,7 @@
           },
           "packageStartDate": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "segment": {
             "type": "string",
