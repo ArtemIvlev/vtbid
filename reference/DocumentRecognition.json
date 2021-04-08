@@ -1,0 +1,530 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "vtbid-document-recognition-service",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/individual/save": {
+      "post": {
+        "tags": [
+          "RecognitionController"
+        ],
+        "summary": "Сохранет распознаный документ",
+        "description": "при сохранении происходит оценка пользовательских изменений(если были)",
+        "operationId": "save",
+        "parameters": [
+          {
+            "name": "sub",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/PassportRecognitionDto"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "401": {
+            "description": "Missing request attribute 'sub' or 'individualId' or Multiply request attribute, remove one of 'sub' or 'individualId'",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/individual/recognize": {
+      "post": {
+        "tags": [
+          "RecognitionController"
+        ],
+        "summary": "Загрузка документа",
+        "description": "скачивает документы из чатбота и инициализирует процесс распознавания",
+        "operationId": "recognize",
+        "parameters": [
+          {
+            "name": "sub",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Upload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "401": {
+            "description": "Missing request attribute 'sub' or 'individualId' or Multiply request attribute, remove one of 'sub' or 'individualId'",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecognizeResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/accessRecognize": {
+      "post": {
+        "tags": [
+          "RecognitionController"
+        ],
+        "summary": "Подтверждение возможности загрузки",
+        "description": "проверяет отсутствие конкурирующих загрузок на распознавании для этого вида документов",
+        "operationId": "accessRecognize",
+        "parameters": [
+          {
+            "name": "docType",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "RF_PASSPORT",
+                "INN",
+                "SNILS",
+                "FRGN_PASS",
+                "RF_DRIVING_LICENSE",
+                "RF_BRTH_CERT",
+                "FID_DOC",
+                "MARRIED_CERT",
+                "DIVORCE_CERT",
+                "NAME_CHANGE_CERT",
+                "FATHERHOOD_CERT",
+                "DEATH_CERT",
+                "VEHICLE_CERT",
+                "ILS_DOC",
+                "INCOME_REFERENCE",
+                "ELECTRONIC_WORKBOOK"
+              ]
+            }
+          },
+          {
+            "name": "sub",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute 'sub' or 'individualId' or Multiply request attribute, remove one of 'sub' or 'individualId'",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessRecognition"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/pend": {
+      "get": {
+        "tags": [
+          "RecognitionController"
+        ],
+        "summary": "Получение состояния загрузки",
+        "description": "проверяет статус загрузки и распознавания документа",
+        "operationId": "pend",
+        "parameters": [
+          {
+            "name": "docType",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "RF_PASSPORT",
+                "INN",
+                "SNILS",
+                "FRGN_PASS",
+                "RF_DRIVING_LICENSE",
+                "RF_BRTH_CERT",
+                "FID_DOC",
+                "MARRIED_CERT",
+                "DIVORCE_CERT",
+                "NAME_CHANGE_CERT",
+                "FATHERHOOD_CERT",
+                "DEATH_CERT",
+                "VEHICLE_CERT",
+                "ILS_DOC",
+                "INCOME_REFERENCE",
+                "ELECTRONIC_WORKBOOK"
+              ]
+            }
+          },
+          {
+            "name": "sub",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute 'sub' or 'individualId' or Multiply request attribute, remove one of 'sub' or 'individualId'",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecognizeResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/auth": {
+      "get": {
+        "tags": [
+          "RecognitionController"
+        ],
+        "summary": "Авторизация в чатботе",
+        "description": "получает токен авторизации",
+        "operationId": "auth",
+        "parameters": [
+          {
+            "name": "sub",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute 'sub' or 'individualId' or Multiply request attribute, remove one of 'sub' or 'individualId'",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ExceptionObject": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "message_title": {
+            "type": "string"
+          },
+          "retryTimeout": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxNumberOfAttempts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "additional_properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "PassportRecognitionDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RecognitionDto"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "guid": {
+                "type": "string"
+              },
+              "series": {
+                "type": "string"
+              },
+              "number": {
+                "type": "string"
+              },
+              "fullName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "middleName": {
+                "type": "string"
+              },
+              "birthday": {
+                "type": "string",
+                "format": "date"
+              },
+              "birthplace": {
+                "type": "string"
+              },
+              "gender": {
+                "type": "string"
+              },
+              "authorityName": {
+                "type": "string"
+              },
+              "authorityCode": {
+                "type": "string"
+              },
+              "issueDate": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        ]
+      },
+      "RecognitionDto": {
+        "type": "object"
+      },
+      "Upload": {
+        "required": [
+          "docType",
+          "pages",
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "docType": {
+            "type": "string",
+            "enum": [
+              "RF_PASSPORT",
+              "INN",
+              "SNILS",
+              "FRGN_PASS",
+              "RF_DRIVING_LICENSE",
+              "RF_BRTH_CERT",
+              "FID_DOC",
+              "MARRIED_CERT",
+              "DIVORCE_CERT",
+              "NAME_CHANGE_CERT",
+              "FATHERHOOD_CERT",
+              "DEATH_CERT",
+              "VEHICLE_CERT",
+              "ILS_DOC",
+              "INCOME_REFERENCE",
+              "ELECTRONIC_WORKBOOK"
+            ]
+          },
+          "token": {
+            "type": "string"
+          },
+          "pages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadPage"
+            }
+          }
+        }
+      },
+      "UploadPage": {
+        "required": [
+          "fileId",
+          "page"
+        ],
+        "type": "object",
+        "properties": {
+          "page": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "fileId": {
+            "type": "string"
+          }
+        }
+      },
+      "RecognizeResult": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/UploadStatus"
+          },
+          "recognitionDto": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PassportRecognitionDto"
+              }
+            ]
+          }
+        }
+      },
+      "UploadStatus": {
+        "required": [
+          "docType",
+          "pages"
+        ],
+        "type": "object",
+        "properties": {
+          "docType": {
+            "type": "string",
+            "enum": [
+              "RF_PASSPORT",
+              "INN",
+              "SNILS",
+              "FRGN_PASS",
+              "RF_DRIVING_LICENSE",
+              "RF_BRTH_CERT",
+              "FID_DOC",
+              "MARRIED_CERT",
+              "DIVORCE_CERT",
+              "NAME_CHANGE_CERT",
+              "FATHERHOOD_CERT",
+              "DEATH_CERT",
+              "VEHICLE_CERT",
+              "ILS_DOC",
+              "INCOME_REFERENCE",
+              "ELECTRONIC_WORKBOOK"
+            ]
+          },
+          "pages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadStatusPage"
+            }
+          }
+        }
+      },
+      "UploadStatusPage": {
+        "required": [
+          "page",
+          "state"
+        ],
+        "type": "object",
+        "properties": {
+          "page": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "UPLOADING",
+              "UPLOADED",
+              "ERROR",
+              "NONE"
+            ]
+          }
+        }
+      },
+      "AccessRecognition": {
+        "type": "object",
+        "properties": {
+          "isAccess": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Token": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "messengerType": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    }
+  }
+}
