@@ -42,6 +42,9 @@
           "required": true
         },
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Missing request attribute 'sub' or 'individualId' or Multiply request attribute, remove one of 'sub' or 'individualId'",
             "content": {
@@ -51,9 +54,6 @@
                 }
               }
             }
-          },
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -85,22 +85,22 @@
           "required": true
         },
         "responses": {
-          "401": {
-            "description": "Missing request attribute 'sub' or 'individualId' or Multiply request attribute, remove one of 'sub' or 'individualId'",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExceptionObject"
-                }
-              }
-            }
-          },
           "200": {
             "description": "OK",
             "content": {
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/RecognizeResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing request attribute 'sub' or 'individualId' or Multiply request attribute, remove one of 'sub' or 'individualId'",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
                 }
               }
             }
@@ -139,7 +139,8 @@
                 "VEHICLE_CERT",
                 "ILS_DOC",
                 "INCOME_REFERENCE",
-                "ELECTRONIC_WORKBOOK"
+                "ELECTRONIC_WORKBOOK",
+                "PENSION_REFERENCE"
               ]
             }
           },
@@ -151,16 +152,6 @@
           }
         ],
         "responses": {
-          "401": {
-            "description": "Missing request attribute 'sub' or 'individualId' or Multiply request attribute, remove one of 'sub' or 'individualId'",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExceptionObject"
-                }
-              }
-            }
-          },
           "200": {
             "description": "OK",
             "content": {
@@ -170,18 +161,28 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Missing request attribute 'sub' or 'individualId' or Multiply request attribute, remove one of 'sub' or 'individualId'",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/individual/pend": {
+    "/individual/poolingRecognition": {
       "get": {
         "tags": [
           "RecognitionController"
         ],
         "summary": "Получение состояния загрузки",
         "description": "проверяет статус загрузки и распознавания документа",
-        "operationId": "pend",
+        "operationId": "poolingRecognition",
         "parameters": [
           {
             "name": "docType",
@@ -205,7 +206,8 @@
                 "VEHICLE_CERT",
                 "ILS_DOC",
                 "INCOME_REFERENCE",
-                "ELECTRONIC_WORKBOOK"
+                "ELECTRONIC_WORKBOOK",
+                "PENSION_REFERENCE"
               ]
             }
           },
@@ -217,16 +219,6 @@
           }
         ],
         "responses": {
-          "401": {
-            "description": "Missing request attribute 'sub' or 'individualId' or Multiply request attribute, remove one of 'sub' or 'individualId'",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExceptionObject"
-                }
-              }
-            }
-          },
           "200": {
             "description": "OK",
             "content": {
@@ -236,27 +228,7 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/individual/auth": {
-      "get": {
-        "tags": [
-          "RecognitionController"
-        ],
-        "summary": "Авторизация в чатботе",
-        "description": "получает токен авторизации",
-        "operationId": "auth",
-        "parameters": [
-          {
-            "name": "sub",
-            "in": "header",
-            "description": "Идентификатор УНК",
-            "required": true
-          }
-        ],
-        "responses": {
+          },
           "401": {
             "description": "Missing request attribute 'sub' or 'individualId' or Multiply request attribute, remove one of 'sub' or 'individualId'",
             "content": {
@@ -266,13 +238,43 @@
                 }
               }
             }
-          },
+          }
+        }
+      }
+    },
+    "/individual/authChatBot": {
+      "get": {
+        "tags": [
+          "RecognitionController"
+        ],
+        "summary": "Авторизация в чатботе",
+        "description": "получает токен авторизации",
+        "operationId": "authChatBot",
+        "parameters": [
+          {
+            "name": "sub",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
           "200": {
             "description": "OK",
             "content": {
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing request attribute 'sub' or 'individualId' or Multiply request attribute, remove one of 'sub' or 'individualId'",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
                 }
               }
             }
@@ -315,12 +317,12 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "#/components/schemas/RecognitionDto"
+            "$ref": "#/components/schemas/RecognitionDocDto"
           },
           {
             "type": "object",
             "properties": {
-              "guid": {
+              "fullName": {
                 "type": "string"
               },
               "series": {
@@ -329,19 +331,16 @@
               "number": {
                 "type": "string"
               },
-              "fullName": {
+              "surname": {
                 "type": "string"
               },
-              "lastName": {
+              "name": {
                 "type": "string"
               },
-              "firstName": {
+              "patronymic": {
                 "type": "string"
               },
-              "middleName": {
-                "type": "string"
-              },
-              "birthday": {
+              "birthdate": {
                 "type": "string",
                 "format": "date"
               },
@@ -351,22 +350,67 @@
               "gender": {
                 "type": "string"
               },
-              "authorityName": {
+              "issuedBy": {
                 "type": "string"
               },
-              "authorityCode": {
+              "division": {
                 "type": "string"
               },
-              "issueDate": {
+              "issued": {
                 "type": "string",
                 "format": "date"
               }
             }
           }
-        ]
+        ],
+        "x-examples": {
+          "example-1": {
+            "type": "RF_PASSPORT",
+            "uuid": "string",
+            "fullName": "string",
+            "series": "string",
+            "number": "string",
+            "surname": "string",
+            "name": "string",
+            "patronymic": "string",
+            "birthdate": "2019-08-24",
+            "birthplace": "string",
+            "gender": "string",
+            "issuedBy": "string",
+            "division": "string",
+            "issued": "2019-08-24"
+          }
+        }
       },
-      "RecognitionDto": {
-        "type": "object"
+      "RecognitionDocDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "RF_PASSPORT",
+              "INN",
+              "SNILS",
+              "FRGN_PASS",
+              "RF_DRIVING_LICENSE",
+              "RF_BRTH_CERT",
+              "FID_DOC",
+              "MARRIED_CERT",
+              "DIVORCE_CERT",
+              "NAME_CHANGE_CERT",
+              "FATHERHOOD_CERT",
+              "DEATH_CERT",
+              "VEHICLE_CERT",
+              "ILS_DOC",
+              "INCOME_REFERENCE",
+              "ELECTRONIC_WORKBOOK",
+              "PENSION_REFERENCE"
+            ]
+          },
+          "uuid": {
+            "type": "string"
+          }
+        }
       },
       "Upload": {
         "required": [
@@ -394,7 +438,8 @@
               "VEHICLE_CERT",
               "ILS_DOC",
               "INCOME_REFERENCE",
-              "ELECTRONIC_WORKBOOK"
+              "ELECTRONIC_WORKBOOK",
+              "PENSION_REFERENCE"
             ]
           },
           "token": {
@@ -466,7 +511,8 @@
               "VEHICLE_CERT",
               "ILS_DOC",
               "INCOME_REFERENCE",
-              "ELECTRONIC_WORKBOOK"
+              "ELECTRONIC_WORKBOOK",
+              "PENSION_REFERENCE"
             ]
           },
           "pages": {
