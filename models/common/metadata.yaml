@@ -6,30 +6,30 @@ allOf:
   - type: object
     properties:
       status:
-        enum: 
+        enum:
           - CREATED
           - LOADED
           - ERROR
-        description: системный статус 'CREATED' - создан, 'LOADED' - загружен, 'ERROR' - ошибка 
+        description: 'системный статус ''CREATED'' - создан, ''LOADED'' - загружен, ''ERROR'' - ошибка'
       createadAt:
         type: string
         description: дата создания
         format: date-time
       createadBy:
         type: string
-        description: имя создавшего пользователя
+        description: Система - автор изменения
       updatedAt:
         type: string
-        description: дата последнего изменения, для данных,полученных через ЕСИА заполнять значением receiptDocDate
+        description: 'дата последнего изменения, для данных,полученных через ЕСИА заполнять значением receiptDocDate'
         format: date-time
       qaLevel:
-        enum: 
+        enum:
           - 0
           - 1
           - 2
           - 3
           - 4
-        description: уровень доверия 0..4 (0 - для загруженных вручную, 2 - для ЕСИА, 4 - для МДМ)
+        description: 'уровень доверия 0..4 (0 - для загруженных вручную, 2 - для ЕСИА, 4 - для МДМ)'
       comment:
         type: string
         description: коментарии к статусу
@@ -42,4 +42,3 @@ allOf:
       - createadAt
       - createadBy
       - qaLevel
-      - validFor
