@@ -1,0 +1,48 @@
+title: BaseDocForHistoryPassport
+description: >
+  Базовый тип для истории паспортов
+allOf:
+  - $ref: ./BaseTypeDocSeries.yaml
+  - $ref: ./BaseTypeDocNumber.yaml
+  - $ref: ./BaseTypeDocIssued.yaml
+  - type: object
+    properties:
+      issued_by:
+        type: string
+        example: Гагаринским отделением милиции №5 по г.Москве МВД России
+        description: Кем выдан паспорт
+      division:
+        type: string
+        description: Код подразделения
+        example: 503-078
+      passportType:
+        type: string
+        enum:
+          - RF_PASSPORT
+          - FRGN_PASS
+          - USSR_PASSPORT
+        description: Тип паспорта
+        example: USSR_PASSPORT
+      passport_status:
+        type: string
+        enum:
+          - valid
+          - invalid
+          - no_information
+        description: Статус паспорта
+        example: invalid
+      invalidity_reason:
+        type: string
+        enum:
+          - expired
+          - replaced
+          - with_violation
+          - in_search
+          - destroyes
+          - owner_death
+          - technical_defect
+          - lost
+        description: Причина недействительности
+        example: replaced
+    required: 
+      - number

@@ -17,7 +17,7 @@ properties:
       - FID_BRTH_CERT
       - OLD_BRTH_CERT
       - REGISTRATION
-      - RF_BRTH_CERT
+      - BRTH_CERT
       - MARRIED_CERT
       - DIVORCE_CERT
       - NAME_CHANGE_CERT
@@ -28,8 +28,11 @@ properties:
       - MLTR_ID
       - LGL_CPCT_CERT
       - PRISON_CERT
-      - ILS_PFR_CERT
       - EGRN_CERT
+      - ILS_PFR
+      - INCOME_REFERENCE
+      - ELECTRONIC_WORKBOOK
+      - PENSION_REFERENCE
     description: >
       * `INN` - ИНН
 
@@ -37,13 +40,15 @@ properties:
       
       * `RF_PASSPORT` – паспорт гражданина РФ
       
-      * `FID_DOC` – документ иностранного гражданина
+      * `FID_DOC` – документ иностранного гражданина, удостоверяющий личность на территории РФ
       
       * `RF_DRIVING_LICENSE` – водительское удостоверение
       
       * `MLTR_ID` – военный билет
       
       * `FRGN_PASS` – заграничный паспорт
+      
+      * 'PASSPORT_HISTORY' - История выданных паспортов
       
       * `MDCL_PLCY` – полис ОМС
       
@@ -74,12 +79,18 @@ properties:
       * `LGL_CPCT_CERT` - Сведения о дееспособности
       
       * `PRISON_CERT` - Сведения о нахождении гражданина в местах лишения свободы
-      
-      * `ILS_PFR_CERT` - Сведения о состоянии индивидуального страхового счета застрахованного лица
-      
+            
       * `EGRN_CERT` - Сведения, содержащиеся в кадастре недвижимости и реестре прав на недвижимость в составе Единого государственного реестра недвижимости, относящиеся к гражданам Российской Федерации - физическим лицам
+      
+      * `ILS_PFR` - Сведения о состоянии индивидуального страхового счета застрахованного лица
+
+      * `INCOME_REFERENCE` - Cправки о доходах и суммах налога физического лица (форма 2-НДФЛ)
+
+      * `ELECTRONIC_WORKBOOK` - Сведения о трудовой деятельности (выписка из электронной трудовой книжки)
+      * `PENSION_REFERENCE` - Справка о назначенных пенсиях и социальных выплатах на дату
       
 
 discriminator:
   propertyName: type
+
 

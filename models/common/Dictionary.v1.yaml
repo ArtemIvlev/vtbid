@@ -1,0 +1,22 @@
+title: Dictionary
+description: Словари Тип адреса, Тип контакта, Жизненный цикл Клиента, Семейное положение
+type: object
+allOf:
+  - $ref: ./BaseTypeCatalogName.v1.yaml
+  - type: object
+    properties:
+      description:
+       type: string
+       description: описание для отображения на фронте
+       example: "cm.PhoneType.ForNotifications"
+      code:
+        type: string
+        description: код значения
+        example: "Для нотификаций"
+      active:
+        type: boolean
+        description: Доступность значения (значение по умолчанию true)
+        example: "true"
+    required:
+      - code
+      - CatalogName

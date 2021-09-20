@@ -6,5 +6,5 @@ items:
   allOf:
     - type: object
     - $ref: ./BaseTypeId.yaml
-    - $ref: ./doctypes/baseTypes/BaseTypeProofRelevance.yaml
+    - $ref: ./doctypes/baseTypes/BaseTypeRelevance.yaml
     - $ref: ./doctypes/baseTypes/BaseDocType.yaml

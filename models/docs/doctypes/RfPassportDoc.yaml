@@ -23,14 +23,6 @@ allOf:
         type: string
         description: Код подразделения
         example: 503-078
-      passport_status:
-        type: string
-        enum:
-          - valid
-          - invalid
-          - no_information
-        description: Статус паспорта
-        example: invalid
       invalidity_reason:
         type: string
         enum:
@@ -44,8 +36,20 @@ allOf:
           - lost
         description: Причина недействительности
         example: replaced
+      passportstatus:
+        type: string
+        enum:
+          - valid
+          - invalid
+          - noInformation
+        description: Статус паспорта - заполняется только для паспортов, пришедших в истории из ЕСИА
+      legalForce:
+        type: boolean
+        description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
+      metadata:
+        $ref: ../../common/metadata.yaml    
     required:
-      - issued_by
-      - division
+      - type
+      - metadata
 x-tags:
   - ready to implement

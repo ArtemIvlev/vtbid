@@ -3,5 +3,5 @@ type: object
 properties:
   patronymic:
     type: string
-    description: Отчество (если наличиствует)
+    description: Отчество (если есть)
     example: Петровна

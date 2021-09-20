@@ -1,0 +1,48 @@
+title: ils_doc
+description: ИЛС (Сведения о состоянии индивидуального страхового счета застрахованного лица)
+allOf:
+  - $ref: ./baseTypes/BaseDepartmentDoc.yaml
+  - $ref: ./baseTypes/BaseGetDateDoc.yaml
+  - $ref: ./baseTypes/BaseValidateDateDoc.yaml
+  - $ref: ./baseTypes/BaseTypeSnils.yaml
+  - $ref: ./baseTypes/BaseTypeSurname.yaml
+  - $ref: ./baseTypes/BaseTypeName.yaml
+  - $ref: ./baseTypes/BaseTypePatronymic.yaml
+  - $ref: ./baseTypes/BaseTypeBirthDate.yaml
+  - type: object
+    properties:
+      id:
+       type: string
+       description: Уникальный идентификатор документа
+      formationDate:
+       type: date
+       description: Дата, на которую сформированы сведения
+       example: 22.08.2018
+      date:
+       type: date
+       description: Дата заполнения выписки
+       example: 22.08.2018
+      linkJson:
+       type: string
+       description: Файл, содержащий весь документ в формате JSON
+      legalForce:
+        type: boolean
+        description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
+      docVersion:
+        type: string
+        example: 'v1'
+        description: Версия документа
+      pensionType:
+        type: string
+        enum:
+          - 1
+          - 2
+        description: Вариант пенсионного обеспечения в системе ОПС, выбранные застрахованным лицом года рождения и моложе. Возможные значения `1` – направление страховых взносов на формирование только страховой пенсии;`2` – направление страховых взносов на формирование страховой и накопительной пенсии
+      metadata:
+        $ref: ../../common/metadata.yaml    
+    required:
+      - type
+      - snils
+      - formationDate
+      - ilsJson
+      - metadata

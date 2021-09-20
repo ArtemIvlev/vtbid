@@ -1,6 +1,6 @@
 title: BaseTypeDocIssued
 type: object
-description:  Серия документа
+description:  Дата выдачи документа
 properties:
   issued:
     type: string

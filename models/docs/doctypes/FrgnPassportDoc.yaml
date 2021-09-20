@@ -5,8 +5,6 @@ description: >
   PermittedScope: id_doc (если заграничный паспорт гражданина России указан как ДУЛ в УЗ гражданина)
                   foreign_passport_doc (если заграничный паспорт гражданина России не указан как ДУЛ)
 allOf:
-  - $ref: ./baseTypes/BaseTypeSid.yaml
-  - $ref: ./baseTypes/BaseTypeId.yaml
   - $ref: ./baseTypes/BaseProofBlock.yaml
   - $ref: ./baseTypes/BaseDoc.yaml
   - $ref: ./baseTypes/BaseDepartmentDoc.yaml
@@ -19,14 +17,6 @@ allOf:
   - $ref: ./baseTypes/BaseTypeBirthDate.yaml
   - $ref: ./baseTypes/BaseTypeBirthPlace.yaml
   - type: object
-    required:
-      - expiryDate
-      - latinFirstName
-      - latinLastName
-      - issuedBy
-      - gender
-      - birthDate
-      - birthPlace
     properties:
       latinFirstName:
         type: string
@@ -44,3 +34,31 @@ allOf:
         type: string
         example: '29.08.2026'
         description: Действителен до (в формате ДД.ММ.ГГГГ)
+      invalidity_reason:
+        type: string
+        enum:
+          - expired
+          - replaced
+          - with_violation
+          - in_search
+          - destroyes
+          - owner_death
+          - technical_defect
+          - lost
+        description: Причина недействительности
+        example: replaced
+      passportstatus:
+        type: string
+        enum:
+          - valid
+          - invalid
+          - noInformation
+        description: Статус паспорта - заполняется только для паспортов, пришедших в истории из ЕСИА
+      legalForce:
+        type: boolean
+        description: Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)
+      metadata:
+        $ref: ../../common/metadata.yaml    
+    required:
+      - type
+      - metadata

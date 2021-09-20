@@ -1,12 +1,27 @@
 title: ExternalReference
 type: object
 description: Ссылка на внешний источник (например профиль в VK)
+allof:
 properties:
+  referredUUID:
+    description: идентификатор объекта в tdg
+    type: string
   href:
+    description: идентификатор объекта в системе-источнике, например, идентификатор пользователя в ЕСИА
     type: string
   type:
+    description: тип-источник информации
+    type: string 
+    example: ESIA
+  '@referredType':
     type: string
+    description: признак типа объекта, например, Document, Individual, Address, contactMedium
+    example: "Document"
   characteristic:
+    description: может использоваться для хранения информации о token
     type: array
     items:
       $ref: ../common/characteristic.yaml
+required:
+    - referredUUID
+    - referredType

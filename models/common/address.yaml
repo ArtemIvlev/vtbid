@@ -25,20 +25,24 @@ properties:
     example: cm.region.Altay
   province:
     type: string
-    description: Область
+    description: Регион
     example: Воронежская
   provinceType:
     type: string
-    description: тип области
+    description: тип регион
     example: обл.
   region:
     type: string
     description: Район
-    example: Бутурлиновский
+    example: Советский
   regionType:
     type: string
     description: тип района
     example: район
+  area:
+    type: string
+    description: территория
+    example: Бутурлиновский
   additionArea:
     type: string
     description: Дополнительная территория
@@ -90,4 +94,12 @@ properties:
   fiasCode:
     type: string
     description: Идентификатор адресной единицы. Формат строки не определен
-
+  type:
+    type: stirng
+    description: Тип адреса в Dictionary catalogName = `AddressType`
+  metadata:
+    $ref: ./metadata.yaml
+    
+required:
+- metadata
+- type

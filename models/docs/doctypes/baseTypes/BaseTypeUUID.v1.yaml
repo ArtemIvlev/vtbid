@@ -1,0 +1,7 @@
+title: BaseTypeUUID
+type: object
+properties:
+  uuid:
+    type: string
+    description: идентификатор в tdg
+    example: 

@@ -2,14 +2,21 @@ title: Document
 type: object
 description: Модель Документов
 properties:
+  uuid:
+    $ref: ../docs/doctypes/baseTypes/BaseTypeUUID.v1.yaml
   details:
     $ref: ./DocResponse.yaml
+  relevance:
+    $ref: ../docs/doctypes/baseTypes/BaseTypeRelevance.yaml
   RelatedPartyRef:
     $ref: ../common/RelatedPartyRef.yaml
   metadata:
     $ref: ../common/metadata.yaml
-  id:
-    type: string
-    format: uuid
+  externalRef:
+    $ref: ../individual/ExternalReference.yaml
   type:
     type: string
+    description: тип документа
+required:
+  - metadata
+  - type

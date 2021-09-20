@@ -1,0 +1,32 @@
+title: ElWrkBkDoc
+description: Сведения о трудовой деятельности (выписка из электронной трудовой книжки TYPE 'ELECTRONIC_WORKBOOK')
+allOf:
+  - $ref: ./baseTypes/BaseDocType.yaml
+  - $ref: ./baseTypes/BaseGetDateDoc.yaml
+  - $ref: ./baseTypes/BaseDepartmentDoc.yaml
+  - $ref: ./baseTypes/BaseValidateDateDoc.yaml
+  - type: object
+    properties:
+      message:
+        type: string
+        example: Признан недействительным после утери
+        description: Дополнительная информация о сведениях. Например тут может быть информация поясняющая причину невалидности документа.
+      docVersion:
+        type: string
+        example: v1
+        description: Версия документа
+      linkJson:
+        type: string
+        example: 'Файл, содержащий весь документ в формате JSON'
+        description: 'Файл, содержащий весь документ в формате JSON'
+      legalForce:
+        type: boolean
+        description: 'Возможность проверить подлинность данных, полученных из ГИС (документы подписанные ЭП ведомства)'
+      metadata:
+        $ref: ../../common/metadata.yaml
+    required:
+      - type
+      - linkJson
+      - metadata
+x-tags:
+  - ready to implement

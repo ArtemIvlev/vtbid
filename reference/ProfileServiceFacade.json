@@ -1,0 +1,2548 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "vtbid-profile-service-facade",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8088",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/individual/contactMedium/{contactMediumId}": {
+      "patch": {
+        "tags": [
+          "facade-contact-medium-controller"
+        ],
+        "summary": "Обновление контакта (телефон или email) физ лица",
+        "description": "Обновляет телефон или mail для физ лица",
+        "operationId": "patchContact",
+        "parameters": [
+          {
+            "name": "contactMediumId",
+            "in": "path",
+            "description": "Идентификатор контакта",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-UNC",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactMediumDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "401": {
+            "description": "Missing request attribute",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Модель контакта",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactMediumDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/address/{addressId}": {
+      "patch": {
+        "tags": [
+          "facade-address-controller"
+        ],
+        "summary": "Обновление адреса (регистрации или проживания) физ лица",
+        "description": "Обновляет адрес регистрации или проживания для физ лица",
+        "operationId": "patchAddress",
+        "parameters": [
+          {
+            "name": "addressId",
+            "in": "path",
+            "description": "Идентификатор адреса",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-UNC",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "401": {
+            "description": "Missing request attribute",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Модель адреса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual": {
+      "get": {
+        "tags": [
+          "facade-individual-controller"
+        ],
+        "summary": "Получение полной информации о физ лице с контактами и адресами",
+        "description": "Получает модель физ лица, содержащую полную информацию с контактами и адресами.",
+        "operationId": "getByIdPure",
+        "parameters": [
+          {
+            "name": "X-UNC",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Полная модель физ лица с контактами и адресами",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualPureFacadeDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individualShort": {
+      "get": {
+        "tags": [
+          "facade-individual-short-controller"
+        ],
+        "summary": "Получение краткой информации о физ лице без вложенных объектов",
+        "description": "Получает модель физ лица, содержащую краткую информацию без вложенных объектов.",
+        "operationId": "getByIdShort",
+        "parameters": [
+          {
+            "name": "X-UNC",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Краткая модель физ лица без вложенных объектов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualShortFacadeDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individualShort/privilege": {
+      "get": {
+        "tags": [
+          "facade-individual-short-controller"
+        ],
+        "summary": "Получение краткой информации о физ лице без вложенных объектов с признаком привилегии",
+        "description": "Получает модель физ лица, содержащую краткую информацию без вложенных объектов с запросом на признак привилегий.",
+        "operationId": "getByIdPrivilegeShort",
+        "parameters": [
+          {
+            "name": "X-UNC",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Краткая модель физ лица без вложенных объектов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualShortPrivilegedFacadeDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/esiaToken": {
+      "get": {
+        "tags": [
+          "facade-esia-token-controller"
+        ],
+        "summary": "Получение информации о флаге согласия ЕСИА",
+        "description": "Получение информации о флаге согласия ЕСИА.",
+        "operationId": "getEsiaToken",
+        "parameters": [
+          {
+            "name": "X-UNC",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Полная модель физ лица с контактами и адресами",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EsiaTokenDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/document": {
+      "get": {
+        "tags": [
+          "facade-document-controller"
+        ],
+        "summary": "Получение документов физ лица",
+        "description": "Получает все документы переданного физ лица",
+        "operationId": "getDocumentByIndividualUcn",
+        "parameters": [
+          {
+            "name": "X-UNC",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Модель документа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/FrgnPassportFacadeDocDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/INNFacadeDocDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RFDrivingLicenseFacadeDocDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RFPassportFacadeDocDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SNILSFacadeDocDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/VehicleFacadeDocDto"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/documentPooling/{documentType}": {
+      "get": {
+        "tags": [
+          "facade-document-controller"
+        ],
+        "summary": "Пулинг статуса документа по типу",
+        "description": "Получает статус документа по комплексному состоянию",
+        "operationId": "documentPooling",
+        "parameters": [
+          {
+            "name": "documentType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "DocumentTypeDto",
+              "enum": [
+                "RF_PASSPORT",
+                "INN",
+                "SNILS",
+                "FRGN_PASS",
+                "RF_DRIVING_LICENSE",
+                "RF_BRTH_CERT",
+                "FID_DOC",
+                "MARRIED_CERT",
+                "DIVORCE_CERT",
+                "NAME_CHANGE_CERT",
+                "FATHERHOOD_CERT",
+                "DEATH_CERT",
+                "VEHICLE_CERT",
+                "ILS_DOC",
+                "INCOME_REFERENCE",
+                "ELECTRONIC_WORKBOOK",
+                "PENSION_REFERENCE"
+              ]
+            }
+          },
+          {
+            "name": "X-UNC",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentStateDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/document/{documentId}": {
+      "get": {
+        "tags": [
+          "facade-document-controller"
+        ],
+        "summary": "Получение документа физ лица по ID",
+        "description": "Получает документ физ лица по ID",
+        "operationId": "getDocumentById",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "Идентификатор документа",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-UNC",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Модель документа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/FrgnPassportFacadeDocDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/INNFacadeDocDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RFDrivingLicenseFacadeDocDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RFPassportFacadeDocDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/SNILSFacadeDocDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/VehicleFacadeDocDto"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/contactMedium": {
+      "get": {
+        "tags": [
+          "facade-contact-medium-controller"
+        ],
+        "summary": "Получение контактов физ лица",
+        "description": "Получает все контакты переданного физ лица",
+        "operationId": "getContactMediumsByIndividualUcn",
+        "parameters": [
+          {
+            "name": "X-UNC",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Список контактов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContactMediumFacadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/avatar": {
+      "get": {
+        "tags": [
+          "facade-avatar-controller"
+        ],
+        "summary": "Получение список аватаров физ лица",
+        "description": "Получает аватары переданного физ лица",
+        "operationId": "getAvatarsByIndividualUcn",
+        "parameters": [
+          {
+            "name": "X-UNC",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Список аватаров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvatarFacadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/avatar/active": {
+      "get": {
+        "tags": [
+          "facade-avatar-controller"
+        ],
+        "summary": "Получение активных аватаров физ лица",
+        "description": "Получает активный и загружаемый аватар",
+        "operationId": "getActiveAvatarsByIndividualUcn",
+        "parameters": [
+          {
+            "name": "X-UNC",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Список аватаров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvatarFacadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/address": {
+      "get": {
+        "tags": [
+          "facade-address-controller"
+        ],
+        "summary": "Получение адресов физ лица",
+        "description": "Получает все адреса переданного физ лица",
+        "operationId": "getAddressByIndividualUcn",
+        "parameters": [
+          {
+            "name": "X-UNC",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Список адресов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AddressFacadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/avatar/{avatarId}": {
+      "delete": {
+        "tags": [
+          "facade-avatar-controller"
+        ],
+        "summary": "Удаление аватара физ лица",
+        "description": "Удаляет активный аватар",
+        "operationId": "deleteAvatarByIndividualUcn",
+        "parameters": [
+          {
+            "name": "avatarId",
+            "in": "path",
+            "description": "Идентификатор аватара",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-UNC",
+            "in": "header",
+            "description": "Идентификатор УНК",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Missing request attribute",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionObject"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ExceptionObject": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "message_title": {
+            "type": "string"
+          },
+          "retryTimeout": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxNumberOfAttempts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "additional_properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "BaseMetadataDto": {
+        "required": [
+          "createdBy",
+          "qaLevel",
+          "validFor"
+        ],
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalCreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "DefaultMetadataCreatedBy",
+                "enum": [
+                  "PROFILE_LOADER",
+                  "MDM",
+                  "ESIA",
+                  "AVATAR_UPLOADER",
+                  "VTB_LITE",
+                  "VTBID_PARTNER"
+                ]
+              },
+              {
+                "type": "string",
+                "description": "any-custom-value"
+              }
+            ]
+          },
+          "qaLevel": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/ValidDateDto"
+          },
+          "proofStatus": {
+            "type": "string",
+            "enum": [
+              "TRUSTED",
+              "VERIFIED",
+              "UNVERIFIED",
+              "REJECTED",
+              "UNKNOWN"
+            ]
+          },
+          "comment": {
+            "type": "string"
+          },
+          "logRef": {
+            "type": "string"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorDto"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "LOADED",
+              "CONFIRMED",
+              "ERROR"
+            ]
+          }
+        }
+      },
+      "ContactMediumDto": {
+        "required": [
+          "contactType",
+          "metadata",
+          "objectType"
+        ],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "contactType": {
+            "description": "Catalogs: ContactType",
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "DefaultContactType (samples were loaded from the DB Dictionary)",
+                "enum": [
+                  "cm.PhoneType.Home",
+                  "cm.PhoneType.Contact",
+                  "cm.PhoneType.Actual",
+                  "cm.PhoneType.Workplace",
+                  "cm.PhoneType.MobileWork",
+                  "cm.PhoneType.MobilePersonal",
+                  "cm.PhoneType.ForNotifications",
+                  "cm.PhoneType.TelephoneOrganization",
+                  "cm.PhoneType.Fax",
+                  "cm.PhoneType.Telex",
+                  "cm.PhoneType.ATM",
+                  "cm.PhoneType.TemporaryRegistrationPhone",
+                  "cm.PhoneType.PermanentRegistrationPhone",
+                  "cm.PhoneType.3rdPersonPhone",
+                  "cm.PhoneType.AuthorisedPhone",
+                  "cm.PhoneType.BCOmain",
+                  "cm.PhoneType.BCOadditional",
+                  "cm.EmailType.Personal",
+                  "cm.EmailType.Work",
+                  "cm.EmailType.ForNotification",
+                  ""
+                ]
+              },
+              {
+                "type": "string",
+                "description": "any-custom-value"
+              }
+            ]
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          },
+          "objectType": {
+            "type": "string",
+            "enum": [
+              "phone",
+              "email"
+            ]
+          },
+          "phoneNumber": {
+            "$ref": "#/components/schemas/PhoneNumberDto"
+          },
+          "email": {
+            "$ref": "#/components/schemas/EmailDto"
+          }
+        },
+        "description": "Модель контакта с необходимыми изменениями"
+      },
+      "EmailDto": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorDto": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "50",
+              "99",
+              "conflict",
+              "field_validation",
+              "GOVERNMENT_ERROR_CALLBACK_CODE",
+              "GOVERNMENT_ERROR_CALLBACK_PARAMS_CODE",
+              "GOVERNMENT_ERROR_ID_EMPTY_CODE",
+              "GOVERNMENT_ERROR_FORCE_UPDATE_CODE",
+              "state_not_found",
+              "generic",
+              ""
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PhoneNumberDto": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "ValidDateDto": {
+        "required": [
+          "startDateTime"
+        ],
+        "type": "object",
+        "properties": {
+          "startDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AddressDto": {
+        "required": [
+          "metadata",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "type": {
+            "description": "Catalogs: AddressType",
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "DefaultAddressType (samples were loaded from the DB Dictionary)",
+                "enum": [
+                  "cm.AddressType.NotSpecified",
+                  "cm.AddressType.PermanentRegistration",
+                  "cm.AddressType.TemporaryRegistration",
+                  "cm.AddressType.Actual",
+                  "cm.AddressType.RegisteredAddressEmployer",
+                  "cm.AddressType.Legal",
+                  "cm.AddressType.LegalOrg",
+                  "cm.AddressType.Correspondence",
+                  "cm.AddressType.Old",
+                  "cm.AddressType.LatinFont",
+                  "cm.AddressType.FactualWorking",
+                  "cm.AddressType.Mail",
+                  "cm.AddressType.OccupiedArea",
+                  "cm.AddressType.CreateApplicationOffice",
+                  "cm.AddressType.IssueOffice",
+                  "cm.AddressType.NonResident",
+                  "﻿cm.AddressType.NotSpecified"
+                ]
+              },
+              {
+                "type": "string",
+                "description": "any-custom-value"
+              }
+            ]
+          },
+          "notFormAddrName": {
+            "type": "string"
+          },
+          "addressName": {
+            "type": "string"
+          },
+          "countryId": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "string"
+          },
+          "state": {
+            "description": "Catalogs: Region",
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "DefaultRegion (samples were loaded from the DB Dictionary)",
+                "enum": [
+                  "cm.region.Altay",
+                  "cm.region.Krasnodar",
+                  "cm.region.Krasnoyarsk",
+                  "cm.region.Primor",
+                  "cm.region.Stavropol",
+                  "cm.region.Khabarovsk",
+                  "cm.region.Amur",
+                  "cm.region.Arkhangelsk",
+                  "cm.region.Astrakhan",
+                  "cm.region.Belgorod",
+                  "cm.region.Bryansk",
+                  "cm.region.Vladimir",
+                  "cm.region.Volgograd",
+                  "cm.region.Vologda",
+                  "cm.region.Voronezh",
+                  "cm.region.NizhnyNovgorod",
+                  "cm.region.Ivanovo",
+                  "cm.region.Irkutsk",
+                  "cm.region.Ingushetia",
+                  "cm.region.Kaliningrad",
+                  "cm.region.Tver",
+                  "cm.region.Kaluga",
+                  "cm.region.Kamchatka",
+                  "cm.region.Kemerovo",
+                  "cm.region.Kirov",
+                  "cm.region.Kostroma",
+                  "cm.region.Samara",
+                  "cm.region.Kurgan",
+                  "cm.region.Kursk",
+                  "cm.region.StPetersburg",
+                  "cm.region.LeningradRegion",
+                  "cm.region.Lipetsk",
+                  "cm.region.Magadan",
+                  "cm.region.Moscow",
+                  "cm.region.MoscowRegion",
+                  "cm.region.Murmansk",
+                  "cm.region.Novgorod",
+                  "cm.region.Novosibirsk",
+                  "cm.region.Omsk",
+                  "cm.region.Orenburg",
+                  "cm.region.Orel",
+                  "cm.region.Penza",
+                  "cm.region.Perm",
+                  "cm.region.Pskov",
+                  "cm.region.Rostov",
+                  "cm.region.Ryazan",
+                  "cm.region.Saratov",
+                  "cm.region.Sakhalin",
+                  "cm.region.Sverdlovsk",
+                  "cm.region.Smolensk",
+                  "cm.region.Tambov",
+                  "cm.region.Tomsk",
+                  "cm.region.Tula",
+                  "cm.region.Tyumen",
+                  "cm.region.Ulyanovsk",
+                  "cm.region.Chelyabinsk",
+                  "cm.region.Trans-Baikal",
+                  "cm.region.ChukotkaAutonomous",
+                  "cm.region.Yaroslavl",
+                  "cm.region.Adygea",
+                  "cm.region.Bashkortostan",
+                  "cm.region.Buryatia",
+                  "cm.region.Dagestan",
+                  "cm.region.KabardinoBalkar",
+                  "cm.region.Altai",
+                  "cm.region.Kalmykia",
+                  "cm.region.Karelia",
+                  "cm.region.Komi",
+                  "cm.region.MariEl",
+                  "cm.region.Mordovia",
+                  "cm.region.NorthOssetiaAlania",
+                  "cm.region.KarachayCherkessia",
+                  "cm.region.Tatarstan",
+                  "cm.region.Tyva",
+                  "cm.region.Udmurtia",
+                  "cm.region.Khakassia",
+                  "cm.region.Chechen",
+                  "cm.region.Chuvashia",
+                  "cm.region.Yakutia",
+                  "cm.region.JewishAutonomous",
+                  "cm.region.KhantyMansi",
+                  "cm.region.YamalNenets",
+                  "cm.region.Crimea",
+                  "cm.region.Sevastopol",
+                  "cm.region.NotSpecified",
+                  "cm.region.Nenets",
+                  "cm.region.Baikonur"
+                ]
+              },
+              {
+                "type": "string",
+                "description": "any-custom-value"
+              }
+            ]
+          },
+          "province": {
+            "type": "string"
+          },
+          "provinceType": {
+            "type": "string"
+          },
+          "area": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "regionType": {
+            "type": "string"
+          },
+          "additionArea": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "cityType": {
+            "type": "string"
+          },
+          "settlement": {
+            "type": "string"
+          },
+          "settlementType": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "streetType": {
+            "type": "string"
+          },
+          "additionAreaStreet": {
+            "type": "string"
+          },
+          "house": {
+            "type": "string"
+          },
+          "housing": {
+            "type": "string"
+          },
+          "building": {
+            "type": "string"
+          },
+          "flat": {
+            "type": "string"
+          },
+          "fiasCode": {
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          }
+        },
+        "description": "Модель адреса с необходимыми изменениями"
+      },
+      "AddressFacadeDto": {
+        "required": [
+          "metadata",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "type": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "description": "Catalogs: AddressType",
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "description": "DefaultAddressType (samples were loaded from the DB Dictionary)",
+                    "enum": [
+                      "cm.AddressType.NotSpecified",
+                      "cm.AddressType.PermanentRegistration",
+                      "cm.AddressType.TemporaryRegistration",
+                      "cm.AddressType.Actual",
+                      "cm.AddressType.RegisteredAddressEmployer",
+                      "cm.AddressType.Legal",
+                      "cm.AddressType.LegalOrg",
+                      "cm.AddressType.Correspondence",
+                      "cm.AddressType.Old",
+                      "cm.AddressType.LatinFont",
+                      "cm.AddressType.FactualWorking",
+                      "cm.AddressType.Mail",
+                      "cm.AddressType.OccupiedArea",
+                      "cm.AddressType.CreateApplicationOffice",
+                      "cm.AddressType.IssueOffice",
+                      "cm.AddressType.NonResident",
+                      "﻿cm.AddressType.NotSpecified"
+                    ]
+                  },
+                  {
+                    "type": "string",
+                    "description": "any-custom-value"
+                  }
+                ]
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "addressName": {
+            "type": "string"
+          },
+          "countryId": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "string"
+          },
+          "state": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "description": "Catalogs: Region",
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "description": "DefaultRegion (samples were loaded from the DB Dictionary)",
+                    "enum": [
+                      "cm.region.Altay",
+                      "cm.region.Krasnodar",
+                      "cm.region.Krasnoyarsk",
+                      "cm.region.Primor",
+                      "cm.region.Stavropol",
+                      "cm.region.Khabarovsk",
+                      "cm.region.Amur",
+                      "cm.region.Arkhangelsk",
+                      "cm.region.Astrakhan",
+                      "cm.region.Belgorod",
+                      "cm.region.Bryansk",
+                      "cm.region.Vladimir",
+                      "cm.region.Volgograd",
+                      "cm.region.Vologda",
+                      "cm.region.Voronezh",
+                      "cm.region.NizhnyNovgorod",
+                      "cm.region.Ivanovo",
+                      "cm.region.Irkutsk",
+                      "cm.region.Ingushetia",
+                      "cm.region.Kaliningrad",
+                      "cm.region.Tver",
+                      "cm.region.Kaluga",
+                      "cm.region.Kamchatka",
+                      "cm.region.Kemerovo",
+                      "cm.region.Kirov",
+                      "cm.region.Kostroma",
+                      "cm.region.Samara",
+                      "cm.region.Kurgan",
+                      "cm.region.Kursk",
+                      "cm.region.StPetersburg",
+                      "cm.region.LeningradRegion",
+                      "cm.region.Lipetsk",
+                      "cm.region.Magadan",
+                      "cm.region.Moscow",
+                      "cm.region.MoscowRegion",
+                      "cm.region.Murmansk",
+                      "cm.region.Novgorod",
+                      "cm.region.Novosibirsk",
+                      "cm.region.Omsk",
+                      "cm.region.Orenburg",
+                      "cm.region.Orel",
+                      "cm.region.Penza",
+                      "cm.region.Perm",
+                      "cm.region.Pskov",
+                      "cm.region.Rostov",
+                      "cm.region.Ryazan",
+                      "cm.region.Saratov",
+                      "cm.region.Sakhalin",
+                      "cm.region.Sverdlovsk",
+                      "cm.region.Smolensk",
+                      "cm.region.Tambov",
+                      "cm.region.Tomsk",
+                      "cm.region.Tula",
+                      "cm.region.Tyumen",
+                      "cm.region.Ulyanovsk",
+                      "cm.region.Chelyabinsk",
+                      "cm.region.Trans-Baikal",
+                      "cm.region.ChukotkaAutonomous",
+                      "cm.region.Yaroslavl",
+                      "cm.region.Adygea",
+                      "cm.region.Bashkortostan",
+                      "cm.region.Buryatia",
+                      "cm.region.Dagestan",
+                      "cm.region.KabardinoBalkar",
+                      "cm.region.Altai",
+                      "cm.region.Kalmykia",
+                      "cm.region.Karelia",
+                      "cm.region.Komi",
+                      "cm.region.MariEl",
+                      "cm.region.Mordovia",
+                      "cm.region.NorthOssetiaAlania",
+                      "cm.region.KarachayCherkessia",
+                      "cm.region.Tatarstan",
+                      "cm.region.Tyva",
+                      "cm.region.Udmurtia",
+                      "cm.region.Khakassia",
+                      "cm.region.Chechen",
+                      "cm.region.Chuvashia",
+                      "cm.region.Yakutia",
+                      "cm.region.JewishAutonomous",
+                      "cm.region.KhantyMansi",
+                      "cm.region.YamalNenets",
+                      "cm.region.Crimea",
+                      "cm.region.Sevastopol",
+                      "cm.region.NotSpecified",
+                      "cm.region.Nenets",
+                      "cm.region.Baikonur"
+                    ]
+                  },
+                  {
+                    "type": "string",
+                    "description": "any-custom-value"
+                  }
+                ]
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "province": {
+            "type": "string"
+          },
+          "provinceType": {
+            "type": "string"
+          },
+          "area": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "regionType": {
+            "type": "string"
+          },
+          "additionArea": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "cityType": {
+            "type": "string"
+          },
+          "settlement": {
+            "type": "string"
+          },
+          "settlementType": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "streetType": {
+            "type": "string"
+          },
+          "additionAreaStreet": {
+            "type": "string"
+          },
+          "house": {
+            "type": "string"
+          },
+          "flat": {
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          }
+        }
+      },
+      "AvatarFacadeDto": {
+        "required": [
+          "file",
+          "isPublic",
+          "metadata"
+        ],
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "isPublic": {
+            "type": "boolean"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AvatarMetadataDto"
+          }
+        }
+      },
+      "AvatarMetadataDto": {
+        "required": [
+          "createdBy",
+          "qaLevel",
+          "validFor"
+        ],
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalCreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "DefaultMetadataCreatedBy",
+                "enum": [
+                  "PROFILE_LOADER",
+                  "MDM",
+                  "ESIA",
+                  "AVATAR_UPLOADER",
+                  "VTB_LITE",
+                  "VTBID_PARTNER"
+                ]
+              },
+              {
+                "type": "string",
+                "description": "any-custom-value"
+              }
+            ]
+          },
+          "qaLevel": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/ValidDateDto"
+          },
+          "proofStatus": {
+            "type": "string",
+            "enum": [
+              "TRUSTED",
+              "VERIFIED",
+              "UNVERIFIED",
+              "REJECTED",
+              "UNKNOWN"
+            ]
+          },
+          "comment": {
+            "type": "string"
+          },
+          "logRef": {
+            "type": "string"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorDto"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "LOADING",
+              "ACTIVE",
+              "REMOVED",
+              "ERROR_LOADING",
+              "LOADING_TIMEOUT",
+              "BLOCKED_BY_ANTIVIRUS"
+            ]
+          }
+        }
+      },
+      "ClientProduct": {
+        "type": "object",
+        "properties": {
+          "package": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "packageStartDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "segment": {
+            "type": "string",
+            "enum": [
+              "VIP",
+              "PRIVILEGE"
+            ]
+          }
+        }
+      },
+      "ContactMediumFacadeDto": {
+        "required": [
+          "contactType",
+          "metadata",
+          "objectType"
+        ],
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "contactType": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "description": "Catalogs: ContactType",
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "description": "DefaultContactType (samples were loaded from the DB Dictionary)",
+                    "enum": [
+                      "cm.PhoneType.Home",
+                      "cm.PhoneType.Contact",
+                      "cm.PhoneType.Actual",
+                      "cm.PhoneType.Workplace",
+                      "cm.PhoneType.MobileWork",
+                      "cm.PhoneType.MobilePersonal",
+                      "cm.PhoneType.ForNotifications",
+                      "cm.PhoneType.TelephoneOrganization",
+                      "cm.PhoneType.Fax",
+                      "cm.PhoneType.Telex",
+                      "cm.PhoneType.ATM",
+                      "cm.PhoneType.TemporaryRegistrationPhone",
+                      "cm.PhoneType.PermanentRegistrationPhone",
+                      "cm.PhoneType.3rdPersonPhone",
+                      "cm.PhoneType.AuthorisedPhone",
+                      "cm.PhoneType.BCOmain",
+                      "cm.PhoneType.BCOadditional",
+                      "cm.EmailType.Personal",
+                      "cm.EmailType.Work",
+                      "cm.EmailType.ForNotification",
+                      ""
+                    ]
+                  },
+                  {
+                    "type": "string",
+                    "description": "any-custom-value"
+                  }
+                ]
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          },
+          "objectType": {
+            "type": "string",
+            "enum": [
+              "phone",
+              "email"
+            ]
+          },
+          "phoneNumber": {
+            "$ref": "#/components/schemas/PhoneNumberDto"
+          },
+          "email": {
+            "$ref": "#/components/schemas/EmailDto"
+          }
+        }
+      },
+      "FacadeDocDto": {
+        "type": "object"
+      },
+      "IndividualPureFacadeDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "ucn": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "GenderDto (samples were loaded from the DB Dictionary)",
+                "enum": [
+                  "F",
+                  "M",
+                  "U"
+                ]
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          },
+          "individualLifeCycle": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "description": "Catalogs: CustomerLifeCycleStatus",
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "description": "DefaultCustomerLifeCycleStatus (samples were loaded from the DB Dictionary)",
+                    "enum": [
+                      "cm.CustomerLifeCycleStatus.Prospect",
+                      "cm.CustomerLifeCycleStatus.Client",
+                      "cm.CustomerLifeCycleStatus.UnverifiedProspect",
+                      "cm.CustomerLifeCycleStatus.NotClient",
+                      "cm.CustomerLifeCycleStatus.None",
+                      "cm.CustomerLifeCycleStatus.Active",
+                      "cm.CustomerLifeCycleStatus.Inactive",
+                      "cm.CustomerLifeCycleStatus.Reorganization"
+                    ]
+                  },
+                  {
+                    "type": "string",
+                    "description": "any-custom-value"
+                  }
+                ]
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "is_uprid": {
+            "type": "boolean"
+          },
+          "contactMedium": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactMediumFacadeDto"
+            }
+          },
+          "address": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressFacadeDto"
+            }
+          },
+          "clientProduct": {
+            "$ref": "#/components/schemas/ClientProduct"
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FacadeDocDto"
+            }
+          },
+          "avatar": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvatarFacadeDto"
+            }
+          }
+        }
+      },
+      "IndividualShortFacadeDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "ucn": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "is_uprid": {
+            "type": "boolean"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetadataWithStatusDto"
+          }
+        }
+      },
+      "MetadataWithStatusDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "LOADED",
+              "CONFIRMED",
+              "ERROR"
+            ]
+          }
+        }
+      },
+      "IndividualShortPrivilegedFacadeDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "ucn": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "is_uprid": {
+            "type": "boolean"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetadataWithStatusDto"
+          },
+          "clientProduct": {
+            "$ref": "#/components/schemas/ClientProduct"
+          }
+        }
+      },
+      "EsiaTokenDto": {
+        "type": "object",
+        "properties": {
+          "is_esia_token": {
+            "type": "boolean"
+          }
+        }
+      },
+      "FrgnPassportFacadeDocDto": {
+        "required": [
+          "issued",
+          "metadata",
+          "number",
+          "series",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "DocumentTypeDto",
+            "enum": [
+              "RF_PASSPORT",
+              "INN",
+              "SNILS",
+              "FRGN_PASS",
+              "RF_DRIVING_LICENSE",
+              "RF_BRTH_CERT",
+              "FID_DOC",
+              "MARRIED_CERT",
+              "DIVORCE_CERT",
+              "NAME_CHANGE_CERT",
+              "FATHERHOOD_CERT",
+              "DEATH_CERT",
+              "VEHICLE_CERT",
+              "ILS_DOC",
+              "INCOME_REFERENCE",
+              "ELECTRONIC_WORKBOOK",
+              "PENSION_REFERENCE"
+            ]
+          },
+          "relevance": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "expired",
+              "invalid"
+            ]
+          },
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "GenderDto (samples were loaded from the DB Dictionary)",
+                "enum": [
+                  "F",
+                  "M",
+                  "U"
+                ]
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "latinName": {
+            "type": "string"
+          },
+          "latinSurname": {
+            "type": "string"
+          },
+          "expiryDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "invalidityReason": {
+            "type": "string",
+            "enum": [
+              "expired",
+              "replaced",
+              "with_violation",
+              "in_search",
+              "destroyes",
+              "owner_death",
+              "technical_defect",
+              "lost"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          },
+          "passportStatus": {
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          }
+        }
+      },
+      "INNFacadeDocDto": {
+        "required": [
+          "gender",
+          "inn",
+          "metadata",
+          "name",
+          "surname",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "DocumentTypeDto",
+            "enum": [
+              "RF_PASSPORT",
+              "INN",
+              "SNILS",
+              "FRGN_PASS",
+              "RF_DRIVING_LICENSE",
+              "RF_BRTH_CERT",
+              "FID_DOC",
+              "MARRIED_CERT",
+              "DIVORCE_CERT",
+              "NAME_CHANGE_CERT",
+              "FATHERHOOD_CERT",
+              "DEATH_CERT",
+              "VEHICLE_CERT",
+              "ILS_DOC",
+              "INCOME_REFERENCE",
+              "ELECTRONIC_WORKBOOK",
+              "PENSION_REFERENCE"
+            ]
+          },
+          "relevance": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "expired",
+              "invalid"
+            ]
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "inn": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "GenderDto (samples were loaded from the DB Dictionary)",
+                "enum": [
+                  "F",
+                  "M",
+                  "U"
+                ]
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "issued_by": {
+            "type": "string"
+          },
+          "division": {
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          }
+        }
+      },
+      "RFDrivingLicenseFacadeDocDto": {
+        "required": [
+          "issuedBy",
+          "metadata",
+          "number",
+          "series",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "DocumentTypeDto",
+            "enum": [
+              "RF_PASSPORT",
+              "INN",
+              "SNILS",
+              "FRGN_PASS",
+              "RF_DRIVING_LICENSE",
+              "RF_BRTH_CERT",
+              "FID_DOC",
+              "MARRIED_CERT",
+              "DIVORCE_CERT",
+              "NAME_CHANGE_CERT",
+              "FATHERHOOD_CERT",
+              "DEATH_CERT",
+              "VEHICLE_CERT",
+              "ILS_DOC",
+              "INCOME_REFERENCE",
+              "ELECTRONIC_WORKBOOK",
+              "PENSION_REFERENCE"
+            ]
+          },
+          "relevance": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "expired",
+              "invalid"
+            ]
+          },
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "countryName": {
+            "type": "string"
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "expiryDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "А",
+                "А1",
+                "В",
+                "ВE",
+                "В1",
+                "С",
+                "СE",
+                "С1",
+                "С1E",
+                "D",
+                "DE",
+                "D1",
+                "D1E",
+                "М",
+                "Tm",
+                "Tb"
+              ]
+            }
+          },
+          "experience": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          }
+        }
+      },
+      "RFPassportFacadeDocDto": {
+        "required": [
+          "issued",
+          "metadata",
+          "number",
+          "series",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "DocumentTypeDto",
+            "enum": [
+              "RF_PASSPORT",
+              "INN",
+              "SNILS",
+              "FRGN_PASS",
+              "RF_DRIVING_LICENSE",
+              "RF_BRTH_CERT",
+              "FID_DOC",
+              "MARRIED_CERT",
+              "DIVORCE_CERT",
+              "NAME_CHANGE_CERT",
+              "FATHERHOOD_CERT",
+              "DEATH_CERT",
+              "VEHICLE_CERT",
+              "ILS_DOC",
+              "INCOME_REFERENCE",
+              "ELECTRONIC_WORKBOOK",
+              "PENSION_REFERENCE"
+            ]
+          },
+          "relevance": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "expired",
+              "invalid"
+            ]
+          },
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "GenderDto (samples were loaded from the DB Dictionary)",
+                "enum": [
+                  "F",
+                  "M",
+                  "U"
+                ]
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "division": {
+            "type": "string"
+          },
+          "invalidityReason": {
+            "type": "string",
+            "enum": [
+              "expired",
+              "replaced",
+              "with_violation",
+              "in_search",
+              "destroyes",
+              "owner_death",
+              "technical_defect",
+              "lost"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          },
+          "passportStatus": {
+            "type": "string"
+          },
+          "registration": {
+            "$ref": "#/components/schemas/AddressFacadeDto"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          }
+        }
+      },
+      "SNILSFacadeDocDto": {
+        "required": [
+          "gender",
+          "metadata",
+          "name",
+          "snils",
+          "surname",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "DocumentTypeDto",
+            "enum": [
+              "RF_PASSPORT",
+              "INN",
+              "SNILS",
+              "FRGN_PASS",
+              "RF_DRIVING_LICENSE",
+              "RF_BRTH_CERT",
+              "FID_DOC",
+              "MARRIED_CERT",
+              "DIVORCE_CERT",
+              "NAME_CHANGE_CERT",
+              "FATHERHOOD_CERT",
+              "DEATH_CERT",
+              "VEHICLE_CERT",
+              "ILS_DOC",
+              "INCOME_REFERENCE",
+              "ELECTRONIC_WORKBOOK",
+              "PENSION_REFERENCE"
+            ]
+          },
+          "relevance": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "expired",
+              "invalid"
+            ]
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "snils": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "GenderDto (samples were loaded from the DB Dictionary)",
+                "enum": [
+                  "F",
+                  "M",
+                  "U"
+                ]
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          }
+        }
+      },
+      "VehicleFacadeDocDto": {
+        "required": [
+          "metadata",
+          "number",
+          "registrationPlate",
+          "series",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "DocumentTypeDto",
+            "enum": [
+              "RF_PASSPORT",
+              "INN",
+              "SNILS",
+              "FRGN_PASS",
+              "RF_DRIVING_LICENSE",
+              "RF_BRTH_CERT",
+              "FID_DOC",
+              "MARRIED_CERT",
+              "DIVORCE_CERT",
+              "NAME_CHANGE_CERT",
+              "FATHERHOOD_CERT",
+              "DEATH_CERT",
+              "VEHICLE_CERT",
+              "ILS_DOC",
+              "INCOME_REFERENCE",
+              "ELECTRONIC_WORKBOOK",
+              "PENSION_REFERENCE"
+            ]
+          },
+          "relevance": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "expired",
+              "invalid"
+            ]
+          },
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "carName": {
+            "type": "string"
+          },
+          "registrationPlate": {
+            "type": "string"
+          },
+          "vin": {
+            "type": "string"
+          },
+          "brand": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "vehicleCategory": {
+            "type": "string"
+          },
+          "productionYear": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "engineNumber": {
+            "type": "string"
+          },
+          "bodyNumber": {
+            "type": "string"
+          },
+          "chassisNumber": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          }
+        }
+      },
+      "DocumentStateDto": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "LOADED",
+              "PROCESSING",
+              "CONFIRMED",
+              "ANY"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

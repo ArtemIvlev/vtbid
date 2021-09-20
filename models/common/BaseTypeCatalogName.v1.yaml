@@ -1,0 +1,23 @@
+title: BaseTypeCatalogName
+type: object
+description: Наименование справочника. Базовый тип.
+properties:
+  CatalogName:
+    type: string
+    description: >
+      * AddressType - Тип адреса
+      * ContactType - Тип контакта (используется для телефонов и e-mail)
+      * CustomerLifeCycleStatus - Жизненный цикл клиента
+      * MaritalStatus - Семейное положение
+      * Region - Регион
+      * InfoSystems - Информационная система
+      * ErrorMobile - ошибки для APP
+      * ErrorWeb - ошибки для интенет банка
+  CatalogNameDecription:
+    type: string
+    description: Описание справочника, текстовый коментарий
+required:
+- CatalogName
+discriminator:
+  propertyName: type
+

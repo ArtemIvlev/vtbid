@@ -1,0 +1,2919 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "vtbid-profile-service",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8088",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/version": {
+      "get": {
+        "tags": [
+          "version-controller"
+        ],
+        "operationId": "getCurrentUserProfile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual": {
+      "get": {
+        "tags": [
+          "individual-controller"
+        ],
+        "operationId": "getById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "The list of the requested field in the response; Example: fields=uuid,document.uuid",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/RequestedFields"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "individual-controller"
+        ],
+        "operationId": "createIndividual",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/load": {
+      "post": {
+        "tags": [
+          "individual-controller"
+        ],
+        "operationId": "loadIndividual",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalId"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/document/{documentId}": {
+      "get": {
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "getDocumentById",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/document": {
+      "get": {
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "getDocumentsByIndividualUcn",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "filterParams",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DocumentFilterParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DocumentDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/avatar/{avatarId}": {
+      "get": {
+        "tags": [
+          "avatar-controller"
+        ],
+        "operationId": "getAvatarsById",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "avatarId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvatarDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "avatar-controller"
+        ],
+        "operationId": "udpateAvatar",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "avatarId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvatarDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvatarDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "avatar-controller"
+        ],
+        "operationId": "deleteAvatar",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "avatarId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/individual/avatar": {
+      "get": {
+        "tags": [
+          "avatar-controller"
+        ],
+        "operationId": "getAvatarsByIndividualUcn",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvatarDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "avatar-controller"
+        ],
+        "operationId": "createAvatar",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvatarDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvatarDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/avatar/active": {
+      "get": {
+        "tags": [
+          "avatar-controller"
+        ],
+        "operationId": "getAvatarActiveByIndividualUcn",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvatarDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/contactMedium": {
+      "get": {
+        "tags": [
+          "contact-medium-controller"
+        ],
+        "operationId": "getContactMediumsByIndividualUcn",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "filterParams",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ContactMediumFilterParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContactMediumDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "contact-medium-controller"
+        ],
+        "operationId": "createContactMedium",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactMediumDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactMediumDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/contactMedium/{contactMediumId}": {
+      "get": {
+        "tags": [
+          "contact-medium-controller"
+        ],
+        "operationId": "getContactMediumsById",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "contactMediumId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactMediumDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "contact-medium-controller"
+        ],
+        "operationId": "updateContactMedium",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "contactMediumId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactMediumDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactMediumDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/address": {
+      "get": {
+        "tags": [
+          "address-controller"
+        ],
+        "operationId": "getAddressByIndividualId",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "addressFilterParams",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AddressFilterParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AddressDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "address-controller"
+        ],
+        "operationId": "createAddress",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individual/address/{addressId}": {
+      "get": {
+        "tags": [
+          "address-controller"
+        ],
+        "operationId": "getAddressById",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "addressId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "address-controller"
+        ],
+        "operationId": "updateAddress",
+        "parameters": [
+          {
+            "name": "individualId",
+            "in": "query",
+            "description": "The individual user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualIdType",
+            "in": "query",
+            "description": "The individual user id type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MDM",
+                "UCN",
+                "UUID"
+              ]
+            }
+          },
+          {
+            "name": "addressId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "VersionDto": {
+        "type": "object",
+        "properties": {
+          "versionNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "RequestedFields": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "AddressDto": {
+        "required": [
+          "metadata",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "cm.AddressType.NotSpecified",
+              "cm.AddressType.PermanentRegistration",
+              "cm.AddressType.TemporaryRegistration",
+              "cm.AddressType.Actual",
+              "cm.AddressType.RegisteredAddressEmployer",
+              "cm.AddressType.Legal",
+              "cm.AddressType.LegalOrg",
+              "cm.AddressType.Correspondence",
+              "cm.AddressType.Old",
+              "cm.AddressType.LatinFont",
+              "cm.AddressType.FactualWorking",
+              "cm.AddressType.Mail",
+              "cm.AddressType.OccupiedArea",
+              "cm.AddressType.CreateApplicationOffice",
+              "cm.AddressType.IssueOffice",
+              "cm.AddressType.NonResident"
+            ]
+          },
+          "notFormAddrName": {
+            "type": "string"
+          },
+          "addressName": {
+            "type": "string"
+          },
+          "countryId": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "cm.region.Altay",
+              "cm.region.Krasnodar",
+              "cm.region.Krasnoyarsk",
+              "cm.region.Primor",
+              "cm.region.Stavropol",
+              "cm.region.Khabarovsk",
+              "cm.region.Amur",
+              "cm.region.Arkhangelsk",
+              "cm.region.Astrakhan",
+              "cm.region.Belgorod",
+              "cm.region.Bryansk",
+              "cm.region.Vladimir",
+              "cm.region.Volgograd",
+              "cm.region.Vologda",
+              "cm.region.Voronezh",
+              "cm.region.NizhnyNovgorod",
+              "cm.region.Ivanovo",
+              "cm.region.Irkutsk",
+              "cm.region.Ingushetia",
+              "cm.region.Kaliningrad",
+              "cm.region.Tver",
+              "cm.region.Kaluga",
+              "cm.region.Kamchatka",
+              "cm.region.Kemerovo",
+              "cm.region.Kirov",
+              "cm.region.Kostroma",
+              "cm.region.Samara",
+              "cm.region.Kurgan",
+              "cm.region.Kursk",
+              "cm.region.StPetersburg",
+              "cm.region.LeningradRegion",
+              "cm.region.Lipetsk",
+              "cm.region.Magadan",
+              "cm.region.Moscow",
+              "cm.region.MoscowRegion",
+              "cm.region.Murmansk",
+              "cm.region.Novgorod",
+              "cm.region.Novosibirsk",
+              "cm.region.Omsk",
+              "cm.region.Orenburg",
+              "cm.region.Orel",
+              "cm.region.Penza",
+              "cm.region.Perm",
+              "cm.region.Pskov",
+              "cm.region.Rostov",
+              "cm.region.Ryazan",
+              "cm.region.Saratov",
+              "cm.region.Sakhalin",
+              "cm.region.Sverdlovsk",
+              "cm.region.Smolensk",
+              "cm.region.Tambov",
+              "cm.region.Tomsk",
+              "cm.region.Tula",
+              "cm.region.Tyumen",
+              "cm.region.Ulyanovsk",
+              "cm.region.Chelyabinsk",
+              "cm.region.Trans-Baikal",
+              "cm.region.ChukotkaAutonomous",
+              "cm.region.Yaroslavl",
+              "cm.region.Adygea",
+              "cm.region.Bashkortostan",
+              "cm.region.Buryatia",
+              "cm.region.Dagestan",
+              "cm.region.KabardinoBalkar",
+              "cm.region.Altai",
+              "cm.region.Kalmykia",
+              "cm.region.Karelia",
+              "cm.region.Komi",
+              "cm.region.MariEl",
+              "cm.region.Mordovia",
+              "cm.region.NorthOssetiaAlania",
+              "cm.region.KarachayCherkessia",
+              "cm.region.Tatarstan",
+              "cm.region.Tyva",
+              "cm.region.Udmurtia",
+              "cm.region.Khakassia",
+              "cm.region.Chechen",
+              "cm.region.Chuvashia",
+              "cm.region.Yakutia",
+              "cm.region.JewishAutonomous",
+              "cm.region.KhantyMansi",
+              "cm.region.YamalNenets",
+              "cm.region.Crimea",
+              "cm.region.Sevastopol",
+              "cm.region.NotSpecified",
+              "cm.region.Nenets"
+            ]
+          },
+          "province": {
+            "type": "string"
+          },
+          "provinceType": {
+            "type": "string"
+          },
+          "area": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "regionType": {
+            "type": "string"
+          },
+          "additionArea": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "cityType": {
+            "type": "string"
+          },
+          "settlement": {
+            "type": "string"
+          },
+          "settlementType": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "streetType": {
+            "type": "string"
+          },
+          "additionAreaStreet": {
+            "type": "string"
+          },
+          "house": {
+            "type": "string"
+          },
+          "housing": {
+            "type": "string"
+          },
+          "building": {
+            "type": "string"
+          },
+          "flat": {
+            "type": "string"
+          },
+          "fiasCode": {
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          }
+        }
+      },
+      "AvatarDto": {
+        "required": [
+          "file",
+          "isPublic",
+          "metadata"
+        ],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "isPublic": {
+            "type": "boolean"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AvatarMetadataDto"
+          }
+        }
+      },
+      "AvatarMetadataDto": {
+        "required": [
+          "createdBy",
+          "qaLevel",
+          "validFor"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "LOADING",
+              "ACTIVE",
+              "REMOVED",
+              "ERROR_LOADING",
+              "LOADING_TIMEOUT",
+              "BLOCKED_BY_ANTIVIRUS"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "enum": [
+              "PROFILE_LOADER",
+              "MDM",
+              "ESIA",
+              "AVATAR_UPLOADER"
+            ]
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "qaLevel": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/ValidDateDto"
+          },
+          "proofStatus": {
+            "type": "string",
+            "enum": [
+              "VERIFIED",
+              "UNVERIFIED",
+              "UNKNOWN"
+            ]
+          },
+          "comment": {
+            "type": "string"
+          },
+          "logRef": {
+            "type": "string"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorDto"
+          }
+        }
+      },
+      "BaseMetadataDto": {
+        "required": [
+          "createdBy",
+          "qaLevel",
+          "validFor"
+        ],
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "enum": [
+              "PROFILE_LOADER",
+              "MDM",
+              "ESIA",
+              "AVATAR_UPLOADER"
+            ]
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "qaLevel": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/ValidDateDto"
+          },
+          "proofStatus": {
+            "type": "string",
+            "enum": [
+              "VERIFIED",
+              "UNVERIFIED",
+              "UNKNOWN"
+            ]
+          },
+          "comment": {
+            "type": "string"
+          },
+          "logRef": {
+            "type": "string"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorDto"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "LOADED",
+              "ERROR"
+            ]
+          }
+        }
+      },
+      "CharacteristicDto": {
+        "required": [
+          "name",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "VIP",
+              "PRIVILEGE",
+              "AGREEMENT"
+            ]
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "ContactMediumDto": {
+        "required": [
+          "contactType",
+          "metadata",
+          "objectType"
+        ],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "contactType": {
+            "type": "string",
+            "enum": [
+              "cm.PhoneType.Home",
+              "cm.PhoneType.Contact",
+              "cm.PhoneType.Actual",
+              "cm.PhoneType.Workplace",
+              "cm.PhoneType.MobileWork",
+              "cm.PhoneType.MobilePersonal",
+              "cm.PhoneType.ForNotifications",
+              "cm.PhoneType.TelephoneOrganization",
+              "cm.PhoneType.Fax",
+              "cm.PhoneType.Telex",
+              "cm.PhoneType.ATM",
+              "cm.PhoneType.TemporaryRegistrationPhone",
+              "cm.PhoneType.PermanentRegistrationPhone",
+              "cm.PhoneType.3rdPersonPhone",
+              "cm.PhoneType.AuthorisedPhone",
+              "cm.PhoneType.BCOmain",
+              "cm.PhoneType.BCOadditional",
+              "cm.EmailType.Personal",
+              "cm.EmailType.Work",
+              "cm.EmailType.ForNotification",
+              ""
+            ]
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          },
+          "objectType": {
+            "type": "string",
+            "enum": [
+              "phone",
+              "email"
+            ]
+          },
+          "phoneNumber": {
+            "$ref": "#/components/schemas/PhoneNumberDto"
+          },
+          "email": {
+            "$ref": "#/components/schemas/EmailDto"
+          }
+        }
+      },
+      "CrossLinksDto": {
+        "required": [
+          "externalId",
+          "systemNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "partyId": {
+            "type": "string"
+          },
+          "savedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "systemNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "DivorceCertDocDto": {
+        "required": [
+          "actDate",
+          "actNo",
+          "issuedBy",
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actNo": {
+            "type": "string"
+          },
+          "actDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "F",
+              "M",
+              "U"
+            ]
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "relevance": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DocumentDto": {
+        "required": [
+          "metadata",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "individualUUID": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "RF_PASSPORT",
+              "SNILS",
+              "INN",
+              "FID_DOC",
+              "RF_DRIVING_LICENSE",
+              "MLTR_ID",
+              "FRGN_PASS",
+              "MDCL_PLCY",
+              "REGISTRATION",
+              "RF_BRTH_CERT",
+              "MARRIED_CERT",
+              "DIVORCE_CERT",
+              "NAME_CHANGE_CERT",
+              "FATHERHOOD_CERT",
+              "DEATH_CERT",
+              "VEHICLE_CERT",
+              "MLTR_CONTRACT_CERT",
+              "LGL_CPCT_CERT",
+              "PRISON_CERT",
+              "ILS_PFR_CERT",
+              "EGRN_CERT",
+              "ILS_DOC",
+              "INCOME_REFERENCE"
+            ]
+          },
+          "snilsDoc": {
+            "$ref": "#/components/schemas/SNILSDocDto"
+          },
+          "rfPassportDoc": {
+            "$ref": "#/components/schemas/RFPassportDocDto"
+          },
+          "rfDrivingLicenseDoc": {
+            "$ref": "#/components/schemas/RFDrivingLicenseDocDto"
+          },
+          "vehicleDoc": {
+            "$ref": "#/components/schemas/VehicleDocDto"
+          },
+          "marriedCertDoc": {
+            "$ref": "#/components/schemas/MarriedCertDocDto"
+          },
+          "innDoc": {
+            "$ref": "#/components/schemas/INNDocDto"
+          },
+          "frgnPassportDoc": {
+            "$ref": "#/components/schemas/FrgnPassportDocDto"
+          },
+          "nameChangeCertDoc": {
+            "$ref": "#/components/schemas/NameChangeCertDocDto"
+          },
+          "divorceCertDoc": {
+            "$ref": "#/components/schemas/DivorceCertDocDto"
+          },
+          "ilsDoc": {
+            "$ref": "#/components/schemas/ILSDocDto"
+          },
+          "fidDoc": {
+            "$ref": "#/components/schemas/FIDDocDto"
+          },
+          "rfBrthCertDoc": {
+            "$ref": "#/components/schemas/RFBrthCertDocDto"
+          },
+          "fatherHoodCertDoc": {
+            "$ref": "#/components/schemas/FatherHoodCertDocDto"
+          },
+          "incomeReferenceDocDto": {
+            "$ref": "#/components/schemas/IncomeReferenceDocDto"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          },
+          "externalReference": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReferenceDto"
+            }
+          }
+        }
+      },
+      "EmailDto": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorDto": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "50",
+              "99"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "FIDDocDto": {
+        "required": [
+          "issued",
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "relevance": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "birthdate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "birthplace": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "F",
+              "M",
+              "U"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          }
+        }
+      },
+      "FatherHoodCertDocDto": {
+        "required": [
+          "actDate",
+          "actNo",
+          "issuedBy",
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "relevance": {
+            "type": "string"
+          },
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "F",
+              "M",
+              "U"
+            ]
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "actNo": {
+            "type": "string"
+          },
+          "actDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "legalForce": {
+            "type": "boolean"
+          }
+        }
+      },
+      "FrgnPassportDocDto": {
+        "required": [
+          "issued",
+          "number",
+          "series"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "F",
+              "M",
+              "U"
+            ]
+          },
+          "birthdate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "birthplace": {
+            "type": "string"
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "latinName": {
+            "type": "string"
+          },
+          "latinSurname": {
+            "type": "string"
+          },
+          "expiryDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "invalidityReason": {
+            "type": "string",
+            "enum": [
+              "expired",
+              "replaced",
+              "with_violation",
+              "in_search",
+              "destroyes",
+              "owner_death",
+              "technical_defect",
+              "lost"
+            ]
+          },
+          "relevance": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "expired",
+              "invalid"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          },
+          "passportStatus": {
+            "type": "string"
+          }
+        }
+      },
+      "ILSDocDto": {
+        "required": [
+          "birthDate",
+          "formationDate",
+          "linkIlsJson",
+          "snils"
+        ],
+        "type": "object",
+        "properties": {
+          "snils": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "relevance": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "formationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "pensionType": {
+            "type": "string"
+          },
+          "servLenYearsAll": {
+            "type": "string"
+          },
+          "servLenMonthsAll": {
+            "type": "string"
+          },
+          "servLenDaysAll": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "linkIlsJson": {
+            "type": "string"
+          }
+        }
+      },
+      "INNDocDto": {
+        "required": [
+          "birthdate",
+          "gender",
+          "inn",
+          "name",
+          "surname"
+        ],
+        "type": "object",
+        "properties": {
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "inn": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "F",
+              "M",
+              "U"
+            ]
+          },
+          "birthdate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "issued_by": {
+            "type": "string"
+          },
+          "division": {
+            "type": "string"
+          },
+          "birthplace": {
+            "type": "string"
+          }
+        }
+      },
+      "IncomeReferenceDocDto": {
+        "required": [
+          "linkJson"
+        ],
+        "type": "object",
+        "properties": {
+          "relevance": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "year": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "linkJson": {
+            "type": "string"
+          }
+        }
+      },
+      "IndividualDto": {
+        "required": [
+          "metadata"
+        ],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "ucn": {
+            "type": "string"
+          },
+          "mdm_id": {
+            "type": "string"
+          },
+          "individualLifeCycle": {
+            "type": "string",
+            "enum": [
+              "cm.CustomerLifeCycleStatus.Prospect",
+              "cm.CustomerLifeCycleStatus.Client",
+              "cm.CustomerLifeCycleStatus.UnverifiedProspect",
+              "cm.CustomerLifeCycleStatus.NotClient",
+              "cm.CustomerLifeCycleStatus.None",
+              "cm.CustomerLifeCycleStatus.Active",
+              "cm.CustomerLifeCycleStatus.Inactive",
+              "cm.CustomerLifeCycleStatus.Reorganization"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "formattedName": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "F",
+              "M",
+              "U"
+            ]
+          },
+          "placeOfBirth": {
+            "type": "string"
+          },
+          "countryOfBirth": {
+            "type": "string"
+          },
+          "maritalStatus": {
+            "type": "string",
+            "enum": [
+              "cm.MaritalStatus.Single",
+              "cm.MaritalStatus.Divorced",
+              "cm.MaritalStatus.Widow",
+              "cm.MaritalStatus.Married",
+              "cm.MaritalStatus.Remarriage",
+              "cm.MaritalStatus.CivilMarriage",
+              "cm.MaritalStatus.Unknown"
+            ]
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "location": {
+            "type": "string"
+          },
+          "characteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicDto"
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BaseMetadataDto"
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentDto"
+            }
+          },
+          "contactMedium": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactMediumDto"
+            }
+          },
+          "crossLinks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrossLinksDto"
+            }
+          },
+          "avatar": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvatarDto"
+            }
+          },
+          "address": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressDto"
+            }
+          },
+          "externalReference": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReferenceDto"
+            }
+          }
+        }
+      },
+      "MarriedCertDocDto": {
+        "required": [
+          "actDate",
+          "actNo",
+          "issuedBy",
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actNo": {
+            "type": "string"
+          },
+          "actDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "F",
+              "M",
+              "U"
+            ]
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "birthPlace": {
+            "type": "string"
+          },
+          "relevance": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NameChangeCertDocDto": {
+        "required": [
+          "actNo",
+          "issuedBy",
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "F",
+              "M",
+              "U"
+            ]
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "actNo": {
+            "type": "string"
+          },
+          "actDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "relevance": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PhoneNumberDto": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "RFBrthCertDocDto": {
+        "required": [
+          "issued",
+          "issuedBy",
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "relevance": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "F",
+              "M",
+              "U"
+            ]
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "birthPlace": {
+            "type": "string"
+          },
+          "typeBrthCert": {
+            "type": "string",
+            "enum": [
+              "RF_BRTH_CERT",
+              "OLD_BRTH_CERT",
+              "FID_BRTH_CERT"
+            ]
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "actNo": {
+            "type": "string"
+          },
+          "actDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "legalForce": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RFDrivingLicenseDocDto": {
+        "required": [
+          "issuedBy",
+          "number",
+          "series"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "birthdate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "birthplace": {
+            "type": "string"
+          },
+          "countryName": {
+            "type": "string"
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "expiryDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "А",
+                "А1",
+                "В",
+                "ВE",
+                "В1",
+                "С",
+                "СE",
+                "С1",
+                "С1E",
+                "D",
+                "DE",
+                "D1",
+                "D1E",
+                "М",
+                "Tm",
+                "Tb"
+              ]
+            }
+          },
+          "experience": {
+            "type": "string"
+          },
+          "relevance": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RFPassportDocDto": {
+        "required": [
+          "issued",
+          "number",
+          "series"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "F",
+              "M",
+              "U"
+            ]
+          },
+          "birthdate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "birthplace": {
+            "type": "string"
+          },
+          "issuedBy": {
+            "type": "string"
+          },
+          "division": {
+            "type": "string"
+          },
+          "invalidityReason": {
+            "type": "string",
+            "enum": [
+              "expired",
+              "replaced",
+              "with_violation",
+              "in_search",
+              "destroyes",
+              "owner_death",
+              "technical_defect",
+              "lost"
+            ]
+          },
+          "relevance": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "expired",
+              "invalid"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          },
+          "passportStatus": {
+            "type": "string"
+          }
+        }
+      },
+      "ReferenceDto": {
+        "required": [
+          "href",
+          "referredType",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "referredUUID": {
+            "type": "string"
+          },
+          "referredType": {
+            "type": "string",
+            "enum": [
+              "Individual",
+              "Document"
+            ]
+          },
+          "href": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ESIA"
+            ]
+          },
+          "characteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicDto"
+            }
+          }
+        }
+      },
+      "SNILSDocDto": {
+        "required": [
+          "birthdate",
+          "gender",
+          "name",
+          "snils",
+          "surname"
+        ],
+        "type": "object",
+        "properties": {
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "snils": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "F",
+              "M",
+              "U"
+            ]
+          },
+          "birthdate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "birthplace": {
+            "type": "string"
+          }
+        }
+      },
+      "ValidDateDto": {
+        "required": [
+          "startDateTime"
+        ],
+        "type": "object",
+        "properties": {
+          "startDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "VehicleDocDto": {
+        "required": [
+          "registrationPlate"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departmentDoc": {
+            "type": "string"
+          },
+          "receiptDocDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validateDateDoc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "carName": {
+            "type": "string"
+          },
+          "registrationPlate": {
+            "type": "string"
+          },
+          "vin": {
+            "type": "string"
+          },
+          "brand": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "vehicleCategory": {
+            "type": "string"
+          },
+          "productionYear": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "engineNumber": {
+            "type": "string"
+          },
+          "bodyNumber": {
+            "type": "string"
+          },
+          "chassisNumber": {
+            "type": "string"
+          },
+          "registration": {
+            "$ref": "#/components/schemas/VehicleRegistrationDto"
+          },
+          "relevance": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "legalForce": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "birthPlace": {
+            "type": "string"
+          }
+        }
+      },
+      "VehicleRegistrationDto": {
+        "type": "object",
+        "properties": {
+          "registrationDocSeries": {
+            "type": "string"
+          },
+          "registrationDocNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "ExternalId": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "MDM",
+              "UCN",
+              "UUID"
+            ]
+          }
+        }
+      },
+      "DocumentFilterParams": {
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string",
+            "enum": [
+              "PROFILE_LOADER",
+              "MDM",
+              "ESIA",
+              "AVATAR_UPLOADER"
+            ]
+          },
+          "documentType": {
+            "type": "string",
+            "enum": [
+              "RF_PASSPORT",
+              "SNILS",
+              "INN",
+              "FID_DOC",
+              "RF_DRIVING_LICENSE",
+              "MLTR_ID",
+              "FRGN_PASS",
+              "MDCL_PLCY",
+              "REGISTRATION",
+              "RF_BRTH_CERT",
+              "MARRIED_CERT",
+              "DIVORCE_CERT",
+              "NAME_CHANGE_CERT",
+              "FATHERHOOD_CERT",
+              "DEATH_CERT",
+              "VEHICLE_CERT",
+              "MLTR_CONTRACT_CERT",
+              "LGL_CPCT_CERT",
+              "PRISON_CERT",
+              "ILS_PFR_CERT",
+              "EGRN_CERT",
+              "ILS_DOC",
+              "INCOME_REFERENCE"
+            ]
+          },
+          "valid": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ContactMediumFilterParams": {
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string",
+            "enum": [
+              "PROFILE_LOADER",
+              "MDM",
+              "ESIA",
+              "AVATAR_UPLOADER"
+            ]
+          }
+        }
+      },
+      "AddressFilterParams": {
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string",
+            "enum": [
+              "PROFILE_LOADER",
+              "MDM",
+              "ESIA",
+              "AVATAR_UPLOADER"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
