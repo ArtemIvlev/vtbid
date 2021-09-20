@@ -8,7 +8,23 @@ info:
     email: ivlev@vtb.ru
 servers:
   - url: 'http://localhost:3000'
-paths: {}
+paths:
+  '/individuals/{individualIdType}:{individualId}':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/individual/IndividualPure.yaml
+      operationId: get-individuals
+      description: Получение данных ФЛ
+    parameters:
+      - $ref: '#/components/parameters/individualIdType'
+      - $ref: '#/components/parameters/individualId'
 components:
   schemas: {}
   parameters:

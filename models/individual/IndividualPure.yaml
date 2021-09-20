@@ -9,12 +9,8 @@ properties:
     type: string
     format: uuid
     description: Идентификатор partyId
-  crosslinks:
-    type: array
-    items:
-      $ref: crossRef.yaml
   gender:
-    $ref: '../docs/doctypes/baseTypes/BaseTypeGender.yaml#/properties/gender'
+    $ref: ../docs/doctypes/baseTypes/BaseTypeGender.yaml#/properties/gender
   placeOfBirth:
     type: string
     description: В модели это ссылка на место рождения (не уверен что нам оно надо)
@@ -62,8 +58,6 @@ properties:
         - гость
   metadata:
     $ref: ../common/metadata.yaml
-  avatar:
-    $ref: ./avatar.yaml
 required:
   - uuid
   - type
