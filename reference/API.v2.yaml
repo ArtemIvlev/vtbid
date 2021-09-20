@@ -11,7 +11,7 @@ servers:
 paths:
   '/individuals/{individualIdType}:{individualId}':
     get:
-      summary: Your GET endpoint
+      summary: Individual
       tags: []
       responses:
         '200':
@@ -25,6 +25,43 @@ paths:
     parameters:
       - $ref: '#/components/parameters/individualIdType'
       - $ref: '#/components/parameters/individualId'
+  '/individuals/{individualIdType}:{individualId}/documents/':
+    parameters:
+      - $ref: '#/components/parameters/individualIdType'
+      - $ref: '#/components/parameters/individualId'
+    get:
+      summary: Documents list
+      tags: []
+      responses:
+        '200':
+          description: Список документов
+          content:
+            application/json:
+              schema:
+                $ref: ../models/docs/DocItems.yaml
+      operationId: 'get-individuals-individualIdType-:-individualId-documents'
+      description: Получение списка документов
+  '/individuals/{individualIdType}:{individualId}/documents/{type}':
+    parameters:
+      - $ref: '#/components/parameters/individualIdType'
+      - $ref: '#/components/parameters/individualId'
+      - schema:
+          type: string
+        name: type
+        in: path
+        required: true
+    get:
+      summary: Document get
+      tags: []
+      responses:
+        '200':
+          description: Документ
+          content:
+            application/json:
+              schema:
+                $ref: ../models/docs/Document.yaml
+      operationId: 'get-individuals-individualIdType-:-individualId-documents-type'
+      description: Получение определенного документа
 components:
   schemas: {}
   parameters:
@@ -34,7 +71,7 @@ components:
       required: true
       schema:
         type: string
-        maxLength: 128
+        maxLength: 64
         example: '11111111'
       description: Идентификатор ФЛ
     individualIdType:
@@ -47,5 +84,5 @@ components:
           - mdmid
           - ucn
           - uuid
-        maxLength: 128
+        maxLength: 16
       description: Тип идентификатора
